@@ -6,11 +6,19 @@ The purpose of this project is simply to provide IDL definitions to JavaScript i
 
 Use the .json files in the json directory.
 
-Provided is all the ingrediants required to actually convert IDLs into usable JSON. This allows you to tweak the generation as you see fit. Beyond that, the actual resulting JSON is provided so for most usages, some loading the pre-created JSON is all you need. What you do with it is up to you.
+Provided is all the ingrediants required to actually convert IDLs into usable JSON. This allows you to tweak the generation as you see fit. Beyond that, the actual resulting JSON is provided so for most usages simply loading the pre-created JSON is all you need. What you do with it is up to you.
+
+# Schema
+
+At the top level is the definition type. The vast majority of definitions are __interfaces__. A handful are __dictionaries__ which are exclusively used for initializing event objects. A smaller handful are enums.
+
+# Extra
+
+`converters.js` includes some very simply utilities for automated handling of the basic types provided.
 
 # Included
 
-All of these have been slightly modified to parse correctly by the web.idl parser. The URL where these originated can be found in source.json.
+All of these have been slightly modified to parse correctly by the web.idl parser. The URL where these originated can be found in sources.json.
 
 * css.idl
 * cssomview.idl
