@@ -675,7 +675,7 @@
 		"readonlys": {
 			"sandbox": "DOMSettableTokenList",
 			"contentDocument": "Document",
-			"contentWindow": "WindowProxy"
+			"contentWindow": "Window"
 		}
 	},
 	"HTMLEmbedElement": {
@@ -729,7 +729,7 @@
 		"readonlys": {
 			"form": "HTMLFormElement",
 			"contentDocument": "Document",
-			"contentWindow": "WindowProxy",
+			"contentWindow": "Window",
 			"willValidate": "Boolean",
 			"validity": "ValidityState",
 			"validationMessage": "String"
@@ -2567,8 +2567,8 @@
 			"EventTarget"
 		],
 		"readonlys": {
-			"window": "WindowProxy",
-			"self": "WindowProxy",
+			"window": "Window",
+			"self": "Window",
 			"document": "Document",
 			"location": "Location",
 			"history": "History",
@@ -2578,10 +2578,10 @@
 			"scrollbars": "BarProp",
 			"statusbar": "BarProp",
 			"toolbar": "BarProp",
-			"frames": "WindowProxy",
+			"frames": "Window",
 			"length": "Uint32",
-			"top": "WindowProxy",
-			"parent": "WindowProxy",
+			"top": "Window",
+			"parent": "Window",
 			"frameElement": "Element",
 			"navigator": "Navigator",
 			"external": "External",
@@ -2592,7 +2592,7 @@
 		"attributes": {
 			"name": "String",
 			"status": "String",
-			"opener": "WindowProxy",
+			"opener": "Window",
 			"onabort": "Function",
 			"onafterprint": "Function",
 			"onbeforeprint": "Function",
@@ -2680,7 +2680,7 @@
 			"focus": {},
 			"blur": {},
 			"open": {
-				"returns": "WindowProxy",
+				"returns": "Window",
 				"args": {
 					"url": "String",
 					"target": "String",
@@ -3344,7 +3344,7 @@
 			"data": "Any",
 			"origin": "String",
 			"lastEventId": "String",
-			"source": "WindowProxy",
+			"source": "Window",
 			"ports": "MessagePort"
 		},
 		"construct": {
@@ -3363,7 +3363,7 @@
 			"data": "Any",
 			"origin": "String",
 			"lastEventId": "String",
-			"source": "WindowProxy",
+			"source": "Window",
 			"ports": "MessagePort"
 		}
 	},
@@ -3664,7 +3664,7 @@
 		},
 		"readonlys": {
 			"contentDocument": "Document",
-			"contentWindow": "WindowProxy"
+			"contentWindow": "Window"
 		}
 	},
 	"HTMLBaseFontElement": {

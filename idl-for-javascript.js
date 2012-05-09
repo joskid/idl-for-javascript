@@ -38,6 +38,7 @@ var types = {
   void                 : 'Void',
   DOMUserData          : 'Any',
   any                  : 'Any',
+  WindowProxy          : 'Window'
 };
 
 function isObject(o){
