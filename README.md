@@ -1,8 +1,10 @@
-# IDL for JS
+# IDL for JavaScript
 
 The purpose of this project is simply to provide IDL definitions to JavaScript in a JavaScript friendly manner. These definitions are incredibly important to JavaScript in that they are the interface that is provided to it, yet up until now it's been nearly impossible to actually get this information into JavaScript outside from the resulting interfaces created from these IDLs.
 
 # Usage
+
+Use the .json files in the json directory.
 
 Provided is all the ingrediants required to actually convert IDLs into usable JSON. This allows you to tweak the generation as you see fit. Beyond that, the actual resulting JSON is provided so for most usages, some loading the pre-created JSON is all you need. What you do with it is up to you.
 
