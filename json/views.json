@@ -1,0 +1,16 @@
+{
+	"AbstractView": {
+		"type": "interface",
+		"inherits": [],
+		"readonlys": {
+			"document": "DocumentView"
+		}
+	},
+	"DocumentView": {
+		"type": "interface",
+		"inherits": [],
+		"readonlys": {
+			"defaultView": "AbstractView"
+		}
+	}
+}
