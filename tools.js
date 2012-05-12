@@ -10,8 +10,6 @@ var converters = function(global){
     Uint16: function Uint16(x){ Uint16.typed[0] = x; return Uint16.typed[0] },
     Uint32: function Uint32(x){ x >>> 0 },
     Float32: function Float32(x){ Float32.typed[0] = x; return Float32.typed[0] },
-    Float64: function Float64(x){ return +x || 0; },
+    Float64: function Float64(x){ return +x || 0 },
   });
 }(new Function('return this')());
-
-console.log(converters);

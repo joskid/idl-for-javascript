@@ -49,6 +49,8 @@ function type(json){
   if (json === 'void')
     return 'Void';
   if (isObject(json)) {
+    if (json.idlType === 'union')
+      return json.members.map(type);
     if (isObject(json.idlType))
       return type(json.idlType);
     if (!types[json.idlType])
@@ -100,6 +102,15 @@ var definitionTypes = {
   interface: function(json){
     return new Interface(json);
   },
+  exception: function(json){
+    return new Exception(json);
+  },
+  callback: function(json){
+    return new Callback(json);
+  },
+  callbackinterface: function(json){
+    return new CallbackInterface(json);
+  },
   partialinterface: function(json){
     var iface = new Interface(json);
     if (json.name in allDefinitions)
@@ -133,7 +144,6 @@ var memberTypes = {
   }
 };
 
-
 function Definition(type){
   Object.defineProperty(this, 'type', { value: type, enumerable: true });
 }
@@ -151,8 +161,10 @@ function Interface(json){
     this.tag = tags[json.name];
   this.inherits = typeof json.inheritance === 'string' ? json.inheritance === '' ? [] : [json.inheritance] : json.inheritance;
   json.members && json.members.forEach(function(member){
+    if (member.type === 'field')
+      member.type = 'readonly';
     if (member.readonly)
-      member.type = 'readonly'
+      member.type = 'readonly';
     if (!member.name) {
       if (member.stringifier)
         member.name = 'toString';
@@ -230,6 +242,21 @@ Enum.prototype = new Definition('enum');
 
 
 
+function Exception(json){
+  Interface.call(this, json);
+  this.type = 'exception';
+}
+
+Exception.prototype = new Definition('exception');
+
+function CallbackInterface(json){
+  Interface.call(this, json);
+  this.type = 'callbackinterface';
+}
+
+CallbackInterface.prototype = Object.create(Interface.prototype);
+
+
 
 function Operation(json){
   hidden(this, 'name', json.name);
@@ -249,6 +276,12 @@ function Operation(json){
 }
 
 
+function Callback(json){
+  Operation.call(this, json);
+  this.type = 'callback';
+}
+
+Callback.prototype = Object.create(Operation.prototype);
 
 
 var conversionStanza = [

@@ -66,8 +66,14 @@
 			},
 			"add": {
 				"args": {
-					"element": "union",
-					"before": "union"
+					"element": [
+						"HTMLOptionElement",
+						"HTMLOptGroupElement"
+					],
+					"before": [
+						"HTMLElement",
+						"Int32"
+					]
 				}
 			},
 			"remove": {
@@ -167,17 +173,6 @@
 			"deleter": {
 				"args": {
 					"name": "String"
-				}
-			}
-		}
-	},
-	"XMLDocument": {
-		"type": "interface",
-		"operations": {
-			"load": {
-				"returns": "Boolean",
-				"args": {
-					"url": "String"
 				}
 			}
 		}
@@ -1306,7 +1301,11 @@
 			"createPattern": {
 				"returns": "CanvasPattern",
 				"args": {
-					"image": "union",
+					"image": [
+						"HTMLImageElement",
+						"HTMLCanvasElement",
+						"HTMLVideoElement"
+					],
 					"repetition": "String"
 				}
 			},
@@ -1401,7 +1400,21 @@
 			},
 			"drawImage": {
 				"args": {
-					"image": "union",
+					"image": [
+						"HTMLImageElement",
+						"HTMLCanvasElement",
+						"HTMLVideoElement",
+						[
+							"HTMLImageElement",
+							"HTMLCanvasElement",
+							"HTMLVideoElement"
+						],
+						[
+							"HTMLImageElement",
+							"HTMLCanvasElement",
+							"HTMLVideoElement"
+						]
+					],
 					"dx": "Float64",
 					"dy": "Float64",
 					"dw": "Float64",
@@ -2248,8 +2261,14 @@
 			},
 			"add": {
 				"args": {
-					"element": "union",
-					"before": "union"
+					"element": [
+						"HTMLOptionElement",
+						"HTMLOptGroupElement"
+					],
+					"before": [
+						"HTMLElement",
+						"Int32"
+					]
 				}
 			},
 			"remove": {
@@ -2546,12 +2565,18 @@
 		"operations": {
 			"show": {
 				"args": {
-					"anchor": "union"
+					"anchor": [
+						"MouseEvent",
+						"Element"
+					]
 				}
 			},
 			"showModal": {
 				"args": {
-					"anchor": "union"
+					"anchor": [
+						"MouseEvent",
+						"Element"
+					]
 				}
 			},
 			"close": {
@@ -2721,6 +2746,21 @@
 					"transfer": "Transferable"
 				}
 			},
+			"requestFileSystem": {
+				"args": {
+					"type": "Uint16",
+					"size": "Uint64",
+					"successCallback": "FileSystemCallback",
+					"errorCallback": "ErrorCallback"
+				}
+			},
+			"resolveLocalFileSystemURL": {
+				"args": {
+					"url": "String",
+					"successCallback": "EntryCallback",
+					"errorCallback": "ErrorCallback"
+				}
+			},
 			"btoa": {
 				"returns": "String",
 				"args": {
@@ -2774,7 +2814,12 @@
 				}
 			}
 		},
-		"ReplaceableNamedProperties": true
+		"ReplaceableNamedProperties": true,
+		"consts": {
+			"TEMPORARY": 0,
+			"PERSISTENT": 1
+		},
+		"Supplemental": true
 	},
 	"BarProp": {
 		"type": "interface",
@@ -3198,6 +3243,34 @@
 		},
 		"operations": {
 			"close": {},
+			"requestFileSystem": {
+				"args": {
+					"type": "Uint16",
+					"size": "Uint64",
+					"successCallback": "FileSystemCallback",
+					"errorCallback": "ErrorCallback"
+				}
+			},
+			"resolveLocalFileSystemURL": {
+				"args": {
+					"url": "String",
+					"successCallback": "EntryCallback",
+					"errorCallback": "ErrorCallback"
+				}
+			},
+			"requestFileSystemSync": {
+				"returns": "FileSystemSync",
+				"args": {
+					"type": "Uint16",
+					"size": "Uint64"
+				}
+			},
+			"resolveLocalFileSystemSyncURL": {
+				"returns": "EntrySync",
+				"args": {
+					"url": "String"
+				}
+			},
 			"importScripts": {
 				"args": {
 					"urls": "String"
@@ -3208,7 +3281,12 @@
 			"onerror": "Function",
 			"onoffline": "Function",
 			"ononline": "Function"
-		}
+		},
+		"consts": {
+			"TEMPORARY": 0,
+			"PERSISTENT": 1
+		},
+		"Supplemental": true
 	},
 	"DedicatedWorkerGlobalScope": {
 		"type": "interface",
@@ -3449,7 +3527,10 @@
 		"construct": {
 			"args": {
 				"url": "String",
-				"protocols": "union"
+				"protocols": [
+					"String",
+					"StringArray"
+				]
 			}
 		}
 	},

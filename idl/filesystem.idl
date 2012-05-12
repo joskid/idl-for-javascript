@@ -1,0 +1,138 @@
+Window implements LocalFileSystem;
+WorkerGlobalScope implements LocalFileSystem;
+[Supplemental, NoInterfaceObject]
+interface LocalFileSystem {
+    const unsigned short TEMPORARY = 0;
+    const unsigned short PERSISTENT = 1;
+    void requestFileSystem (unsigned short type, unsigned long long size, FileSystemCallback successCallback, optional ErrorCallback errorCallback);
+    void resolveLocalFileSystemURL (DOMString url, EntryCallback successCallback, optional ErrorCallback errorCallback);
+};
+
+WorkerGlobalScope implements LocalFileSystemSync;
+[Supplemental, NoInterfaceObject]
+interface LocalFileSystemSync {
+    const unsigned short TEMPORARY = 0;
+    const unsigned short PERSISTENT = 1;
+    FileSystemSync requestFileSystemSync (unsigned short type, unsigned long long size);
+    EntrySync      resolveLocalFileSystemSyncURL (DOMString url);
+};
+
+interface Metadata {
+    readonly attribute Date               modificationTime;
+    readonly attribute unsigned long long size;
+};
+
+dictionary Flags {
+    boolean create;
+    boolean exclusive;
+};
+
+interface FileSystem {
+    readonly attribute DOMString      name;
+    readonly attribute DirectoryEntry root;
+};
+
+interface Entry {
+    readonly attribute boolean    isFile;
+    readonly attribute boolean    isDirectory;
+    void      getMetadata (MetadataCallback successCallback, optional ErrorCallback errorCallback);
+    readonly attribute DOMString  name;
+    readonly attribute DOMString  fullPath;
+    readonly attribute FileSystem filesystem;
+    void      moveTo (DirectoryEntry parent, optional DOMString newName, optional EntryCallback successCallback, optional ErrorCallback errorCallback);
+    void      copyTo (DirectoryEntry parent, optional DOMString newName, optional EntryCallback successCallback, optional ErrorCallback errorCallback);
+    DOMString toURL ();
+    void      remove (VoidCallback successCallback, optional ErrorCallback errorCallback);
+    void      getParent (EntryCallback successCallback, optional ErrorCallback errorCallback);
+};
+
+interface DirectoryEntry : Entry {
+    DirectoryReader createReader ();
+    void            getFile (DOMString path, optional Flags options, optional EntryCallback successCallback, optional ErrorCallback errorCallback);
+    void            getDirectory (DOMString path, optional Flags options, optional EntryCallback successCallback, optional ErrorCallback errorCallback);
+    void            removeRecursively (VoidCallback successCallback, optional ErrorCallback errorCallback);
+};
+
+interface DirectoryReader {
+    void readEntries (EntriesCallback successCallback, optional ErrorCallback errorCallback);
+};
+
+interface FileEntry : Entry {
+    void createWriter (FileWriterCallback successCallback, optional ErrorCallback errorCallback);
+    void file (FileCallback successCallback, optional ErrorCallback errorCallback);
+};
+
+[Callback=FunctionOnly]
+interface FileSystemCallback {
+    void handleEvent (FileSystem filesystem);
+};
+
+[Callback=FunctionOnly]
+interface EntryCallback {
+    void handleEvent (Entry entry);
+};
+
+[Callback=FunctionOnly]
+interface EntriesCallback {
+    void handleEvent (Entry[] entries);
+};
+
+[Callback=FunctionOnly]
+interface MetadataCallback {
+    void handleEvent (Metadata metadata);
+};
+
+[Callback=FunctionOnly]
+interface FileWriterCallback {
+    void handleEvent (FileWriter fileWriter);
+};
+
+[Callback=FunctionOnly]
+interface FileCallback {
+    void handleEvent (File file);
+};
+
+[Callback=FunctionOnly]
+interface VoidCallback {
+    void handleEvent ();
+};
+
+[Callback=FunctionOnly]
+interface ErrorCallback {
+    void handleEvent (DOMError err);
+};
+
+interface FileSystemSync {
+    readonly attribute DOMString          name;
+    readonly attribute DirectoryEntrySync root;
+};
+
+interface EntrySync {
+    readonly attribute boolean        isFile;
+    readonly attribute boolean        isDirectory;
+    Metadata           getMetadata ();
+    readonly attribute DOMString      name;
+    readonly attribute DOMString      fullPath;
+    readonly attribute FileSystemSync filesystem;
+    EntrySync          moveTo (DirectoryEntrySync parent, optional DOMString newName);
+    EntrySync          copyTo (DirectoryEntrySync parent, optional DOMString newName);
+    DOMString          toURL ();
+    void               remove ();
+    DirectoryEntrySync getParent ();
+};
+
+interface DirectoryEntrySync : EntrySync {
+    DirectoryReaderSync createReader ();
+    FileEntrySync       getFile (DOMString path, optional Flags options);
+    DirectoryEntrySync  getDirectory (DOMString path, optional Flags options);
+    void                removeRecursively ();
+};
+
+interface DirectoryReaderSync {
+    EntrySync[] readEntries ();
+};
+
+interface FileEntrySync : EntrySync {
+    FileWriterSync createWriter ();
+    File           file ();
+};
