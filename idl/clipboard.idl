@@ -1,0 +1,12 @@
+
+dictionary ClipboardEventInit : EventInit {
+    //attribute DOMString data;
+    //attribute DOMString dataType;
+    DOMString data;
+		DOMString dataType;
+};
+
+[Constructor(DOMString type, optional ClipboardEventInit eventInitDict)]
+interface ClipboardEvent : Event {
+    readonly attribute DataTransfer clipboardData;
+};

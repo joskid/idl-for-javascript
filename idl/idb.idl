@@ -1,0 +1,221 @@
+interface IDBKeyRange {
+    readonly attribute any     lower;
+    readonly attribute any     upper;
+    readonly attribute boolean lowerOpen;
+    readonly attribute boolean upperOpen;
+    static IDBKeyRange only (any value) raises (DOMException);
+    static IDBKeyRange lowerBound (any bound, optional boolean open) raises (DOMException);
+    static IDBKeyRange upperBound (any bound, optional boolean open) raises (DOMException);
+    static IDBKeyRange bound (any lower, any upper, optional boolean lowerOpen, optional boolean upperOpen) raises (DOMException);
+};
+
+interface IDBRequest : EventTarget {
+    const unsigned short LOADING = 1;
+    const unsigned short DONE = 2;
+    readonly attribute any            result getraises (DOMException);
+    readonly attribute DOMError       error getraises (DOMException);
+    readonly attribute Object         source;
+    readonly attribute IDBTransaction transaction;
+    readonly attribute unsigned short readyState;
+    [TreatNonCallableAsNull]
+             attribute Function?      onsuccess;
+    [TreatNonCallableAsNull]
+             attribute Function?      onerror;
+};
+
+interface IDBOpenDBRequest : IDBRequest {
+    [TreatNonCallableAsNull]
+    attribute Function? onblocked;
+    [TreatNonCallableAsNull]
+    attribute Function? onupgradeneeded;
+};
+
+interface IDBVersionChangeEvent : Event {
+    readonly attribute unsigned long long oldVersion;
+    readonly attribute unsigned long long newVersion;
+    void initIDBVersionChangeEvent (DOMString typeArg, boolean canBubbleArg, boolean cancelableArg, unsigned long long oldVersion, unsigned long long newVersion);
+};
+
+Window implements IDBEnvironment;
+WorkerUtils implements IDBEnvironment;
+[NoInterfaceObject]
+interface IDBEnvironment {
+    readonly attribute IDBFactory indexedDB;
+};
+
+interface IDBFactory {
+    IDBOpenDBRequest open (DOMString name, [EnforceRange] optional unsigned long long version) raises (DOMException);
+    IDBOpenDBRequest deleteDatabase (DOMString name);
+    short            cmp (any first, any second) raises (DOMException);
+};
+
+interface IDBDatabase : EventTarget {
+    readonly attribute DOMString          name;
+    readonly attribute unsigned long long version;
+    readonly attribute DOMStringList      objectStoreNames;
+    IDBObjectStore createObjectStore (DOMString name, optional IDBObjectStoreParameters optionalParameters) raises (DOMException);
+    void           deleteObjectStore (DOMString name) raises (DOMException);
+    IDBTransaction transaction (any storeNames, optional unsigned short mode) raises (DOMException);
+    void           close ();
+    [TreatNonCallableAsNull]
+             attribute Function?          onabort;
+    [TreatNonCallableAsNull]
+             attribute Function?          onerror;
+    [TreatNonCallableAsNull]
+             attribute Function?          onversionchange;
+};
+
+interface IDBObjectStore {
+    readonly attribute DOMString      name;
+    readonly attribute DOMString      keyPath;
+    readonly attribute DOMStringList  indexNames;
+    readonly attribute IDBTransaction transaction;
+    IDBRequest put (any value, optional any key) raises (DOMException);
+    IDBRequest add (any value, optional any key) raises (DOMException);
+    IDBRequest delete (any key) raises (DOMException);
+    IDBRequest get (any key) raises (DOMException);
+    IDBRequest clear () raises (DOMException);
+    IDBRequest openCursor (optional any? range, optional unsigned short direction) raises (DOMException);
+    IDBIndex   createIndex (DOMString name, DOMString keyPath, optional IDBIndexParameters optionalParameters) raises (DOMException);
+    IDBIndex   index (DOMString name) raises (DOMException);
+    void       deleteIndex (DOMString indexName) raises (DOMException);
+    IDBRequest count (optional any key) raises (DOMException);
+};
+
+interface IDBIndex {
+    readonly attribute DOMString      name;
+    readonly attribute IDBObjectStore objectStore;
+    readonly attribute DOMString      keyPath;
+    readonly attribute boolean        multientry;
+    readonly attribute boolean        unique;
+    IDBRequest openCursor (optional any? range, optional unsigned short direction) raises (DOMException);
+    IDBRequest openKeyCursor (optional any? range, optional unsigned short direction) raises (DOMException);
+    IDBRequest get (any key) raises (DOMException);
+    IDBRequest getKey (any key) raises (DOMException);
+    IDBRequest count (optional any key) raises (DOMException);
+};
+
+interface IDBCursor {
+    const unsigned short NEXT = 0;
+    const unsigned short NEXT_NO_DUPLICATE = 1;
+    const unsigned short PREV = 2;
+    const unsigned short PREV_NO_DUPLICATE = 3;
+    readonly attribute Object         source;
+    readonly attribute unsigned short direction;
+    readonly attribute any            key;
+    readonly attribute any            primaryKey;
+    IDBRequest update (any value) raises (DOMException);
+    void       advance ([EnforceRange] unsigned long count) raises (DOMException);
+    void       continue (optional any key) raises (DOMException);
+    IDBRequest delete () raises (DOMException);
+};
+
+interface IDBCursorWithValue : IDBCursor {
+    readonly attribute any value;
+};
+
+interface IDBTransaction : EventTarget {
+    const unsigned short READ_ONLY = 0;
+    const unsigned short READ_WRITE = 1;
+    const unsigned short VERSION_CHANGE = 2;
+    readonly attribute unsigned short mode;
+    readonly attribute IDBDatabase    db;
+    IDBObjectStore objectStore (DOMString name) raises (DOMException);
+    void           abort () raises (DOMException);
+    [TreatNonCallableAsNull]
+             attribute Function?      onabort;
+    [TreatNonCallableAsNull]
+             attribute Function?      oncomplete;
+    [TreatNonCallableAsNull]
+             attribute Function?      onerror;
+};
+
+WorkerUtils implements IDBEnvironmentSync;
+[NoInterfaceObject]
+interface IDBEnvironmentSync {
+    readonly attribute IDBFactorySync indexedDBSync;
+};
+
+interface IDBFactorySync {
+    IDBDatabaseSync open (DOMString name, [EnforceRange] optional unsigned long long version, optional IDBVersionChangeCallback upgradeCallback, optional unsigned long timeout) raises (DOMException);
+    void            deleteDatabase (DOMString name);
+    short           cmp (any first, any second) raises (DOMException);
+};
+
+interface IDBDatabaseSync {
+    readonly attribute DOMString          name;
+    readonly attribute unsigned long long version;
+    readonly attribute DOMStringList      objectStoreNames;
+    IDBObjectStoreSync createObjectStore (DOMString name, optional IDBObjectStoreParameters optionalParameters) raises (DOMException);
+    void               deleteObjectStore (DOMString name) raises (DOMException);
+    void               transaction (any storeNames, IDBTransactionCallback callback, optional unsigned short mode, optional unsigned long timeout) raises (DOMException);
+    void               close ();
+};
+
+[NoInterfaceObject, Callback]
+interface IDBTransactionCallback {
+    void transactionStarted (IDBTransactionSync transaction);
+};
+
+[NoInterfaceObject, Callback]
+interface IDBVersionChangeCallback {
+    void transactionStarted (IDBTransactionSync transaction, unsigned long long oldVersion);
+};
+
+interface IDBObjectStoreSync {
+    readonly attribute DOMString          name;
+    readonly attribute DOMString          keyPath;
+    readonly attribute DOMStringList      indexNames;
+    readonly attribute IDBTransactionSync transaction;
+    any                    put (any value, optional any key) raises (DOMException);
+    any                    add (any value, optional any key) raises (DOMException);
+    boolean                delete (any key) raises (DOMException);
+    any                    get (any key) raises (DOMException);
+    void                   clear () raises (DOMException);
+    IDBIndexSync           createIndex (DOMString name, DOMString keyPath, optional IDBIndexParameters optionalParameters) raises (DOMException);
+    IDBIndexSync           index (DOMString name) raises (DOMException);
+    void                   deleteIndex (DOMString indexName) raises (DOMException);
+    IDBCursorWithValueSync openCursor (optional any? range, optional unsigned short direction) raises (DOMException);
+    unsigned short         count (optional any key) raises (DOMException);
+};
+
+interface IDBIndexSync {
+    readonly attribute DOMString          name;
+    readonly attribute IDBObjectStoreSync objectStore;
+    readonly attribute DOMString          keyPath;
+    readonly attribute boolean            multientry;
+    readonly attribute boolean            unique;
+    IDBCursorWithValueSync openCursor (optional any? range, optional unsigned short direction) raises (DOMException);
+    IDBCursorSync          openKeyCursor (optional any? range, optional unsigned short direction) raises (DOMException);
+    any                    get (any key) raises (DOMException);
+    any                    getKey (any key) raises (DOMException);
+    unsigned short         count (optional any key) raises (DOMException);
+};
+
+interface IDBCursorSync {
+    const unsigned short NEXT = 0;
+    const unsigned short NEXT_NO_DUPLICATE = 1;
+    const unsigned short PREV = 2;
+    const unsigned short PREV_NO_DUPLICATE = 3;
+    readonly attribute Object         source;
+    readonly attribute unsigned short direction;
+    readonly attribute any            primaryKey;
+    IDBRequest update (any value) raises (DOMException);
+    boolean    advance ([EnforceRange] unsigned long count) raises (DOMException);
+    boolean    continue (optional any key) raises (DOMException);
+    boolean    delete () raises (DOMException);
+};
+
+interface IDBCursorWithValueSync : IDBCursorSync {
+    attribute any value;
+};
+
+interface IDBTransactionSync {
+    const unsigned short READ_ONLY = 0;
+    const unsigned short READ_WRITE = 1;
+    const unsigned short VERSION_CHANGE = 2;
+    readonly attribute unsigned short  mode;
+             attribute IDBDatabaseSync db;
+    IDBObjectStoreSync objectStore (DOMString name) raises (DOMException);
+    void               abort () raises (DOMException);
+};

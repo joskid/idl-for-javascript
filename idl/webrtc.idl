@@ -1,0 +1,107 @@
+[Constructor (MediaStreamTrackList? audioTracks, MediaStreamTrackList? videoTracks)]
+interface MediaStream {
+    readonly attribute DOMString            label;
+    readonly attribute MediaStreamTrackList audioTracks;
+    readonly attribute MediaStreamTrackList videoTracks;
+    MediaStreamRecorder record ();
+             attribute boolean              ended;
+             attribute Function?            onended;
+};
+
+MediaStream implements EventTarget;
+interface LocalMediaStream : MediaStream {
+    void stop ();
+};
+
+interface MediaStreamTrack {
+    readonly attribute DOMString      kind;
+    readonly attribute DOMString      label;
+             attribute boolean        enabled;
+    const unsigned short LIVE = 0;
+    const unsigned short MUTED = 1;
+    const unsigned short ENDED = 2;
+    readonly attribute unsigned short readyState;
+             attribute Function?      onmute;
+             attribute Function?      onunmute;
+             attribute Function?      onended;
+};
+
+interface AudioMediaStreamTrack : MediaStreamTrack {
+    readonly attribute boolean canInsertDTMF;
+    void insertDTMF (DOMString tones, optional long duration);
+};
+
+interface MediaStreamTrackList {
+    readonly attribute unsigned long length;
+    MediaStreamTrack item (unsigned long index);
+    void             add (MediaStreamTrack track);
+    void             remove (MediaStreamTrack track);
+             attribute Function?     onaddtrack;
+             attribute Function?     onremovetrack;
+};
+
+interface MediaStreamRecorder {
+    voice getRecordedData (BlobCallback? callBack);
+};
+
+[Callback, NoInterfaceObject]
+interface BlobCallback {
+    void handleEvent (Blob blob);
+};
+
+partial interface URL {
+    static DOMString createObjectURL (MediaStream stream);
+};
+
+[Constructor (DOMString configuration, SignalingCallback signalingCallback)]
+interface PeerConnection {
+    void processSignalingMessage (DOMString message);
+    const unsigned short NEW = 0;
+    const unsigned short NEGOTIATING = 1;
+    const unsigned short ACTIVE = 2;
+    const unsigned short CLOSING = 4;
+    const unsigned short CLOSED = 3;
+    readonly attribute unsigned short readyState;
+    const unsigned short ICE_GATHERING = 0x100;
+    const unsigned short ICE_WAITING = 0x200;
+    const unsigned short ICE_CHECKING = 0x300;
+    const unsigned short ICE_CONNECTED = 0x400;
+    const unsigned short ICE_COMPLETED = 0x500;
+    const unsigned short ICE_FAILED = 0x600;
+    const unsigned short ICE_CLOSED = 0x700;
+    readonly attribute unsigned short iceState;
+    const unsigned short SDP_IDLE = 0x1000;
+    const unsigned short SDP_WAITING = 0x2000;
+    const unsigned short SDP_GLARE = 0x3000;
+    readonly attribute unsigned short sdpState;
+    void addStream (MediaStream stream, MediaStreamHints hints);
+    void removeStream (MediaStream stream);
+    readonly attribute MediaStream[]  localStreams;
+    readonly attribute MediaStream[]  remoteStreams;
+    void close ();
+             attribute Function?      onconnecting;
+             attribute Function?      onopen;
+             attribute Function?      onstatechange;
+             attribute Function?      onaddstream;
+             attribute Function?      onremovestream;
+};
+
+PeerConnection implements EventTarget;
+[Callback, NoInterfaceObject]
+interface SignalingCallback {
+    void handleEvent (DOMString message, PeerConnection source);
+};
+
+[Constructor(DOMString type, optional MediaStreamTrackEventInit eventInitDict)]
+interface MediaStreamTrackEvent : Event {
+    readonly attribute MediaStreamTrack? track;
+};dictionary MediaStreamTrackEventInit : EventInit {
+    MediaStreamTrack? track;
+};
+
+[Constructor(DOMString type, optional MediaStreamEventInit eventInitDict)]
+interface MediaStreamEvent : Event {
+    readonly attribute MediaStream? stream;
+};dictionary MediaStreamEventInit : EventInit {
+    MediaStream? stream;
+};

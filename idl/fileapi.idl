@@ -1,0 +1,106 @@
+interface FileList {
+  getter File? item(unsigned long index);
+  readonly attribute unsigned long length;
+};
+
+
+//[Constructor, Constructor((ArrayBufferView or Blob or DOMString)?[] blobParts, optional BlobPropertyBag options)]
+[Constructor,
+ Constructor(ArrayBufferView[] blobParts, optional BlobPropertyBag options),
+ Constructor(Blob[] blobParts, optional BlobPropertyBag options),
+ Constructor(DOMString[] blobParts, optional BlobPropertyBag options)]
+interface Blob {
+
+  readonly attribute unsigned long long size;
+  readonly attribute DOMString type;
+
+  //slice Blob into byte-ranged chunks
+
+  // Blob slice(optional long long start,
+  //            optional long long end,
+  //            optional DOMString contentType);
+  Blob slice(optional unsigned long long start,
+             optional unsigned long long end,
+             optional DOMString contentType);
+
+};
+
+enum EndingTypes{"transparent", "native"};
+
+dictionary BlobPropertyBag {
+
+  //DOMString type = "";
+  //EndingTypes endings = "transparent";
+
+  DOMString type;
+	EndingTypes endings;
+
+};
+
+
+interface File : Blob {
+
+readonly attribute DOMString name;
+readonly attribute Date? lastModifiedDate;
+
+};
+
+
+
+[Constructor]
+interface FileReader: EventTarget {
+
+  // async read methods
+  void readAsArrayBuffer(Blob blob);
+  void readAsText(Blob blob, optional DOMString encoding);
+  void readAsDataURL(Blob blob);
+
+  void abort();
+
+  // states
+  const unsigned short EMPTY = 0;
+  const unsigned short LOADING = 1;
+  const unsigned short DONE = 2;
+
+
+  readonly attribute unsigned short readyState;
+
+  // File or Blob data
+  readonly attribute (DOMString or ArrayBuffer)? result;
+
+  readonly attribute DOMError error;
+
+  // event handler attributes
+  [TreatNonCallableAsNull] attribute Function? onloadstart;
+  [TreatNonCallableAsNull] attribute Function? onprogress;
+  [TreatNonCallableAsNull] attribute Function? onload;
+  [TreatNonCallableAsNull] attribute Function? onabort;
+  [TreatNonCallableAsNull] attribute Function? onerror;
+  [TreatNonCallableAsNull] attribute Function? onloadend;
+
+};
+
+
+
+[Constructor]
+interface FileReaderSync {
+
+  // Synchronously return strings
+
+  ArrayBuffer readAsArrayBuffer(Blob blob);
+  DOMString readAsText(Blob blob, optional DOMString encoding);
+  DOMString readAsDataURL(Blob blob);
+};
+
+
+partial interface URL {
+
+    static DOMString createObjectURL(Blob blob, optional objectURLOptions options);
+    static void revokeObjectURL(DOMString url);
+};
+
+dictionary objectURLOptions
+{
+	boolean oneTimeOnly = false;
+
+};

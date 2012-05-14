@@ -1,7 +1,8 @@
 var fs = require('fs');
 var path = require('path');
 var parseIDL = require('webidl.js').webidl;
-var tags = require('./tags');
+var tags = require('./json/_tags');
+var zlib = require('zlib');
 
 tags = Object.keys(tags).reduce(function(ret, type){
   Object.keys(tags[type]).forEach(function(tag){
@@ -316,13 +317,18 @@ var conversionStanza = [
   },
 
   function stringify(state, json){
-    return JSON.stringify(json, null, '\t');
+    return [JSON.stringify(json, null, '\t'), JSON.stringify(json)];
   },
 
   function save(state, text){
-    var name = path.basename(state.name).slice(0, -path.extname(state.name).length);
-    var out = path.resolve(state.out, name+'.json');
-    fs.writeFileSync(out, text);
+    var name = path.basename(state.name).slice(0, -path.extname(state.name).length)+'.json';
+    fs.writeFileSync(path.resolve(state.out, name), text[0]);
+    fs.writeFileSync(path.resolve(state.out+'.min', name), text[1]);
+    var gzip = zlib.createGzip();
+    var fs = require('fs');
+    var inp = fs.createReadStream('input.txt');
+    var out = fs.createWriteStream('input.txt.gz');
+    inp.pipe(gzip).pipe(out);
   }
 ];
 
