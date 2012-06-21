@@ -47,10 +47,9 @@
 	},
 	"BlobPropertyBag": {
 		"type": "dictionary",
-		"inherits": [],
 		"members": {
-			"type": "String",
-			"endings": "EndingTypes"
+			"type": "",
+			"endings": ""
 		}
 	},
 	"File": {
@@ -138,6 +137,7 @@
 	},
 	"URL": {
 		"type": "interface",
+		"inherits": [],
 		"operations": {
 			"createObjectURL": {
 				"returns": "String",
@@ -155,9 +155,8 @@
 	},
 	"objectURLOptions": {
 		"type": "dictionary",
-		"inherits": [],
 		"members": {
-			"oneTimeOnly": "Boolean"
+			"oneTimeOnly": true
 		}
 	}
 }

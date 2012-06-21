@@ -1,107 +1,232 @@
-
-
-// Introduced in DOM Level 2:
-interface EventTarget {
-  void               addEventListener(in DOMString type,
-                                      in EventListener listener,
-                                      in boolean useCapture);
-  void               removeEventListener(in DOMString type,
-                                         in EventListener listener,
-                                         in boolean useCapture);
-  boolean            dispatchEvent(in Event evt);
+// Event Constructor Syntax:
+[Constructor(DOMString typeArg, optional EventInit eventInitDict)]
+partial interface Event
+{
 };
 
-// Introduced in DOM Level 2:
-interface EventListener {
-  void               handleEvent(in Event evt);
+// Suggested initEvent initializer:
+dictionary EventInit {
+  boolean bubbles    = false;
+  boolean cancelable = false;
 };
 
-// Introduced in DOM Level 2:
-interface Event {
-
-  // PhaseType
-  const unsigned short      CAPTURING_PHASE                = 1;
-  const unsigned short      AT_TARGET                      = 2;
-  const unsigned short      BUBBLING_PHASE                 = 3;
-
-  readonly attribute DOMString        type;
-  readonly attribute EventTarget      target;
-  readonly attribute EventTarget      currentTarget;
-  readonly attribute unsigned short   eventPhase;
-  readonly attribute boolean          bubbles;
-  readonly attribute boolean          cancelable;
-  readonly attribute DOMTimeStamp     timeStamp;
-  void               stopPropagation();
-  void               preventDefault();
-  void               initEvent(in DOMString eventTypeArg,
-                               in boolean canBubbleArg,
-                               in boolean cancelableArg);
+// Event Constructor Syntax:
+[Constructor(DOMString typeArg, optional CustomEventInit customEventInitDict)]
+partial interface CustomEvent
+{
+  // Originally introduced (and deprecated) in DOM Level 3:
+  void initCustomEvent(DOMString typeArg, 
+                       boolean canBubbleArg, 
+                       boolean cancelableArg, 
+                       any detailArg);
 };
 
-// Introduced in DOM Level 2:
-interface DocumentEvent {
-  Event              createEvent(in DOMString eventType);
+// Suggested initCustomEvent replacement initializer:
+dictionary CustomEventInit {
+  // Attributes from Event:
+  boolean bubbles    = false;
+  boolean cancelable = false;
+
+  any     detail     = null;
 };
 
-// Introduced in DOM Level 2:
-interface UIEvent : Event {
-  readonly attribute AbstractView  view;
-  readonly attribute long             detail;
-  void               initUIEvent(in DOMString typeArg,
-                                 in boolean canBubbleArg,
-                                 in boolean cancelableArg,
-                                 in AbstractView viewArg,
-                                 in long detailArg);
+// Event Constructor Syntax:
+[Constructor(DOMString typeArg, optional UIEventInit dictUIEventInit)]
+partial interface UIEvent
+{
 };
 
-// Introduced in DOM Level 2:
-interface MouseEvent : UIEvent {
-  readonly attribute long             screenX;
-  readonly attribute long             screenY;
-  readonly attribute long             clientX;
-  readonly attribute long             clientY;
-  readonly attribute boolean          ctrlKey;
-  readonly attribute boolean          shiftKey;
-  readonly attribute boolean          altKey;
-  readonly attribute boolean          metaKey;
-  readonly attribute unsigned short   button;
-  readonly attribute EventTarget      relatedTarget;
-  void               initMouseEvent(in DOMString typeArg,
-                                    in boolean canBubbleArg,
-                                    in boolean cancelableArg,
-                                    in AbstractView viewArg,
-                                    in long detailArg,
-                                    in long screenXArg,
-                                    in long screenYArg,
-                                    in long clientXArg,
-                                    in long clientYArg,
-                                    in boolean ctrlKeyArg,
-                                    in boolean altKeyArg,
-                                    in boolean shiftKeyArg,
-                                    in boolean metaKeyArg,
-                                    in unsigned short buttonArg,
-                                    in EventTarget relatedTargetArg);
+// Suggested initUIEvent replacement initializer:
+dictionary UIEventInit {
+  // Attributes from Event:
+  boolean       bubbles    = false;
+  boolean       cancelable = false;
+
+  // Attributes for UIEvent:
+  AbstractView? view       = null;
+  long          detail     = 0;
 };
 
-// Introduced in DOM Level 2:
-interface MutationEvent : Event {
+// Event Constructor Syntax:
+[Constructor(DOMString typeArg, optional FocusEventInit focusEventInitDict)]
+partial interface FocusEvent
+{
+  // Originally introduced (and deprecated) in DOM Level 3:
+  void initFocusEvent(DOMString typeArg, 
+                      boolean canBubbleArg, 
+                      boolean cancelableArg, 
+                      AbstractView? viewArg, 
+                      long detailArg, 
+                      EventTarget? relatedTargetArg);
+};
 
-  // attrChangeType
-  const unsigned short      MODIFICATION                   = 1;
-  const unsigned short      ADDITION                       = 2;
-  const unsigned short      REMOVAL                        = 3;
+// Suggested initFocusEvent replacement initializer:
+dictionary FocusEventInit {
+  // Attributes from Event:
+  boolean       bubbles       = false;
+  boolean       cancelable    = false;
 
-  readonly attribute Node             relatedNode;
-  readonly attribute DOMString        prevValue;
-  readonly attribute DOMString        newValue;
-  readonly attribute DOMString        attrName;
-  readonly attribute unsigned short   attrChange;
-  void               initMutationEvent(in DOMString typeArg,
-                                       in boolean canBubbleArg,
-                                       in boolean cancelableArg,
-                                       in Node relatedNodeArg,
-                                       in DOMString prevValueArg,
-                                       in DOMString newValueArg,
-                                       in DOMString attrNameArg,
-                                       in unsigned short attrChangeArg);
+  // Attributes from UIEvent:
+  AbstractView? view          = null;
+  long          detail        = 0;
+
+  // Attributes for FocusEvent:
+  EventTarget?  relatedTarget = null;
+};
+
+// Event Constructor Syntax:
+[Constructor(DOMString typeArg, optional MouseEventInit mouseEventInitDict)]
+partial interface MouseEvent
+{
+};
+
+// Suggested initMouseEvent replacement initializer:
+dictionary MouseEventInit {
+  // Attributes from Event:
+  boolean        bubbles       = false;
+  boolean        cancelable    = false;
+
+  // Attributes from UIEvent:
+  AbstractView?  view          = null;
+  long           detail        = 0;
+
+  // Attributes for MouseEvent:
+  long           screenX       = 0;
+  long           screenY       = 0;
+  long           clientX       = 0;
+  long           clientY       = 0;
+  boolean        ctrlKey       = false;
+  boolean        shiftKey      = false;
+  boolean        altKey        = false;
+  boolean        metaKey       = false;
+  unsigned short button        = 0;
+  // Note: "buttons" was not previously initializable through initMouseEvent!
+  unsigned short buttons       = 0;
+  EventTarget?   relatedTarget = null;
+};
+
+// Event Constructor Syntax:
+[Constructor(DOMString typeArg, optional WheelEventInit wheelEventInitDict)]
+partial interface WheelEvent
+{
+  // Originally introduced (and deprecated) in DOM Level 3:
+  void initWheelEvent(DOMString typeArg, 
+                      boolean canBubbleArg, 
+                      boolean cancelableArg, 
+                      AbstractView? viewArg, 
+                      long detailArg, 
+                      long screenXArg, 
+                      long screenYArg, 
+                      long clientXArg, 
+                      long clientYArg, 
+                      unsigned short buttonArg, 
+                      EventTarget? relatedTargetArg, 
+                      DOMString modifiersListArg, 
+                      float deltaXArg, 
+                      float deltaYArg, 
+                      float deltaZArg, 
+                      unsigned long deltaMode);
+};
+
+// Suggested initWheelEvent replacement initializer:
+dictionary WheelEventInit {
+  // Attributes from Event:
+  boolean        bubbles       = false;
+  boolean        cancelable    = false;
+
+  // Attributes from UIEvent:
+  AbstractView?  view          = null;
+  long           detail        = 0;
+
+  // Attributes from MouseEvent:
+  long           screenX       = 0;
+  long           screenY       = 0;
+  long           clientX       = 0;
+  long           clientY       = 0;
+  boolean        ctrlKey       = false;
+  boolean        shiftKey      = false;
+  boolean        altKey        = false;
+  boolean        metaKey       = false;
+  unsigned short button        = 0;
+  // Note: "buttons" was not previously initializable through initMouseEvent!
+  unsigned short buttons       = 0;
+  EventTarget?   relatedTarget = null;
+
+  // Attributes for WheelEvent:
+  float          deltaX        = 0.0;
+  float          deltaY        = 0.0;
+  float          deltaZ        = 0.0;
+  unsigned long  deltaMode     = 0;
+};
+
+// Event Constructor Syntax:
+[Constructor(DOMString typeArg, optional KeyboardEventInit keyboardEventInitDict)]
+partial interface KeyboardEvent
+{
+  // Originally introduced (and deprecated) in DOM Level 3:
+  void initKeyboardEvent(DOMString typeArg, 
+                         boolean canBubbleArg, 
+                         boolean cancelableArg, 
+                         AbstractView? viewArg, 
+                         DOMString charArg, 
+                         DOMString keyArg, 
+                         unsigned long locationArg, 
+                         DOMString modifiersListArg,
+                         boolean repeat,
+                         DOMString localeArg); 
+};
+
+// Suggested initKeyboardEvent replacement initializer:
+dictionary KeyboardEventInit {
+  // Attributes from Event:
+  boolean       bubbles    = false;
+  boolean       cancelable = false;
+
+  // Attributes from UIEvent:
+  AbstractView? view       = null;
+  long          detail     = 0;
+
+  // Attributes for KeyboardEvent:
+  DOMString     char       = "";
+  DOMString     key        = "";
+  unsigned long location   = 0;
+  boolean       ctrlKey    = false;
+  boolean       shiftKey   = false;
+  boolean       altKey     = false;
+  boolean       metaKey    = false;
+  boolean       repeat     = false;
+  DOMString     locale     = "";
+
+  // (Legacy) key attributes for KeyboardEvent:
+  unsigned long charCode   = 0;
+  unsigned long keyCode    = 0;
+  unsigned long which      = 0;
+};
+
+// Event Constructor Syntax:
+[Constructor(DOMString typeArg, optional CompositionEventInit compositionEventInitDict)]
+partial interface CompositionEvent
+{
+  // Originally introduced (and deprecated) in DOM Level 3:
+  void initCompositionEvent(DOMString typeArg, 
+                         boolean canBubbleArg, 
+                         boolean cancelableArg, 
+                         AbstractView? viewArg, 
+                         DOMString? dataArg,
+                         DOMString localeArg);
+};
+
+// Suggested initCompositionEvent replacement initializer:
+dictionary CompositionEventInit {
+  // Attributes from Event:
+  boolean       bubbles    = false;
+  boolean       cancelable = false;
+
+  // Attributes from UIEvent:
+  AbstractView? view       = null;
+  long          detail     = 0;
+
+  // Attributes for CompositionEvent:
+  DOMString?    data       = null;
+  DOMString     locale     = "";
 };

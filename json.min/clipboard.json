@@ -1,1 +1,1 @@
-{"ClipboardEventInit":{"type":"dictionary","inherits":["EventInit"],"members":{"data":"String","dataType":"String"}},"ClipboardEvent":{"type":"interface","inherits":["Event"],"readonlys":{"clipboardData":"DataTransfer"},"construct":{"args":{"type":"String","eventInitDict":"ClipboardEventInit"}}}}
+{"ClipboardEventInit":{"type":"dictionary","members":{"data":"","dataType":""}},"ClipboardEvent":{"type":"interface","inherits":["Event"],"readonlys":{"clipboardData":"DataTransfer"},"construct":{"args":{"type":"String","eventInitDict":"ClipboardEventInit"}}}}

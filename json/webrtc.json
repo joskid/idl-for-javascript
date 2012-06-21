@@ -14,21 +14,21 @@
 			"addEventListener": {
 				"args": {
 					"type": "String",
-					"listener": "EventListener",
-					"useCapture": "Boolean"
+					"callback": "EventListener",
+					"capture": "Boolean"
 				}
 			},
 			"removeEventListener": {
 				"args": {
 					"type": "String",
-					"listener": "EventListener",
-					"useCapture": "Boolean"
+					"callback": "EventListener",
+					"capture": "Boolean"
 				}
 			},
 			"dispatchEvent": {
 				"returns": "Boolean",
 				"args": {
-					"evt": "Event"
+					"event": "Event"
 				}
 			}
 		},
@@ -143,6 +143,25 @@
 		"Callback": true,
 		"NoInterfaceObject": true
 	},
+	"URL": {
+		"type": "interface",
+		"inherits": [],
+		"operations": {
+			"createObjectURL": {
+				"returns": "String",
+				"args": {
+					"blob": "Blob",
+					"options": "objectURLOptions",
+					"stream": "MediaStream"
+				}
+			},
+			"revokeObjectURL": {
+				"args": {
+					"url": "String"
+				}
+			}
+		}
+	},
 	"PeerConnection": {
 		"type": "interface",
 		"inherits": [],
@@ -167,21 +186,21 @@
 			"addEventListener": {
 				"args": {
 					"type": "String",
-					"listener": "EventListener",
-					"useCapture": "Boolean"
+					"callback": "EventListener",
+					"capture": "Boolean"
 				}
 			},
 			"removeEventListener": {
 				"args": {
 					"type": "String",
-					"listener": "EventListener",
-					"useCapture": "Boolean"
+					"callback": "EventListener",
+					"capture": "Boolean"
 				}
 			},
 			"dispatchEvent": {
 				"returns": "Boolean",
 				"args": {
-					"evt": "Event"
+					"event": "Event"
 				}
 			}
 		},
@@ -254,11 +273,8 @@
 	},
 	"MediaStreamTrackEventInit": {
 		"type": "dictionary",
-		"inherits": [
-			"EventInit"
-		],
 		"members": {
-			"track": "MediaStreamTrack"
+			"track": ""
 		}
 	},
 	"MediaStreamEvent": {
@@ -278,11 +294,8 @@
 	},
 	"MediaStreamEventInit": {
 		"type": "dictionary",
-		"inherits": [
-			"EventInit"
-		],
 		"members": {
-			"stream": "MediaStream"
+			"stream": ""
 		}
 	}
 }

@@ -177,6 +177,356 @@
 			}
 		}
 	},
+	"Document": {
+		"type": "interface",
+		"inherits": [
+			"Node"
+		],
+		"readonlys": {
+			"implementation": "DOMImplementation",
+			"URL": "String",
+			"documentURI": "String",
+			"compatMode": "String",
+			"characterSet": "String",
+			"contentType": "String",
+			"doctype": "DocumentType",
+			"documentElement": "Element",
+			"location": "Location",
+			"referrer": "String",
+			"lastModified": "String",
+			"readyState": "String",
+			"head": "HTMLHeadElement",
+			"images": "HTMLCollection",
+			"embeds": "HTMLCollection",
+			"plugins": "HTMLCollection",
+			"links": "HTMLCollection",
+			"forms": "HTMLCollection",
+			"scripts": "HTMLCollection",
+			"cssElementMap": "DOMElementMap",
+			"defaultView": "Window",
+			"activeElement": "Element",
+			"commands": "HTMLCollection",
+			"anchors": "HTMLCollection",
+			"applets": "HTMLCollection",
+			"all": "HTMLAllCollection"
+		},
+		"operations": {
+			"getElementsByTagName": {
+				"returns": "HTMLCollection",
+				"args": {
+					"localName": "String"
+				}
+			},
+			"getElementsByTagNameNS": {
+				"returns": "HTMLCollection",
+				"args": {
+					"namespace": "String",
+					"localName": "String"
+				}
+			},
+			"getElementsByClassName": {
+				"returns": "HTMLCollection",
+				"args": {
+					"classNames": "String"
+				}
+			},
+			"getElementById": {
+				"returns": "Element",
+				"args": {
+					"elementId": "String"
+				}
+			},
+			"createElement": {
+				"returns": "Element",
+				"args": {
+					"localName": "String"
+				}
+			},
+			"createElementNS": {
+				"returns": "Element",
+				"args": {
+					"namespace": "String",
+					"qualifiedName": "String"
+				}
+			},
+			"createDocumentFragment": {
+				"returns": "DocumentFragment"
+			},
+			"createTextNode": {
+				"returns": "Text",
+				"args": {
+					"data": "String"
+				}
+			},
+			"createComment": {
+				"returns": "Comment",
+				"args": {
+					"data": "String"
+				}
+			},
+			"createProcessingInstruction": {
+				"returns": "ProcessingInstruction",
+				"args": {
+					"target": "String",
+					"data": "String"
+				}
+			},
+			"importNode": {
+				"returns": "Node",
+				"args": {
+					"node": "Node",
+					"deep": "Boolean"
+				}
+			},
+			"adoptNode": {
+				"returns": "Node",
+				"args": {
+					"node": "Node"
+				}
+			},
+			"createEvent": {
+				"returns": "Event",
+				"args": {
+					"eventInterfaceName": "String"
+				}
+			},
+			"createRange": {
+				"returns": "Range"
+			},
+			"createNodeIterator": {
+				"returns": "NodeIterator",
+				"args": {
+					"root": "Node",
+					"whatToShow": "Uint32",
+					"filter": "NodeFilter"
+				}
+			},
+			"createTreeWalker": {
+				"returns": "TreeWalker",
+				"args": {
+					"root": "Node",
+					"whatToShow": "Uint32",
+					"filter": "NodeFilter"
+				}
+			},
+			"prepend": {
+				"args": {
+					"nodes": [
+						"Node",
+						"String"
+					]
+				}
+			},
+			"append": {
+				"args": {
+					"nodes": [
+						"Node",
+						"String"
+					]
+				}
+			},
+			"querySelector": {
+				"returns": "Element",
+				"args": {
+					"selectors": "String",
+					"refNodes": "Any"
+				}
+			},
+			"querySelectorAll": {
+				"returns": "NodeList",
+				"args": {
+					"selectors": "String",
+					"refNodes": "Any"
+				}
+			},
+			"queryScopedSelector": {
+				"returns": "Element",
+				"args": {
+					"selectors": "String"
+				}
+			},
+			"queryScopedSelectorAll": {
+				"returns": "NodeList",
+				"args": {
+					"selectors": "String"
+				}
+			},
+			"getElementsByName": {
+				"returns": "NodeList",
+				"args": {
+					"elementName": "String"
+				}
+			},
+			"getItems": {
+				"returns": "NodeList",
+				"args": {
+					"typeNames": "String"
+				}
+			},
+			"open": {
+				"returns": [
+					"Document",
+					"Window"
+				],
+				"args": {
+					"type": "String",
+					"replace": [
+						"String",
+						"Boolean"
+					],
+					"url": "String",
+					"name": "String",
+					"features": "String"
+				}
+			},
+			"close": {},
+			"write": {
+				"args": {
+					"text": "String"
+				}
+			},
+			"writeln": {
+				"args": {
+					"text": "String"
+				}
+			},
+			"hasFocus": {
+				"returns": "Boolean"
+			},
+			"execCommand": {
+				"returns": "Boolean",
+				"args": {
+					"commandId": "String",
+					"showUI": "Boolean",
+					"value": "String"
+				}
+			},
+			"queryCommandEnabled": {
+				"returns": "Boolean",
+				"args": {
+					"commandId": "String"
+				}
+			},
+			"queryCommandIndeterm": {
+				"returns": "Boolean",
+				"args": {
+					"commandId": "String"
+				}
+			},
+			"queryCommandState": {
+				"returns": "Boolean",
+				"args": {
+					"commandId": "String"
+				}
+			},
+			"queryCommandSupported": {
+				"returns": "Boolean",
+				"args": {
+					"commandId": "String"
+				}
+			},
+			"queryCommandValue": {
+				"returns": "String",
+				"args": {
+					"commandId": "String"
+				}
+			},
+			"clear": {}
+		},
+		"Supplemental": true,
+		"attributes": {
+			"domain": "String",
+			"cookie": "String",
+			"title": "String",
+			"dir": "String",
+			"body": "HTMLElement",
+			"designMode": "String",
+			"onabort": "Function",
+			"onblur": "Function",
+			"oncancel": "Function",
+			"oncanplay": "Function",
+			"oncanplaythrough": "Function",
+			"onchange": "Function",
+			"onclick": "Function",
+			"onclose": "Function",
+			"oncontextmenu": "Function",
+			"oncuechange": "Function",
+			"ondblclick": "Function",
+			"ondrag": "Function",
+			"ondragend": "Function",
+			"ondragenter": "Function",
+			"ondragleave": "Function",
+			"ondragover": "Function",
+			"ondragstart": "Function",
+			"ondrop": "Function",
+			"ondurationchange": "Function",
+			"onemptied": "Function",
+			"onended": "Function",
+			"onerror": "Function",
+			"onfocus": "Function",
+			"oninput": "Function",
+			"oninvalid": "Function",
+			"onkeydown": "Function",
+			"onkeypress": "Function",
+			"onkeyup": "Function",
+			"onload": "Function",
+			"onloadeddata": "Function",
+			"onloadedmetadata": "Function",
+			"onloadstart": "Function",
+			"onmousedown": "Function",
+			"onmousemove": "Function",
+			"onmouseout": "Function",
+			"onmouseover": "Function",
+			"onmouseup": "Function",
+			"onmousewheel": "Function",
+			"onpause": "Function",
+			"onplay": "Function",
+			"onplaying": "Function",
+			"onprogress": "Function",
+			"onratechange": "Function",
+			"onreset": "Function",
+			"onscroll": "Function",
+			"onseeked": "Function",
+			"onseeking": "Function",
+			"onselect": "Function",
+			"onshow": "Function",
+			"onstalled": "Function",
+			"onsubmit": "Function",
+			"onsuspend": "Function",
+			"ontimeupdate": "Function",
+			"onvolumechange": "Function",
+			"onwaiting": "Function",
+			"onreadystatechange": "Function",
+			"fgColor": "String",
+			"linkColor": "String",
+			"vlinkColor": "String",
+			"alinkColor": "String",
+			"bgColor": "String"
+		},
+		"accessors": {
+			"getter": {
+				"returns": "Object",
+				"args": {
+					"name": "String"
+				}
+			}
+		},
+		"OverrideBuiltins": true
+	},
+	"XMLDocument": {
+		"type": "interface",
+		"inherits": [
+			"Document"
+		],
+		"operations": {
+			"load": {
+				"returns": "Boolean",
+				"args": {
+					"url": "String"
+				}
+			}
+		}
+	},
 	"HTMLElement": {
 		"type": "interface",
 		"inherits": [
@@ -1190,11 +1540,8 @@
 	},
 	"TrackEventInit": {
 		"type": "dictionary",
-		"inherits": [
-			"EventInit"
-		],
 		"members": {
-			"track": "Object"
+			"track": ""
 		}
 	},
 	"HTMLCanvasElement": {
@@ -1604,15 +1951,14 @@
 	},
 	"HitRegionOptions": {
 		"type": "dictionary",
-		"inherits": [],
 		"members": {
-			"path": "Path",
-			"id": "String",
-			"parentID": "String",
-			"cursor": "String",
-			"control": "Element",
-			"label": "String",
-			"role": "String"
+			"path": "",
+			"id": "",
+			"parentID": "",
+			"cursor": "",
+			"control": "",
+			"label": "",
+			"role": ""
 		}
 	},
 	"ImageData": {
@@ -1769,6 +2115,29 @@
 		"construct": {
 			"args": {
 				"d": "String"
+			}
+		}
+	},
+	"MouseEvent": {
+		"type": "interface",
+		"inherits": [],
+		"readonlys": {
+			"screenX": "Int32",
+			"screenY": "Int32",
+			"pageX": "Int32",
+			"pageY": "Int32",
+			"clientX": "Int32",
+			"clientY": "Int32",
+			"x": "Int32",
+			"y": "Int32",
+			"offsetX": "Int32",
+			"offsetY": "Int32",
+			"region": "String"
+		},
+		"construct": {
+			"args": {
+				"typeArg": "String",
+				"mouseEventInitDict": "MouseEventInit"
 			}
 		}
 	},
@@ -2903,11 +3272,8 @@
 	},
 	"PopStateEventInit": {
 		"type": "dictionary",
-		"inherits": [
-			"EventInit"
-		],
 		"members": {
-			"state": "Any"
+			"state": ""
 		}
 	},
 	"HashChangeEvent": {
@@ -2928,12 +3294,9 @@
 	},
 	"HashChangeEventInit": {
 		"type": "dictionary",
-		"inherits": [
-			"EventInit"
-		],
 		"members": {
-			"oldURL": "String",
-			"newURL": "String"
+			"oldURL": "",
+			"newURL": ""
 		}
 	},
 	"PageTransitionEvent": {
@@ -2953,11 +3316,8 @@
 	},
 	"PageTransitionEventInit": {
 		"type": "dictionary",
-		"inherits": [
-			"EventInit"
-		],
 		"members": {
-			"persisted": "Boolean"
+			"persisted": false
 		}
 	},
 	"BeforeUnloadEvent": {
@@ -3224,11 +3584,8 @@
 	},
 	"DragEventInit": {
 		"type": "dictionary",
-		"inherits": [
-			"MouseEventInit"
-		],
 		"members": {
-			"dataTransfer": "DataTransfer"
+			"dataTransfer": ""
 		}
 	},
 	"WorkerGlobalScope": {
@@ -3337,13 +3694,10 @@
 	},
 	"ErrorEventInit": {
 		"type": "dictionary",
-		"inherits": [
-			"EventInit"
-		],
 		"members": {
-			"message": "String",
-			"filename": "String",
-			"lineno": "Uint32"
+			"message": "",
+			"filename": "",
+			"lineno": 0
 		}
 	},
 	"Worker": {
@@ -3434,15 +3788,12 @@
 	},
 	"MessageEventInit": {
 		"type": "dictionary",
-		"inherits": [
-			"EventInit"
-		],
 		"members": {
-			"data": "Any",
-			"origin": "String",
-			"lastEventId": "String",
-			"source": "Window",
-			"ports": "MessagePort"
+			"data": "",
+			"origin": "",
+			"lastEventId": "",
+			"source": "",
+			"ports": ""
 		}
 	},
 	"EventSource": {
@@ -3477,9 +3828,8 @@
 	},
 	"EventSourceInit": {
 		"type": "dictionary",
-		"inherits": [],
 		"members": {
-			"withCredentials": "Boolean"
+			"withCredentials": true
 		}
 	},
 	"WebSocket": {
@@ -3553,13 +3903,10 @@
 	},
 	"CloseEventInit": {
 		"type": "dictionary",
-		"inherits": [
-			"EventInit"
-		],
 		"members": {
-			"wasClean": "Boolean",
-			"code": "Uint16",
-			"reason": "String"
+			"wasClean": false,
+			"code": 0,
+			"reason": ""
 		}
 	},
 	"MessageChannel": {
@@ -3644,15 +3991,12 @@
 	},
 	"StorageEventInit": {
 		"type": "dictionary",
-		"inherits": [
-			"EventInit"
-		],
 		"members": {
-			"key": "String",
-			"oldValue": "String",
-			"newValue": "String",
-			"url": "String",
-			"storageArea": "Storage"
+			"key": "",
+			"oldValue": "",
+			"newValue": "",
+			"url": "",
+			"storageArea": ""
 		}
 	},
 	"HTMLAppletElement": {

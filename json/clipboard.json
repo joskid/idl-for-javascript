@@ -1,12 +1,9 @@
 {
 	"ClipboardEventInit": {
 		"type": "dictionary",
-		"inherits": [
-			"EventInit"
-		],
 		"members": {
-			"data": "String",
-			"dataType": "String"
+			"data": "",
+			"dataType": ""
 		}
 	},
 	"ClipboardEvent": {

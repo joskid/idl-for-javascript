@@ -1,49 +1,7 @@
 {
-	"EventTarget": {
-		"type": "interface",
-		"inherits": [],
-		"operations": {
-			"addEventListener": {
-				"args": {
-					"type": "String",
-					"listener": "EventListener",
-					"useCapture": "Boolean"
-				}
-			},
-			"removeEventListener": {
-				"args": {
-					"type": "String",
-					"listener": "EventListener",
-					"useCapture": "Boolean"
-				}
-			},
-			"dispatchEvent": {
-				"returns": "Boolean",
-				"args": {
-					"evt": "Event"
-				}
-			}
-		}
-	},
-	"EventListener": {
-		"type": "interface",
-		"inherits": [],
-		"operations": {
-			"handleEvent": {
-				"args": {
-					"evt": "Event"
-				}
-			}
-		}
-	},
 	"Event": {
 		"type": "interface",
 		"inherits": [],
-		"consts": {
-			"CAPTURING_PHASE": 1,
-			"AT_TARGET": 2,
-			"BUBBLING_PHASE": 3
-		},
 		"readonlys": {
 			"type": "String",
 			"target": "EventTarget",
@@ -51,72 +9,176 @@
 			"eventPhase": "Uint16",
 			"bubbles": "Boolean",
 			"cancelable": "Boolean",
+			"defaultPrevented": "Boolean",
+			"isTrusted": "Boolean",
 			"timeStamp": "Number"
+		},
+		"consts": {
+			"NONE": 0,
+			"CAPTURING_PHASE": 1,
+			"AT_TARGET": 2,
+			"BUBBLING_PHASE": 3
 		},
 		"operations": {
 			"stopPropagation": {},
+			"stopImmediatePropagation": {},
 			"preventDefault": {},
 			"initEvent": {
 				"args": {
-					"eventTypeArg": "String",
-					"canBubbleArg": "Boolean",
-					"cancelableArg": "Boolean"
+					"type": "String",
+					"bubbles": "Boolean",
+					"cancelable": "Boolean"
 				}
+			}
+		},
+		"construct": {
+			"args": {
+				"type": "String",
+				"eventInitDict": "EventInit",
+				"typeArg": "String"
 			}
 		}
 	},
-	"DocumentEvent": {
-		"type": "interface",
-		"inherits": [],
-		"operations": {
-			"createEvent": {
-				"returns": "Event",
-				"args": {
-					"eventType": "String"
-				}
-			}
+	"EventInit": {
+		"type": "dictionary",
+		"members": {
+			"bubbles": true,
+			"cancelable": true
 		}
 	},
-	"UIEvent": {
+	"CustomEvent": {
 		"type": "interface",
 		"inherits": [
 			"Event"
 		],
 		"readonlys": {
-			"view": "AbstractView",
-			"detail": "Int32"
+			"detail": "Any"
+		},
+		"construct": {
+			"args": {
+				"type": "String",
+				"eventInitDict": "CustomEventInit",
+				"typeArg": "String",
+				"customEventInitDict": "CustomEventInit"
+			}
 		},
 		"operations": {
-			"initUIEvent": {
+			"initCustomEvent": {
+				"args": {
+					"typeArg": "String",
+					"canBubbleArg": "Boolean",
+					"cancelableArg": "Boolean",
+					"detailArg": "Any"
+				}
+			}
+		}
+	},
+	"CustomEventInit": {
+		"type": "dictionary",
+		"members": {
+			"bubbles": true,
+			"cancelable": true,
+			"detail": null
+		}
+	},
+	"UIEvent": {
+		"type": "interface",
+		"inherits": [],
+		"construct": {
+			"args": {
+				"typeArg": "String",
+				"dictUIEventInit": "UIEventInit"
+			}
+		}
+	},
+	"UIEventInit": {
+		"type": "dictionary",
+		"members": {
+			"bubbles": true,
+			"cancelable": true,
+			"view": null,
+			"detail": 0
+		}
+	},
+	"FocusEvent": {
+		"type": "interface",
+		"inherits": [],
+		"operations": {
+			"initFocusEvent": {
 				"args": {
 					"typeArg": "String",
 					"canBubbleArg": "Boolean",
 					"cancelableArg": "Boolean",
 					"viewArg": "AbstractView",
-					"detailArg": "Int32"
+					"detailArg": "Int32",
+					"relatedTargetArg": "EventTarget"
 				}
 			}
+		},
+		"construct": {
+			"args": {
+				"typeArg": "String",
+				"focusEventInitDict": "FocusEventInit"
+			}
+		}
+	},
+	"FocusEventInit": {
+		"type": "dictionary",
+		"members": {
+			"bubbles": true,
+			"cancelable": true,
+			"view": null,
+			"detail": 0,
+			"relatedTarget": null
 		}
 	},
 	"MouseEvent": {
 		"type": "interface",
-		"inherits": [
-			"UIEvent"
-		],
+		"inherits": [],
 		"readonlys": {
 			"screenX": "Int32",
 			"screenY": "Int32",
+			"pageX": "Int32",
+			"pageY": "Int32",
 			"clientX": "Int32",
 			"clientY": "Int32",
-			"ctrlKey": "Boolean",
-			"shiftKey": "Boolean",
-			"altKey": "Boolean",
-			"metaKey": "Boolean",
-			"button": "Uint16",
-			"relatedTarget": "EventTarget"
+			"x": "Int32",
+			"y": "Int32",
+			"offsetX": "Int32",
+			"offsetY": "Int32"
 		},
+		"construct": {
+			"args": {
+				"typeArg": "String",
+				"mouseEventInitDict": "MouseEventInit"
+			}
+		}
+	},
+	"MouseEventInit": {
+		"type": "dictionary",
+		"members": {
+			"bubbles": true,
+			"cancelable": true,
+			"view": null,
+			"detail": 0,
+			"screenX": 0,
+			"screenY": 0,
+			"clientX": 0,
+			"clientY": 0,
+			"ctrlKey": true,
+			"shiftKey": true,
+			"altKey": true,
+			"metaKey": true,
+			"button": 0,
+			"buttons": 0,
+			"relatedTarget": null
+		}
+	},
+	"WheelEvent": {
+		"type": "interface",
+		"inherits": [],
 		"operations": {
-			"initMouseEvent": {
+			"initWheelEvent": {
 				"args": {
 					"typeArg": "String",
 					"canBubbleArg": "Boolean",
@@ -127,46 +189,125 @@
 					"screenYArg": "Int32",
 					"clientXArg": "Int32",
 					"clientYArg": "Int32",
-					"ctrlKeyArg": "Boolean",
-					"altKeyArg": "Boolean",
-					"shiftKeyArg": "Boolean",
-					"metaKeyArg": "Boolean",
 					"buttonArg": "Uint16",
-					"relatedTargetArg": "EventTarget"
+					"relatedTargetArg": "EventTarget",
+					"modifiersListArg": "String",
+					"deltaXArg": "Float32",
+					"deltaYArg": "Float32",
+					"deltaZArg": "Float32",
+					"deltaMode": "Uint32"
 				}
+			}
+		},
+		"construct": {
+			"args": {
+				"typeArg": "String",
+				"wheelEventInitDict": "WheelEventInit"
 			}
 		}
 	},
-	"MutationEvent": {
+	"WheelEventInit": {
+		"type": "dictionary",
+		"members": {
+			"bubbles": true,
+			"cancelable": true,
+			"view": null,
+			"detail": 0,
+			"screenX": 0,
+			"screenY": 0,
+			"clientX": 0,
+			"clientY": 0,
+			"ctrlKey": true,
+			"shiftKey": true,
+			"altKey": true,
+			"metaKey": true,
+			"button": 0,
+			"buttons": 0,
+			"relatedTarget": null,
+			"deltaX": 0,
+			"deltaY": 0,
+			"deltaZ": 0,
+			"deltaMode": 0
+		}
+	},
+	"KeyboardEvent": {
 		"type": "interface",
-		"inherits": [
-			"Event"
-		],
-		"consts": {
-			"MODIFICATION": 1,
-			"ADDITION": 2,
-			"REMOVAL": 3
-		},
-		"readonlys": {
-			"relatedNode": "Node",
-			"prevValue": "String",
-			"newValue": "String",
-			"attrName": "String",
-			"attrChange": "Uint16"
-		},
+		"inherits": [],
 		"operations": {
-			"initMutationEvent": {
+			"initKeyboardEvent": {
 				"args": {
 					"typeArg": "String",
 					"canBubbleArg": "Boolean",
 					"cancelableArg": "Boolean",
-					"relatedNodeArg": "Node",
-					"prevValueArg": "String",
-					"newValueArg": "String",
-					"attrNameArg": "String",
-					"attrChangeArg": "Uint16"
+					"viewArg": "AbstractView",
+					"charArg": "String",
+					"keyArg": "String",
+					"locationArg": "Uint32",
+					"modifiersListArg": "String",
+					"repeat": "Boolean",
+					"localeArg": "String"
 				}
 			}
+		},
+		"construct": {
+			"args": {
+				"typeArg": "String",
+				"keyboardEventInitDict": "KeyboardEventInit"
+			}
+		}
+	},
+	"KeyboardEventInit": {
+		"type": "dictionary",
+		"members": {
+			"bubbles": true,
+			"cancelable": true,
+			"view": null,
+			"detail": 0,
+			"char": "",
+			"key": "",
+			"location": 0,
+			"ctrlKey": true,
+			"shiftKey": true,
+			"altKey": true,
+			"metaKey": true,
+			"repeat": true,
+			"locale": "",
+			"charCode": 0,
+			"keyCode": 0,
+			"which": 0
+		}
+	},
+	"CompositionEvent": {
+		"type": "interface",
+		"inherits": [],
+		"operations": {
+			"initCompositionEvent": {
+				"args": {
+					"typeArg": "String",
+					"canBubbleArg": "Boolean",
+					"cancelableArg": "Boolean",
+					"viewArg": "AbstractView",
+					"dataArg": "String",
+					"localeArg": "String"
+				}
+			}
+		},
+		"construct": {
+			"args": {
+				"typeArg": "String",
+				"compositionEventInitDict": "CompositionEventInit"
+			}
+		}
+	},
+	"CompositionEventInit": {
+		"type": "dictionary",
+		"members": {
+			"bubbles": true,
+			"cancelable": true,
+			"view": null,
+			"detail": 0,
+			"data": null,
+			"locale": ""
 		}
 	}
 }

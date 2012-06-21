@@ -9,10 +9,9 @@
 	},
 	"Flags": {
 		"type": "dictionary",
-		"inherits": [],
 		"members": {
-			"create": "Boolean",
-			"exclusive": "Boolean"
+			"create": false,
+			"exclusive": false
 		}
 	},
 	"FileSystem": {

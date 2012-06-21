@@ -1,14 +1,13 @@
 {
 	"WebGLContextAttributes": {
 		"type": "dictionary",
-		"inherits": [],
 		"members": {
-			"alpha": "Boolean",
-			"depth": "Boolean",
-			"stencil": "Boolean",
-			"antialias": "Boolean",
-			"premultipliedAlpha": "Boolean",
-			"preserveDrawingBuffer": "Boolean"
+			"alpha": true,
+			"depth": true,
+			"stencil": true,
+			"antialias": true,
+			"premultipliedAlpha": true,
+			"preserveDrawingBuffer": true
 		}
 	},
 	"WebGLObject": {
@@ -1330,11 +1329,8 @@
 	},
 	"WebGLContextEventInit": {
 		"type": "dictionary",
-		"inherits": [
-			"EventInit"
-		],
 		"members": {
-			"statusMessage": "String"
+			"statusMessage": ""
 		}
 	}
 }

@@ -88,8 +88,7 @@ function merge(from, to){
   isObject(from) && isObject(to) && Object.keys(from).forEach(function(key){
     if (key === 'NoInterfaceObject') return;
     if (key in to)  {
-      if (isObject(to[key]) && isObject(from[key]))
-        merge(from[key], to[key]);
+      merge(from[key], to[key]);
     } else
       to[key] = from[key];
   });
@@ -114,10 +113,11 @@ var definitionTypes = {
   },
   partialinterface: function(json){
     var iface = new Interface(json);
-    if (json.name in allDefinitions)
+    if (json.name in allDefinitions) {
       merge(iface, allDefinitions[json.name]);
-    else
-      return iface;
+      iface = allDefinitions[json.name];
+    }
+    return iface;
   },
   dictionary: function(json){
     return new Dictionary(json);
@@ -160,7 +160,7 @@ function Interface(json){
   hidden(this, 'name', json.name);
   if (json.name in tags)
     this.tag = tags[json.name];
-  this.inherits = typeof json.inheritance === 'string' ? json.inheritance === '' ? [] : [json.inheritance] : json.inheritance;
+  this.inherits = json.inheritance ? typeof json.inheritance === 'string' ? [json.inheritance] : json.inheritance : [];
   json.members && json.members.forEach(function(member){
     if (member.type === 'field')
       member.type = 'readonly';
@@ -217,15 +217,35 @@ function Interface(json){
 
 Interface.prototype = new Definition('interface');
 
+function uncoerce(type, value){
+  if (value === 'null')
+    return null;
+  switch (type) {
+    case 'String':
+      return value;
+    case 'Boolean':
+      return Boolean(value);
+    case 'Int8':
+    case 'Int16':
+    case 'Int32':
+    case 'Uint8':
+    case 'Uint16':
+    case 'Uint32':
+    case 'Float32':
+    case 'Float64':
+      return Number(value);
+    default:
+      return value === 'null' ? null : value;
+  }
+}
 
 
 function Dictionary(json){
   this.type = 'dictionary';
-  this.inherits = typeof json.inheritance === 'string' ? json.inheritance === '' ? [] : [json.inheritance] : json.inheritance;
   hidden(this, 'name', json.name);
   var members = this.members = {};
   json.members.forEach(function(member){
-    members[member.name] = type(member.type);
+    members[member.name] = uncoerce(type(member.type), member.defaultValue);
   });
 }
 
@@ -324,11 +344,6 @@ var conversionStanza = [
     var name = path.basename(state.name).slice(0, -path.extname(state.name).length)+'.json';
     fs.writeFileSync(path.resolve(state.out, name), text[0]);
     fs.writeFileSync(path.resolve(state.out+'.min', name), text[1]);
-    var gzip = zlib.createGzip();
-    var fs = require('fs');
-    var inp = fs.createReadStream('input.txt');
-    var out = fs.createWriteStream('input.txt.gz');
-    inp.pipe(gzip).pipe(out);
   }
 ];
 

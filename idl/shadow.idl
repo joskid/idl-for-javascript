@@ -1,0 +1,23 @@
+//[Constructor(in HTMLElement host) raises (DOMException)]
+[Constructor(in HTMLElement host)]
+interface ShadowRoot : DocumentFragment {
+    HTMLElement getElementById(in DOMString elementId);
+    NodeList getElementsByClassName(in DOMString tagName);
+    NodeList getElementsByTagName(in DOMString className);
+    NodeList getElementsByTagNameNS(DOMString namespace, DOMString localName);
+    Selection getSelection();
+    attribute bool applyAuthorStyles;
+    attribute bool resetStyleInheritance;
+    readonly attribute Element activeElement;
+    attribute DOMString innerHTML;
+};
+
+ShadowRoot implements NodeSelector;
+
+interface HTMLContentElement : HTMLElement {
+    attribute DOMString select;
+};
+
+
+interface HTMLShadowElement : HTMLElement {
+};

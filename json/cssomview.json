@@ -1,6 +1,7 @@
 {
 	"Window": {
 		"type": "interface",
+		"inherits": [],
 		"operations": {
 			"matchMedia": {
 				"returns": "MediaQueryList",
@@ -88,6 +89,7 @@
 	},
 	"Document": {
 		"type": "interface",
+		"inherits": [],
 		"operations": {
 			"elementFromPoint": {
 				"returns": "Element",
@@ -115,6 +117,7 @@
 	},
 	"Element": {
 		"type": "interface",
+		"inherits": [],
 		"operations": {
 			"getClientRects": {
 				"returns": "ClientRectList"
@@ -143,6 +146,7 @@
 	},
 	"HTMLElement": {
 		"type": "interface",
+		"inherits": [],
 		"readonlys": {
 			"offsetParent": "Element",
 			"offsetTop": "Int32",
@@ -153,6 +157,7 @@
 	},
 	"Range": {
 		"type": "interface",
+		"inherits": [],
 		"operations": {
 			"getClientRects": {
 				"returns": "ClientRectList"
@@ -164,6 +169,7 @@
 	},
 	"MouseEvent": {
 		"type": "interface",
+		"inherits": [],
 		"readonlys": {
 			"screenX": "Int32",
 			"screenY": "Int32",

@@ -436,3 +436,21 @@ interface DOMTokenList {
 interface DOMSettableTokenList : DOMTokenList {
             attribute DOMString value;
 };
+
+
+[Supplemental, NoInterfaceObject]
+interface NodeSelector {
+  Element   querySelector(in DOMString selectors, in optional any refNodes);
+  NodeList  querySelectorAll(in DOMString selectors, in optional any refNodes);
+  Element   queryScopedSelector(in DOMString selectors);
+  NodeList  queryScopedSelectorAll(in DOMString selectors);
+};
+
+Document implements NodeSelector;
+DocumentFragment implements NodeSelector;
+Element implements NodeSelector;
+
+[Supplemental]
+interface Element {
+  boolean   matchesSelector(in DOMString selectors, in optional any refNodes);
+};
