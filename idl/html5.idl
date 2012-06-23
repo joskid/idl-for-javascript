@@ -24,7 +24,7 @@ interface HTMLOptionsCollection : HTMLCollection {
            attribute unsigned long length; // overrides inherited length
   legacycaller getter object? namedItem(DOMString name); // overrides inherited namedItem()
   setter creator void (unsigned long index, HTMLOptionElement option);
-  void add((HTMLOptionElement or HTMLOptGroupElement) element, optional (HTMLElement or long)? before);
+  void add((HTMLOptionElement or HTMLOptGroupElement) element, optional (HTMLElement or long)? before); // = null);
   void remove(long index);
            attribute long selectedIndex;
 };
@@ -422,6 +422,9 @@ interface HTMLModElement : HTMLElement {
 interface HTMLImageElement : HTMLElement {
            attribute DOMString alt;
            attribute DOMString src;
+
+           attribute DOMString srcset;
+
            attribute DOMString crossOrigin;
            attribute DOMString useMap;
            attribute boolean isMap;
@@ -542,7 +545,7 @@ interface HTMLMediaElement : HTMLElement {
 
   // playback state
            attribute double currentTime;
-  readonly attribute double duration;
+  readonly attribute unrestricted double duration;
   readonly attribute Date startDate;
   readonly attribute boolean paused;
            attribute double defaultPlaybackRate;
@@ -617,14 +620,18 @@ interface VideoTrack {
            attribute boolean selected;
 };
 
+enum MediaControllerPlaybackState { "waiting", "playing", "ended" };
 [Constructor]
 interface MediaController {
+  readonly attribute unsigned short readyState; // uses HTMLMediaElement.readyState"s values
+
   readonly attribute TimeRanges buffered;
   readonly attribute TimeRanges seekable;
-  readonly attribute double duration;
+  readonly attribute unrestricted double duration;
            attribute double currentTime;
 
   readonly attribute boolean paused;
+  readonly attribute MediaControllerPlaybackState playbackState;
   readonly attribute TimeRanges played;
   void play();
   void pause();
@@ -683,7 +690,7 @@ interface TextTrackCueList {
   TextTrackCue? getCueById(DOMString id);
 };
 
-[Constructor(DOMString id, double startTime, double endTime, DOMString text, optional DOMString settings, optional boolean pauseOnExit)]
+[Constructor(double startTime, double endTime, DOMString text)]
 interface TextTrackCue : EventTarget {
   readonly attribute TextTrack? track;
 
@@ -740,34 +747,37 @@ interface CanvasRenderingContext2D {
 
   // transformations (default transform is the identity matrix)
            attribute SVGMatrix currentTransform;
-  void scale(double x, double y);
-  void rotate(double angle);
-  void translate(double x, double y);
-  void transform(double a, double b, double c, double d, double e, double f);
-  void setTransform(double a, double b, double c, double d, double e, double f);
+  void scale(unrestricted double x, unrestricted double y);
+  void rotate(unrestricted double angle);
+  void translate(unrestricted double x, unrestricted double y);
+  void transform(unrestricted double a, unrestricted double b, unrestricted double c, unrestricted double d, unrestricted double e, unrestricted double f);
+  void setTransform(unrestricted double a, unrestricted double b, unrestricted double c, unrestricted double d, unrestricted double e, unrestricted double f);
   void resetTransform();
 
   // compositing
-           attribute double globalAlpha; // (default 1.0)
+           attribute unrestricted double globalAlpha; // (default 1.0)
            attribute DOMString globalCompositeOperation; // (default source-over)
+
+  // image smoothing
+           attribute boolean imageSmoothingEnabled; // (default true)
 
   // colors and styles (see also the CanvasDrawingStyles interface)
            attribute any strokeStyle; // (default black)
            attribute any fillStyle; // (default black)
-  CanvasGradient createLinearGradient(double x0, double y0, double x1, double y1);
-  CanvasGradient createRadialGradient(double x0, double y0, double r0, double x1, double y1, double r1);
+  CanvasGradient createLinearGradient(unrestricted double x0, unrestricted double y0, unrestricted double x1, unrestricted double y1);
+  CanvasGradient createRadialGradient(unrestricted double x0, unrestricted double y0, unrestricted double r0, unrestricted double x1, unrestricted double y1, unrestricted double r1);
   CanvasPattern createPattern((HTMLImageElement or HTMLCanvasElement or HTMLVideoElement) image, DOMString repetition);
 
   // shadows
-           attribute double shadowOffsetX; // (default 0)
-           attribute double shadowOffsetY; // (default 0)
-           attribute double shadowBlur; // (default 0)
+           attribute unrestricted double shadowOffsetX; // (default 0)
+           attribute unrestricted double shadowOffsetY; // (default 0)
+           attribute unrestricted double shadowBlur; // (default 0)
            attribute DOMString shadowColor; // (default transparent black)
 
   // rects
-  void clearRect(double x, double y, double w, double h);
-  void fillRect(double x, double y, double w, double h);
-  void strokeRect(double x, double y, double w, double h);
+  void clearRect(unrestricted double x, unrestricted double y, unrestricted double w, unrestricted double h);
+  void fillRect(unrestricted double x, unrestricted double y, unrestricted double w, unrestricted double h);
+  void strokeRect(unrestricted double x, unrestricted double y, unrestricted double w, unrestricted double h);
 
   // path API (see also CanvasPathMethods)
   void beginPath();
@@ -784,29 +794,28 @@ interface CanvasRenderingContext2D {
   void clip();
   void clip(Path path);
   void resetClip();
-  boolean isPointInPath(double x, double y);
-  boolean isPointInPath(Path path, double x, double y);
+  boolean isPointInPath(unrestricted double x, unrestricted double y);
+  boolean isPointInPath(Path path, unrestricted double x, unrestricted double y);
 
   // text (see also the CanvasDrawingStyles interface)
-  void fillText(DOMString text, double x, double y, optional double maxWidth);
-  void strokeText(DOMString text, double x, double y, optional double maxWidth);
+  void fillText(DOMString text, unrestricted double x, unrestricted double y, optional unrestricted double maxWidth);
+  void strokeText(DOMString text, unrestricted double x, unrestricted double y, optional unrestricted double maxWidth);
   TextMetrics measureText(DOMString text);
 
   // drawing images
-           attribute boolean imageSmoothingEnabled; // (default true)
-  void drawImage((HTMLImageElement or HTMLCanvasElement or HTMLVideoElement) image, double dx, double dy);
-  void drawImage((HTMLImageElement or HTMLCanvasElement or HTMLVideoElement) image, double dx, double dy, double dw, double dh);
-  void drawImage((HTMLImageElement or HTMLCanvasElement or HTMLVideoElement) image, double sx, double sy, double sw, double sh, double dx, double dy, double dw, double dh);
+  void drawImage((HTMLImageElement or HTMLCanvasElement or HTMLVideoElement) image, unrestricted double dx, unrestricted double dy);
+  void drawImage((HTMLImageElement or HTMLCanvasElement or HTMLVideoElement) image, unrestricted double dx, unrestricted double dy, unrestricted double dw, unrestricted double dh);
+  void drawImage((HTMLImageElement or HTMLCanvasElement or HTMLVideoElement) image, unrestricted double sx, unrestricted double sy, unrestricted double sw, unrestricted double sh, unrestricted double dx, unrestricted double dy, unrestricted double dw, unrestricted double dh);
 
   // hit regions
   void addHitRegion(HitRegionOptions options);
 
   // pixel manipulation
-  ImageData createImageData(double sw, double sh);
+  ImageData createImageData(unrestricted double sw, unrestricted double sh);
   ImageData createImageData(ImageData imagedata);
-  ImageData getImageData(double sx, double sy, double sw, double sh);
-  void putImageData(ImageData imagedata, double dx, double dy);
-  void putImageData(ImageData imagedata, double dx, double dy, double dirtyX, double dirtyY, double dirtyWidth, double dirtyHeight);
+  ImageData getImageData(unrestricted double sx, unrestricted double sy, unrestricted double sw, unrestricted double sh);
+  void putImageData(ImageData imagedata, unrestricted double dx, unrestricted double dy);
+  void putImageData(ImageData imagedata, unrestricted double dx, unrestricted double dy, unrestricted double dirtyX, unrestricted double dirtyY, unrestricted double dirtyWidth, unrestricted double dirtyHeight);
 };
 CanvasRenderingContext2D implements CanvasDrawingStyles;
 CanvasRenderingContext2D implements CanvasPathMethods;
@@ -814,15 +823,15 @@ CanvasRenderingContext2D implements CanvasPathMethods;
 [NoInterfaceObject]
 interface CanvasDrawingStyles {
   // line caps/joins
-           attribute double lineWidth; // (default 1)
+           attribute unrestricted double lineWidth; // (default 1)
            attribute DOMString lineCap; // "butt", "round", "square" (default "butt")
            attribute DOMString lineJoin; // "round", "bevel", "miter" (default "miter")
-           attribute double miterLimit; // (default 10)
+           attribute unrestricted double miterLimit; // (default 10)
 
   // dashed lines
-  void setLineDash(sequence<double> segments); // default empty
-  sequence<double> getLineDash();
-           attribute double lineDashOffset;
+  void setLineDash(sequence<unrestricted double> segments); // default empty
+  sequence<unrestricted double> getLineDash();
+           attribute unrestricted double lineDashOffset;
 
   // text
            attribute DOMString font; // (default 10px sans-serif)
@@ -834,20 +843,20 @@ interface CanvasDrawingStyles {
 interface CanvasPathMethods {
   // shared path API methods
   void closePath();
-  void moveTo(double x, double y);
-  void lineTo(double x, double y);
-  void quadraticCurveTo(double cpx, double cpy, double x, double y);
-  void bezierCurveTo(double cp1x, double cp1y, double cp2x, double cp2y, double x, double y);
-  void arcTo(double x1, double y1, double x2, double y2, double radius); 
-  void arcTo(double x1, double y1, double x2, double y2, double radiusX, double radiusY, double rotation); 
-  void rect(double x, double y, double w, double h);
-  void arc(double x, double y, double radius, double startAngle, double endAngle, optional boolean anticlockwise); 
-  void ellipse(double x, double y, double radiusX, double radiusY, double rotation, double startAngle, double endAngle, boolean anticlockwise); 
+  void moveTo(unrestricted double x, unrestricted double y);
+  void lineTo(unrestricted double x, unrestricted double y);
+  void quadraticCurveTo(unrestricted double cpx, unrestricted double cpy, unrestricted double x, unrestricted double y);
+  void bezierCurveTo(unrestricted double cp1x, unrestricted double cp1y, unrestricted double cp2x, unrestricted double cp2y, unrestricted double x, unrestricted double y);
+  void arcTo(unrestricted double x1, unrestricted double y1, unrestricted double x2, unrestricted double y2, unrestricted double radius); 
+  void arcTo(unrestricted double x1, unrestricted double y1, unrestricted double x2, unrestricted double y2, unrestricted double radiusX, unrestricted double radiusY, unrestricted double rotation); 
+  void rect(unrestricted double x, unrestricted double y, unrestricted double w, unrestricted double h);
+  void arc(unrestricted double x, unrestricted double y, unrestricted double radius, unrestricted double startAngle, unrestricted double endAngle, optional boolean anticlockwise); // = false); 
+  void ellipse(unrestricted double x, unrestricted double y, unrestricted double radiusX, unrestricted double radiusY, unrestricted double rotation, unrestricted double startAngle, unrestricted double endAngle, boolean anticlockwise); 
 };
 
 interface CanvasGradient {
   // opaque object
-  void addColorStop(double offset, DOMString color);
+  void addColorStop(unrestricted double offset, DOMString color);
 };
 
 interface CanvasPattern {
@@ -874,15 +883,15 @@ interface TextMetrics {
 };
 
 dictionary HitRegionOptions {
-  Path? path;
-  DOMString id;
-  DOMString? parentID;
-  DOMString cursor;
+  Path? path = null;
+  DOMString id = "";
+  DOMString? parentID = null;
+  DOMString cursor = "inherit";
   // for control-backed regions:
-  Element? control;
+  Element? control = null;
   // for unbacked regions:
-  DOMString? label;
-  DOMString? role;
+  DOMString? label = null;
+  DOMString? role = null;
 };
 
 interface ImageData {
@@ -901,16 +910,14 @@ DrawingStyle implements CanvasDrawingStyles;
 interface Path {
   void addPath(Path path, SVGMatrix? transformation);
   void addPathByStrokingPath(Path path, CanvasDrawingStyles styles, SVGMatrix? transformation);
-  void addText(DOMString text, CanvasDrawingStyles styles, SVGMatrix? transformation, double x, double y, optional double maxWidth);
-  void addPathByStrokingText(DOMString text, CanvasDrawingStyles styles, SVGMatrix? transformation, double x, double y, optional double maxWidth);
-  void addText(DOMString text, CanvasDrawingStyles styles, SVGMatrix? transformation, Path path, optional double maxWidth);
-  void addPathByStrokingText(DOMString text, CanvasDrawingStyles styles, SVGMatrix? transformation, Path path, optional double maxWidth);
+  void addText(DOMString text, CanvasDrawingStyles styles, SVGMatrix? transformation, unrestricted double x, unrestricted double y, optional unrestricted double maxWidth);
+  void addPathByStrokingText(DOMString text, CanvasDrawingStyles styles, SVGMatrix? transformation, unrestricted double x, unrestricted double y, optional unrestricted double maxWidth);
+  void addText(DOMString text, CanvasDrawingStyles styles, SVGMatrix? transformation, Path path, optional unrestricted double maxWidth);
+  void addPathByStrokingText(DOMString text, CanvasDrawingStyles styles, SVGMatrix? transformation, Path path, optional unrestricted double maxWidth);
 };
 Path implements CanvasPathMethods;
 
-partial interface MouseEvent {
-  readonly attribute DOMString? region;
-};
+
 
 interface HTMLMapElement : HTMLElement {
            attribute DOMString name;
@@ -1078,7 +1085,7 @@ interface HTMLInputElement : HTMLElement {
            attribute DOMString defaultValue;
            attribute DOMString value;
            attribute Date? valueAsDate;
-           attribute double valueAsNumber;
+           attribute unrestricted double valueAsNumber;
            attribute unsigned long width;
 
   void stepUp(optional long n);
@@ -1140,7 +1147,7 @@ interface HTMLSelectElement : HTMLElement {
            attribute unsigned long length;
   getter Element item(unsigned long index);
   object namedItem(DOMString name);
-  void add((HTMLOptionElement or HTMLOptGroupElement) element, optional (HTMLElement or long)? before);
+  void add((HTMLOptionElement or HTMLOptGroupElement) element, optional (HTMLElement or long)? before); // = null);
   void remove(long index);
   setter creator void (unsigned long index, HTMLOptionElement option);
 
@@ -1276,6 +1283,13 @@ interface HTMLMeterElement : HTMLElement {
 };
 
 
+enum SelectionMode {
+  "select",
+  "start",
+  "end",
+  "preserve"
+};
+
 interface ValidityState {
   readonly attribute boolean valueMissing;
   readonly attribute boolean typeMismatch;
@@ -1315,7 +1329,7 @@ interface HTMLDialogElement : HTMLElement {
   void close(optional DOMString returnValue);
 };
 
-[ReplaceableNamedProperties]
+[NamedPropertiesObject]
 interface Window : EventTarget {
   // the current browsing context
   [Unforgeable] readonly attribute WindowProxy window;
@@ -1729,7 +1743,7 @@ interface MessageEvent : Event {
   readonly attribute any data;
   readonly attribute DOMString origin;
   readonly attribute DOMString lastEventId;
-  readonly attribute WindowProxy? source;
+  readonly attribute (WindowProxy or MessagePort)? source;
   readonly attribute MessagePort[]? ports;
 };
 

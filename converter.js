@@ -30,7 +30,9 @@ var types = {
   'long long'          : 'Int64',
   float                : 'Float32',
   single               : 'Float32',
+  'unrestricted float': 'Float32',
   double               : 'Float64',
+  'unrestricted double': 'Float64',
   DOMTimeStamp         : 'Number',
   DOMString            : 'String',
   boolean              : 'Boolean',
@@ -207,6 +209,7 @@ function Interface(json){
           writable: true,
           value: attr.value
         });
+      } else if (attr.name === 'Supplemental') {
       } else {
         self[attr.name] = attr;
         delete attr.name
@@ -223,8 +226,12 @@ function uncoerce(type, value){
   switch (type) {
     case 'String':
       return value;
+    case 'StringArray':
+      return value || [];
     case 'Boolean':
-      return Boolean(value);
+      return value === 'true';
+    case 'Object':
+      return value || {};
     case 'Int8':
     case 'Int16':
     case 'Int32':
@@ -233,7 +240,7 @@ function uncoerce(type, value){
     case 'Uint32':
     case 'Float32':
     case 'Float64':
-      return Number(value);
+      return Number(value) || 0;
     default:
       return value === 'null' ? null : value;
   }

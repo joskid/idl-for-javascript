@@ -42,8 +42,8 @@
 	"EventInit": {
 		"type": "dictionary",
 		"members": {
-			"bubbles": true,
-			"cancelable": true
+			"bubbles": false,
+			"cancelable": false
 		}
 	},
 	"CustomEvent": {
@@ -76,8 +76,8 @@
 	"CustomEventInit": {
 		"type": "dictionary",
 		"members": {
-			"bubbles": true,
-			"cancelable": true,
+			"bubbles": false,
+			"cancelable": false,
 			"detail": null
 		}
 	},
@@ -94,8 +94,8 @@
 	"UIEventInit": {
 		"type": "dictionary",
 		"members": {
-			"bubbles": true,
-			"cancelable": true,
+			"bubbles": false,
+			"cancelable": false,
 			"view": null,
 			"detail": 0
 		}
@@ -125,8 +125,8 @@
 	"FocusEventInit": {
 		"type": "dictionary",
 		"members": {
-			"bubbles": true,
-			"cancelable": true,
+			"bubbles": false,
+			"cancelable": false,
 			"view": null,
 			"detail": 0,
 			"relatedTarget": null
@@ -157,18 +157,18 @@
 	"MouseEventInit": {
 		"type": "dictionary",
 		"members": {
-			"bubbles": true,
-			"cancelable": true,
+			"bubbles": false,
+			"cancelable": false,
 			"view": null,
 			"detail": 0,
 			"screenX": 0,
 			"screenY": 0,
 			"clientX": 0,
 			"clientY": 0,
-			"ctrlKey": true,
-			"shiftKey": true,
-			"altKey": true,
-			"metaKey": true,
+			"ctrlKey": false,
+			"shiftKey": false,
+			"altKey": false,
+			"metaKey": false,
 			"button": 0,
 			"buttons": 0,
 			"relatedTarget": null
@@ -209,18 +209,18 @@
 	"WheelEventInit": {
 		"type": "dictionary",
 		"members": {
-			"bubbles": true,
-			"cancelable": true,
+			"bubbles": false,
+			"cancelable": false,
 			"view": null,
 			"detail": 0,
 			"screenX": 0,
 			"screenY": 0,
 			"clientX": 0,
 			"clientY": 0,
-			"ctrlKey": true,
-			"shiftKey": true,
-			"altKey": true,
-			"metaKey": true,
+			"ctrlKey": false,
+			"shiftKey": false,
+			"altKey": false,
+			"metaKey": false,
 			"button": 0,
 			"buttons": 0,
 			"relatedTarget": null,
@@ -259,18 +259,18 @@
 	"KeyboardEventInit": {
 		"type": "dictionary",
 		"members": {
-			"bubbles": true,
-			"cancelable": true,
+			"bubbles": false,
+			"cancelable": false,
 			"view": null,
 			"detail": 0,
 			"char": "",
 			"key": "",
 			"location": 0,
-			"ctrlKey": true,
-			"shiftKey": true,
-			"altKey": true,
-			"metaKey": true,
-			"repeat": true,
+			"ctrlKey": false,
+			"shiftKey": false,
+			"altKey": false,
+			"metaKey": false,
+			"repeat": false,
 			"locale": "",
 			"charCode": 0,
 			"keyCode": 0,
@@ -302,8 +302,8 @@
 	"CompositionEventInit": {
 		"type": "dictionary",
 		"members": {
-			"bubbles": true,
-			"cancelable": true,
+			"bubbles": false,
+			"cancelable": false,
 			"view": null,
 			"detail": 0,
 			"data": null,

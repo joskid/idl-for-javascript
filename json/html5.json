@@ -972,6 +972,7 @@
 		"attributes": {
 			"alt": "String",
 			"src": "String",
+			"srcset": "String",
 			"crossOrigin": "String",
 			"useMap": "String",
 			"isMap": "Boolean",
@@ -1345,14 +1346,24 @@
 			"selected": "Boolean"
 		}
 	},
+	"MediaControllerPlaybackState": {
+		"type": "enum",
+		"values": [
+			"waiting",
+			"playing",
+			"ended"
+		]
+	},
 	"MediaController": {
 		"type": "interface",
 		"inherits": [],
 		"readonlys": {
+			"readyState": "Uint16",
 			"buffered": "TimeRanges",
 			"seekable": "TimeRanges",
 			"duration": "Float64",
 			"paused": "Boolean",
+			"playbackState": "MediaControllerPlaybackState",
 			"played": "TimeRanges"
 		},
 		"attributes": {
@@ -1493,12 +1504,9 @@
 		},
 		"construct": {
 			"args": {
-				"id": "String",
 				"startTime": "Float64",
 				"endTime": "Float64",
-				"text": "String",
-				"settings": "String",
-				"pauseOnExit": "Boolean"
+				"text": "String"
 			}
 		}
 	},
@@ -1541,7 +1549,7 @@
 	"TrackEventInit": {
 		"type": "dictionary",
 		"members": {
-			"track": ""
+			"track": {}
 		}
 	},
 	"HTMLCanvasElement": {
@@ -1891,13 +1899,13 @@
 			"currentTransform": "SVGMatrix",
 			"globalAlpha": "Float64",
 			"globalCompositeOperation": "String",
+			"imageSmoothingEnabled": "Boolean",
 			"strokeStyle": "Any",
 			"fillStyle": "Any",
 			"shadowOffsetX": "Float64",
 			"shadowOffsetY": "Float64",
 			"shadowBlur": "Float64",
 			"shadowColor": "String",
-			"imageSmoothingEnabled": "Boolean",
 			"lineWidth": "Float64",
 			"lineCap": "String",
 			"lineJoin": "String",
@@ -1952,13 +1960,13 @@
 	"HitRegionOptions": {
 		"type": "dictionary",
 		"members": {
-			"path": "",
+			"path": null,
 			"id": "",
-			"parentID": "",
-			"cursor": "",
-			"control": "",
-			"label": "",
-			"role": ""
+			"parentID": null,
+			"cursor": "inherit",
+			"control": null,
+			"label": null,
+			"role": null
 		}
 	},
 	"ImageData": {
@@ -2115,29 +2123,6 @@
 		"construct": {
 			"args": {
 				"d": "String"
-			}
-		}
-	},
-	"MouseEvent": {
-		"type": "interface",
-		"inherits": [],
-		"readonlys": {
-			"screenX": "Int32",
-			"screenY": "Int32",
-			"pageX": "Int32",
-			"pageY": "Int32",
-			"clientX": "Int32",
-			"clientY": "Int32",
-			"x": "Int32",
-			"y": "Int32",
-			"offsetX": "Int32",
-			"offsetY": "Int32",
-			"region": "String"
-		},
-		"construct": {
-			"args": {
-				"typeArg": "String",
-				"mouseEventInitDict": "MouseEventInit"
 			}
 		}
 	},
@@ -2867,6 +2852,15 @@
 			"labels": "NodeList"
 		}
 	},
+	"SelectionMode": {
+		"type": "enum",
+		"values": [
+			"select",
+			"start",
+			"end",
+			"preserve"
+		]
+	},
 	"ValidityState": {
 		"type": "interface",
 		"inherits": [],
@@ -3183,7 +3177,7 @@
 				}
 			}
 		},
-		"ReplaceableNamedProperties": true,
+		"NamedPropertiesObject": true,
 		"consts": {
 			"TEMPORARY": 0,
 			"PERSISTENT": 1
@@ -3776,7 +3770,10 @@
 			"data": "Any",
 			"origin": "String",
 			"lastEventId": "String",
-			"source": "Window",
+			"source": [
+				"Window",
+				"MessagePort"
+			],
 			"ports": "MessagePort"
 		},
 		"construct": {
@@ -3829,7 +3826,7 @@
 	"EventSourceInit": {
 		"type": "dictionary",
 		"members": {
-			"withCredentials": true
+			"withCredentials": false
 		}
 	},
 	"WebSocket": {
