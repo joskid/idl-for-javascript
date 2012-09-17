@@ -1,0 +1,3 @@
+[submodule "node_modules/webidl.js"]
+	path = node_modules/webidl.js
+	url = git://github.com/Benvie/webidl.js.git
