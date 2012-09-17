@@ -728,7 +728,7 @@
    "subtree": false,
    "attributeOldValue": false,
    "characterDataOldValue": false,
-   "attributeFilter": ""
+   "attributeFilter": []
   }
  },
  "MutationRecord": {

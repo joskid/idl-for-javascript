@@ -324,7 +324,7 @@ function uncoerce(type, value){
   switch (type) {
     case 'String':
       return value;
-    case 'StringArray':
+    case 'String...':
       return value || [];
     case 'Boolean':
       return value === 'true';
