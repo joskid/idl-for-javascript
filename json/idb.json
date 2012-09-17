@@ -1,4 +1,310 @@
 {
+ "IDBCursor": {
+  "type": "interface",
+  "inherits": [],
+  "constants": {
+   "NEXT": 0,
+   "NEXT_NO_DUPLICATE": 1,
+   "PREV": 2,
+   "PREV_NO_DUPLICATE": 3
+  },
+  "readonly": {
+   "source": "Object",
+   "direction": "Uint16",
+   "key": "Any",
+   "primaryKey": "Any"
+  },
+  "methods": {
+   "update": {
+    "returns": "IDBRequest",
+    "args": {
+     "value": "Any"
+    }
+   },
+   "advance": {
+    "args": {
+     "count": "Uint32"
+    }
+   },
+   "continue": {
+    "args": {
+     "key": "Any"
+    }
+   },
+   "delete": {
+    "returns": "IDBRequest"
+   }
+  }
+ },
+ "IDBCursorSync": {
+  "type": "interface",
+  "inherits": [],
+  "constants": {
+   "NEXT": 0,
+   "NEXT_NO_DUPLICATE": 1,
+   "PREV": 2,
+   "PREV_NO_DUPLICATE": 3
+  },
+  "readonly": {
+   "source": "Object",
+   "direction": "Uint16",
+   "primaryKey": "Any"
+  },
+  "methods": {
+   "update": {
+    "returns": "IDBRequest",
+    "args": {
+     "value": "Any"
+    }
+   },
+   "advance": {
+    "returns": "Boolean",
+    "args": {
+     "count": "Uint32"
+    }
+   },
+   "continue": {
+    "returns": "Boolean",
+    "args": {
+     "key": "Any"
+    }
+   },
+   "delete": {
+    "returns": "Boolean"
+   }
+  }
+ },
+ "IDBCursorWithValue": {
+  "type": "interface",
+  "inherits": [
+   "IDBCursor"
+  ],
+  "readonly": {
+   "value": "Any"
+  }
+ },
+ "IDBCursorWithValueSync": {
+  "type": "interface",
+  "inherits": [
+   "IDBCursorSync"
+  ],
+  "properties": {
+   "value": "Any"
+  }
+ },
+ "IDBDatabase": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "readonly": {
+   "name": "String",
+   "version": "Uint64",
+   "objectStoreNames": "DOMStringList"
+  },
+  "methods": {
+   "createObjectStore": {
+    "returns": "IDBObjectStore",
+    "args": {
+     "name": "String",
+     "optionalParameters": "IDBObjectStoreParameters"
+    }
+   },
+   "deleteObjectStore": {
+    "args": {
+     "name": "String"
+    }
+   },
+   "transaction": {
+    "returns": "IDBTransaction",
+    "args": {
+     "storeNames": "Any",
+     "mode": "Uint16"
+    }
+   },
+   "close": {}
+  },
+  "properties": {
+   "onabort": "Function",
+   "onerror": "Function",
+   "onversionchange": "Function"
+  }
+ },
+ "IDBDatabaseSync": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "name": "String",
+   "version": "Uint64",
+   "objectStoreNames": "DOMStringList"
+  },
+  "methods": {
+   "createObjectStore": {
+    "returns": "IDBObjectStoreSync",
+    "args": {
+     "name": "String",
+     "optionalParameters": "IDBObjectStoreParameters"
+    }
+   },
+   "deleteObjectStore": {
+    "args": {
+     "name": "String"
+    }
+   },
+   "transaction": {
+    "args": {
+     "storeNames": "Any",
+     "callback": "IDBTransactionCallback",
+     "mode": "Uint16",
+     "timeout": "Uint32"
+    }
+   },
+   "close": {}
+  }
+ },
+ "IDBFactory": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "open": {
+    "returns": "IDBOpenDBRequest",
+    "args": {
+     "name": "String",
+     "version": "Uint64"
+    }
+   },
+   "deleteDatabase": {
+    "returns": "IDBOpenDBRequest",
+    "args": {
+     "name": "String"
+    }
+   },
+   "cmp": {
+    "returns": "Int16",
+    "args": {
+     "first": "Any",
+     "second": "Any"
+    }
+   }
+  }
+ },
+ "IDBFactorySync": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "open": {
+    "returns": "IDBDatabaseSync",
+    "args": {
+     "name": "String",
+     "version": "Uint64",
+     "upgradeCallback": "IDBVersionChangeCallback",
+     "timeout": "Uint32"
+    }
+   },
+   "deleteDatabase": {
+    "args": {
+     "name": "String"
+    }
+   },
+   "cmp": {
+    "returns": "Int16",
+    "args": {
+     "first": "Any",
+     "second": "Any"
+    }
+   }
+  }
+ },
+ "IDBIndex": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "name": "String",
+   "objectStore": "IDBObjectStore",
+   "keyPath": "String",
+   "multientry": "Boolean",
+   "unique": "Boolean"
+  },
+  "methods": {
+   "openCursor": {
+    "returns": "IDBRequest",
+    "args": {
+     "range": "Any",
+     "direction": "Uint16"
+    }
+   },
+   "openKeyCursor": {
+    "returns": "IDBRequest",
+    "args": {
+     "range": "Any",
+     "direction": "Uint16"
+    }
+   },
+   "get": {
+    "returns": "IDBRequest",
+    "args": {
+     "key": "Any"
+    }
+   },
+   "getKey": {
+    "returns": "IDBRequest",
+    "args": {
+     "key": "Any"
+    }
+   },
+   "count": {
+    "returns": "IDBRequest",
+    "args": {
+     "key": "Any"
+    }
+   }
+  }
+ },
+ "IDBIndexSync": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "name": "String",
+   "objectStore": "IDBObjectStoreSync",
+   "keyPath": "String",
+   "multientry": "Boolean",
+   "unique": "Boolean"
+  },
+  "methods": {
+   "openCursor": {
+    "returns": "IDBCursorWithValueSync",
+    "args": {
+     "range": "Any",
+     "direction": "Uint16"
+    }
+   },
+   "openKeyCursor": {
+    "returns": "IDBCursorSync",
+    "args": {
+     "range": "Any",
+     "direction": "Uint16"
+    }
+   },
+   "get": {
+    "returns": "Any",
+    "args": {
+     "key": "Any"
+    }
+   },
+   "getKey": {
+    "returns": "Any",
+    "args": {
+     "key": "Any"
+    }
+   },
+   "count": {
+    "returns": "Uint16",
+    "args": {
+     "key": "Any"
+    }
+   }
+  }
+ },
  "IDBKeyRange": {
   "type": "interface",
   "inherits": [],
@@ -38,122 +344,6 @@
      "upperOpen": "Boolean"
     }
    }
-  }
- },
- "IDBRequest": {
-  "type": "interface",
-  "inherits": [
-   "EventTarget"
-  ],
-  "constants": {
-   "LOADING": 1,
-   "DONE": 2
-  },
-  "readonly": {
-   "result": "Any",
-   "error": "DOMError",
-   "source": "Object",
-   "transaction": "IDBTransaction",
-   "readyState": "Uint16"
-  },
-  "properties": {
-   "onsuccess": "Function",
-   "onerror": "Function"
-  }
- },
- "IDBOpenDBRequest": {
-  "type": "interface",
-  "inherits": [
-   "IDBRequest"
-  ],
-  "properties": {
-   "onblocked": "Function",
-   "onupgradeneeded": "Function"
-  }
- },
- "IDBVersionChangeEvent": {
-  "type": "interface",
-  "inherits": [
-   "Event"
-  ],
-  "readonly": {
-   "oldVersion": "Uint64",
-   "newVersion": "Uint64"
-  },
-  "methods": {
-   "initIDBVersionChangeEvent": {
-    "args": {
-     "typeArg": "String",
-     "canBubbleArg": "Boolean",
-     "cancelableArg": "Boolean",
-     "oldVersion": "Uint64",
-     "newVersion": "Uint64"
-    }
-   }
-  }
- },
- "IDBFactory": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "open": {
-    "returns": "IDBOpenDBRequest",
-    "args": {
-     "name": "String",
-     "version": "Uint64"
-    }
-   },
-   "deleteDatabase": {
-    "returns": "IDBOpenDBRequest",
-    "args": {
-     "name": "String"
-    }
-   },
-   "cmp": {
-    "returns": "Int16",
-    "args": {
-     "first": "Any",
-     "second": "Any"
-    }
-   }
-  }
- },
- "IDBDatabase": {
-  "type": "interface",
-  "inherits": [
-   "EventTarget"
-  ],
-  "readonly": {
-   "name": "String",
-   "version": "Uint64",
-   "objectStoreNames": "DOMStringList"
-  },
-  "methods": {
-   "createObjectStore": {
-    "returns": "IDBObjectStore",
-    "args": {
-     "name": "String",
-     "optionalParameters": "IDBObjectStoreParameters"
-    }
-   },
-   "deleteObjectStore": {
-    "args": {
-     "name": "String"
-    }
-   },
-   "transaction": {
-    "returns": "IDBTransaction",
-    "args": {
-     "storeNames": "Any",
-     "mode": "Uint16"
-    }
-   },
-   "close": {}
-  },
-  "properties": {
-   "onabort": "Function",
-   "onerror": "Function",
-   "onversionchange": "Function"
   }
  },
  "IDBObjectStore": {
@@ -229,212 +419,6 @@
    }
   }
  },
- "IDBIndex": {
-  "type": "interface",
-  "inherits": [],
-  "readonly": {
-   "name": "String",
-   "objectStore": "IDBObjectStore",
-   "keyPath": "String",
-   "multientry": "Boolean",
-   "unique": "Boolean"
-  },
-  "methods": {
-   "openCursor": {
-    "returns": "IDBRequest",
-    "args": {
-     "range": "Any",
-     "direction": "Uint16"
-    }
-   },
-   "openKeyCursor": {
-    "returns": "IDBRequest",
-    "args": {
-     "range": "Any",
-     "direction": "Uint16"
-    }
-   },
-   "get": {
-    "returns": "IDBRequest",
-    "args": {
-     "key": "Any"
-    }
-   },
-   "getKey": {
-    "returns": "IDBRequest",
-    "args": {
-     "key": "Any"
-    }
-   },
-   "count": {
-    "returns": "IDBRequest",
-    "args": {
-     "key": "Any"
-    }
-   }
-  }
- },
- "IDBCursor": {
-  "type": "interface",
-  "inherits": [],
-  "constants": {
-   "NEXT": 0,
-   "NEXT_NO_DUPLICATE": 1,
-   "PREV": 2,
-   "PREV_NO_DUPLICATE": 3
-  },
-  "readonly": {
-   "source": "Object",
-   "direction": "Uint16",
-   "key": "Any",
-   "primaryKey": "Any"
-  },
-  "methods": {
-   "update": {
-    "returns": "IDBRequest",
-    "args": {
-     "value": "Any"
-    }
-   },
-   "advance": {
-    "args": {
-     "count": "Uint32"
-    }
-   },
-   "continue": {
-    "args": {
-     "key": "Any"
-    }
-   },
-   "delete": {
-    "returns": "IDBRequest"
-   }
-  }
- },
- "IDBCursorWithValue": {
-  "type": "interface",
-  "inherits": [
-   "IDBCursor"
-  ],
-  "readonly": {
-   "value": "Any"
-  }
- },
- "IDBTransaction": {
-  "type": "interface",
-  "inherits": [
-   "EventTarget"
-  ],
-  "constants": {
-   "READ_ONLY": 0,
-   "READ_WRITE": 1,
-   "VERSION_CHANGE": 2
-  },
-  "readonly": {
-   "mode": "Uint16",
-   "db": "IDBDatabase"
-  },
-  "methods": {
-   "objectStore": {
-    "returns": "IDBObjectStore",
-    "args": {
-     "name": "String"
-    }
-   },
-   "abort": {}
-  },
-  "properties": {
-   "onabort": "Function",
-   "oncomplete": "Function",
-   "onerror": "Function"
-  }
- },
- "IDBFactorySync": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "open": {
-    "returns": "IDBDatabaseSync",
-    "args": {
-     "name": "String",
-     "version": "Uint64",
-     "upgradeCallback": "IDBVersionChangeCallback",
-     "timeout": "Uint32"
-    }
-   },
-   "deleteDatabase": {
-    "args": {
-     "name": "String"
-    }
-   },
-   "cmp": {
-    "returns": "Int16",
-    "args": {
-     "first": "Any",
-     "second": "Any"
-    }
-   }
-  }
- },
- "IDBDatabaseSync": {
-  "type": "interface",
-  "inherits": [],
-  "readonly": {
-   "name": "String",
-   "version": "Uint64",
-   "objectStoreNames": "DOMStringList"
-  },
-  "methods": {
-   "createObjectStore": {
-    "returns": "IDBObjectStoreSync",
-    "args": {
-     "name": "String",
-     "optionalParameters": "IDBObjectStoreParameters"
-    }
-   },
-   "deleteObjectStore": {
-    "args": {
-     "name": "String"
-    }
-   },
-   "transaction": {
-    "args": {
-     "storeNames": "Any",
-     "callback": "IDBTransactionCallback",
-     "mode": "Uint16",
-     "timeout": "Uint32"
-    }
-   },
-   "close": {}
-  }
- },
- "IDBTransactionCallback": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "transactionStarted": {
-    "args": {
-     "transaction": "IDBTransactionSync"
-    }
-   }
-  },
-  "NoInterfaceObject": true,
-  "Callback": true
- },
- "IDBVersionChangeCallback": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "transactionStarted": {
-    "args": {
-     "transaction": "IDBTransactionSync",
-     "oldVersion": "Uint64"
-    }
-   }
-  },
-  "NoInterfaceObject": true,
-  "Callback": true
- },
  "IDBObjectStoreSync": {
   "type": "interface",
   "inherits": [],
@@ -506,97 +490,78 @@
    }
   }
  },
- "IDBIndexSync": {
-  "type": "interface",
-  "inherits": [],
-  "readonly": {
-   "name": "String",
-   "objectStore": "IDBObjectStoreSync",
-   "keyPath": "String",
-   "multientry": "Boolean",
-   "unique": "Boolean"
-  },
-  "methods": {
-   "openCursor": {
-    "returns": "IDBCursorWithValueSync",
-    "args": {
-     "range": "Any",
-     "direction": "Uint16"
-    }
-   },
-   "openKeyCursor": {
-    "returns": "IDBCursorSync",
-    "args": {
-     "range": "Any",
-     "direction": "Uint16"
-    }
-   },
-   "get": {
-    "returns": "Any",
-    "args": {
-     "key": "Any"
-    }
-   },
-   "getKey": {
-    "returns": "Any",
-    "args": {
-     "key": "Any"
-    }
-   },
-   "count": {
-    "returns": "Uint16",
-    "args": {
-     "key": "Any"
-    }
-   }
-  }
- },
- "IDBCursorSync": {
-  "type": "interface",
-  "inherits": [],
-  "constants": {
-   "NEXT": 0,
-   "NEXT_NO_DUPLICATE": 1,
-   "PREV": 2,
-   "PREV_NO_DUPLICATE": 3
-  },
-  "readonly": {
-   "source": "Object",
-   "direction": "Uint16",
-   "primaryKey": "Any"
-  },
-  "methods": {
-   "update": {
-    "returns": "IDBRequest",
-    "args": {
-     "value": "Any"
-    }
-   },
-   "advance": {
-    "returns": "Boolean",
-    "args": {
-     "count": "Uint32"
-    }
-   },
-   "continue": {
-    "returns": "Boolean",
-    "args": {
-     "key": "Any"
-    }
-   },
-   "delete": {
-    "returns": "Boolean"
-   }
-  }
- },
- "IDBCursorWithValueSync": {
+ "IDBOpenDBRequest": {
   "type": "interface",
   "inherits": [
-   "IDBCursorSync"
+   "IDBRequest"
   ],
   "properties": {
-   "value": "Any"
+   "onblocked": "Function",
+   "onupgradeneeded": "Function"
   }
+ },
+ "IDBRequest": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "constants": {
+   "LOADING": 1,
+   "DONE": 2
+  },
+  "readonly": {
+   "result": "Any",
+   "error": "DOMError",
+   "source": "Object",
+   "transaction": "IDBTransaction",
+   "readyState": "Uint16"
+  },
+  "properties": {
+   "onsuccess": "Function",
+   "onerror": "Function"
+  }
+ },
+ "IDBTransaction": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "constants": {
+   "READ_ONLY": 0,
+   "READ_WRITE": 1,
+   "VERSION_CHANGE": 2
+  },
+  "readonly": {
+   "mode": "Uint16",
+   "db": "IDBDatabase"
+  },
+  "methods": {
+   "objectStore": {
+    "returns": "IDBObjectStore",
+    "args": {
+     "name": "String"
+    }
+   },
+   "abort": {}
+  },
+  "properties": {
+   "onabort": "Function",
+   "oncomplete": "Function",
+   "onerror": "Function"
+  }
+ },
+ "IDBTransactionCallback": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "transactionStarted": {
+    "args": {
+     "transaction": "IDBTransactionSync"
+    }
+   }
+  },
+  "NoInterfaceObject": true,
+  "Callback": true
  },
  "IDBTransactionSync": {
   "type": "interface",
@@ -620,6 +585,41 @@
     }
    },
    "abort": {}
+  }
+ },
+ "IDBVersionChangeCallback": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "transactionStarted": {
+    "args": {
+     "transaction": "IDBTransactionSync",
+     "oldVersion": "Uint64"
+    }
+   }
+  },
+  "NoInterfaceObject": true,
+  "Callback": true
+ },
+ "IDBVersionChangeEvent": {
+  "type": "interface",
+  "inherits": [
+   "Event"
+  ],
+  "readonly": {
+   "oldVersion": "Uint64",
+   "newVersion": "Uint64"
+  },
+  "methods": {
+   "initIDBVersionChangeEvent": {
+    "args": {
+     "typeArg": "String",
+     "canBubbleArg": "Boolean",
+     "cancelableArg": "Boolean",
+     "oldVersion": "Uint64",
+     "newVersion": "Uint64"
+    }
+   }
   }
  }
 }

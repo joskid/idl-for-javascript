@@ -1,4 +1,92 @@
 {
+ "CSSColorComponentValue": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "red": "Int16",
+   "green": "Int16",
+   "blue": "Int16",
+   "alpha": "Float32"
+  },
+  "NoInterfaceObject": true
+ },
+ "CSSComponentValue": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "type": "String"
+  },
+  "properties": {
+   "value": "Any"
+  },
+  "NoInterfaceObject": true
+ },
+ "CSSIdentifierComponentValue": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "identifier": "String"
+  },
+  "NoInterfaceObject": true
+ },
+ "CSSKeywordComponentValue": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "keyword": "String"
+  },
+  "NoInterfaceObject": true
+ },
+ "CSSLengthComponentValue": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "em": "Float32",
+   "ex": "Float32",
+   "px": "Float32"
+  },
+  "NoInterfaceObject": true
+ },
+ "CSSMapValue": {
+  "type": "interface",
+  "inherits": [],
+  "keyed": {
+   "itemType": "CSSValue",
+   "readonly": true
+  },
+  "NoInterfaceObject": true
+ },
+ "CSSPercentageComponentValue": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "percent": "Float32"
+  },
+  "NoInterfaceObject": true
+ },
+ "CSSPropertyValue": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "cssText": "String"
+  }
+ },
+ "CSSPropertyValueList": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "list": "CSSValue..."
+  },
+  "NoInterfaceObject": true
+ },
+ "CSSStringComponentValue": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "string": "String"
+  },
+  "NoInterfaceObject": true
+ },
  "CSSStyleDeclarationValue": {
   "type": "interface",
   "inherits": [],
@@ -126,94 +214,6 @@
    "wordSpacing": "CSSPropertyValue",
    "zIndex": "CSSPropertyValue"
   }
- },
- "CSSPropertyValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "cssText": "String"
-  }
- },
- "CSSPropertyValueList": {
-  "type": "interface",
-  "inherits": [],
-  "readonly": {
-   "list": "CSSValue..."
-  },
-  "NoInterfaceObject": true
- },
- "CSSMapValue": {
-  "type": "interface",
-  "inherits": [],
-  "keyed": {
-   "itemType": "CSSValue",
-   "readonly": true
-  },
-  "NoInterfaceObject": true
- },
- "CSSComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "readonly": {
-   "type": "String"
-  },
-  "properties": {
-   "value": "Any"
-  },
-  "NoInterfaceObject": true
- },
- "CSSColorComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "red": "Int16",
-   "green": "Int16",
-   "blue": "Int16",
-   "alpha": "Float32"
-  },
-  "NoInterfaceObject": true
- },
- "CSSIdentifierComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "identifier": "String"
-  },
-  "NoInterfaceObject": true
- },
- "CSSKeywordComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "keyword": "String"
-  },
-  "NoInterfaceObject": true
- },
- "CSSLengthComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "em": "Float32",
-   "ex": "Float32",
-   "px": "Float32"
-  },
-  "NoInterfaceObject": true
- },
- "CSSPercentageComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "percent": "Float32"
-  },
-  "NoInterfaceObject": true
- },
- "CSSStringComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "string": "String"
-  },
-  "NoInterfaceObject": true
  },
  "CSSURLComponentValue": {
   "type": "interface",

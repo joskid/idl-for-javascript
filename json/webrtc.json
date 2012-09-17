@@ -1,4 +1,43 @@
 {
+ "AudioMediaStreamTrack": {
+  "type": "interface",
+  "inherits": [
+   "MediaStreamTrack"
+  ],
+  "readonly": {
+   "canInsertDTMF": "Boolean"
+  },
+  "methods": {
+   "insertDTMF": {
+    "args": {
+     "tones": "String",
+     "duration": "Int32"
+    }
+   }
+  }
+ },
+ "BlobCallback": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "handleEvent": {
+    "args": {
+     "blob": "Blob"
+    }
+   }
+  },
+  "Callback": true,
+  "NoInterfaceObject": true
+ },
+ "LocalMediaStream": {
+  "type": "interface",
+  "inherits": [
+   "MediaStream"
+  ],
+  "methods": {
+   "stop": {}
+  }
+ },
  "MediaStream": {
   "type": "interface",
   "inherits": [],
@@ -10,6 +49,26 @@
   "methods": {
    "record": {
     "returns": "MediaStreamRecorder"
+   },
+   "addEventListener": {
+    "args": {
+     "type": "String",
+     "callback": "EventListener",
+     "capture": "Boolean"
+    }
+   },
+   "removeEventListener": {
+    "args": {
+     "type": "String",
+     "callback": "EventListener",
+     "capture": "Boolean"
+    }
+   },
+   "dispatchEvent": {
+    "returns": "Boolean",
+    "args": {
+     "event": "Event"
+    }
    }
   },
   "properties": {
@@ -23,13 +82,40 @@
    }
   }
  },
- "LocalMediaStream": {
+ "MediaStreamEvent": {
   "type": "interface",
   "inherits": [
-   "MediaStream"
+   "Event"
   ],
+  "readonly": {
+   "stream": "MediaStream"
+  },
+  "construct": {
+   "args": {
+    "type": "String",
+    "eventInitDict": "MediaStreamEventInit"
+   }
+  }
+ },
+ "MediaStreamEventInit": {
+  "type": "dictionary",
+  "inherits": [
+   "EventInit"
+  ],
+  "defaults": {
+   "stream": ""
+  }
+ },
+ "MediaStreamRecorder": {
+  "type": "interface",
+  "inherits": [],
   "methods": {
-   "stop": {}
+   "getRecordedData": {
+    "returns": "voice",
+    "args": {
+     "callBack": "BlobCallback"
+    }
+   }
   }
  },
  "MediaStreamTrack": {
@@ -52,21 +138,28 @@
    "ENDED": 2
   }
  },
- "AudioMediaStreamTrack": {
+ "MediaStreamTrackEvent": {
   "type": "interface",
   "inherits": [
-   "MediaStreamTrack"
+   "Event"
   ],
   "readonly": {
-   "canInsertDTMF": "Boolean"
+   "track": "MediaStreamTrack"
   },
-  "methods": {
-   "insertDTMF": {
-    "args": {
-     "tones": "String",
-     "duration": "Int32"
-    }
+  "construct": {
+   "args": {
+    "type": "String",
+    "eventInitDict": "MediaStreamTrackEventInit"
    }
+  }
+ },
+ "MediaStreamTrackEventInit": {
+  "type": "dictionary",
+  "inherits": [
+   "EventInit"
+  ],
+  "defaults": {
+   "track": ""
   }
  },
  "MediaStreamTrackList": {
@@ -98,31 +191,6 @@
    "onremovetrack": "Function"
   }
  },
- "MediaStreamRecorder": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "getRecordedData": {
-    "returns": "voice",
-    "args": {
-     "callBack": "BlobCallback"
-    }
-   }
-  }
- },
- "BlobCallback": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "handleEvent": {
-    "args": {
-     "blob": "Blob"
-    }
-   }
-  },
-  "Callback": true,
-  "NoInterfaceObject": true
- },
  "PeerConnection": {
   "type": "interface",
   "inherits": [],
@@ -143,7 +211,27 @@
      "stream": "MediaStream"
     }
    },
-   "close": {}
+   "close": {},
+   "addEventListener": {
+    "args": {
+     "type": "String",
+     "callback": "EventListener",
+     "capture": "Boolean"
+    }
+   },
+   "removeEventListener": {
+    "args": {
+     "type": "String",
+     "callback": "EventListener",
+     "capture": "Boolean"
+    }
+   },
+   "dispatchEvent": {
+    "returns": "Boolean",
+    "args": {
+     "event": "Event"
+    }
+   }
   },
   "constants": {
    "NEW": 0,
@@ -196,53 +284,5 @@
   },
   "Callback": true,
   "NoInterfaceObject": true
- },
- "MediaStreamTrackEvent": {
-  "type": "interface",
-  "inherits": [
-   "Event"
-  ],
-  "readonly": {
-   "track": "MediaStreamTrack"
-  },
-  "construct": {
-   "args": {
-    "type": "String",
-    "eventInitDict": "MediaStreamTrackEventInit"
-   }
-  }
- },
- "MediaStreamTrackEventInit": {
-  "type": "dictionary",
-  "inherits": [
-   "EventInit"
-  ],
-  "defaults": {
-   "track": ""
-  }
- },
- "MediaStreamEvent": {
-  "type": "interface",
-  "inherits": [
-   "Event"
-  ],
-  "readonly": {
-   "stream": "MediaStream"
-  },
-  "construct": {
-   "args": {
-    "type": "String",
-    "eventInitDict": "MediaStreamEventInit"
-   }
-  }
- },
- "MediaStreamEventInit": {
-  "type": "dictionary",
-  "inherits": [
-   "EventInit"
-  ],
-  "defaults": {
-   "stream": ""
-  }
  }
 }

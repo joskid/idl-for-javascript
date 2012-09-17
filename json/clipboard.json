@@ -1,14 +1,4 @@
 {
- "ClipboardEventInit": {
-  "type": "dictionary",
-  "inherits": [
-   "EventInit"
-  ],
-  "defaults": {
-   "data": "",
-   "dataType": ""
-  }
- },
  "ClipboardEvent": {
   "type": "interface",
   "inherits": [
@@ -22,6 +12,16 @@
     "type": "String",
     "eventInitDict": "ClipboardEventInit"
    }
+  }
+ },
+ "ClipboardEventInit": {
+  "type": "dictionary",
+  "inherits": [
+   "EventInit"
+  ],
+  "defaults": {
+   "data": "",
+   "dataType": ""
   }
  }
 }

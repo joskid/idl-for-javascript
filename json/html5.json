@@ -1,0 +1,3988 @@
+{
+ "AnonXMLHttpRequest": {
+  "type": "interface",
+  "inherits": [
+   "XMLHttpRequest"
+  ],
+  "construct": {}
+ },
+ "ApplicationCache": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "constants": {
+   "UNCACHED": 0,
+   "IDLE": 1,
+   "CHECKING": 2,
+   "DOWNLOADING": 3,
+   "UPDATEREADY": 4,
+   "OBSOLETE": 5
+  },
+  "readonly": {
+   "status": "Uint16"
+  },
+  "methods": {
+   "update": {},
+   "abort": {},
+   "swapCache": {}
+  },
+  "properties": {
+   "onchecking": "EventHandler",
+   "onerror": "EventHandler",
+   "onnoupdate": "EventHandler",
+   "ondownloading": "EventHandler",
+   "onprogress": "EventHandler",
+   "onupdateready": "EventHandler",
+   "oncached": "EventHandler",
+   "onobsolete": "EventHandler"
+  }
+ },
+ "AudioTrack": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "id": "String",
+   "kind": "String",
+   "label": "String",
+   "language": "String"
+  },
+  "properties": {
+   "enabled": "Boolean"
+  }
+ },
+ "AudioTrackList": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "getTrackById": {
+    "returns": "AudioTrack",
+    "args": {
+     "id": "String"
+    }
+   }
+  },
+  "properties": {
+   "onchange": "EventHandler",
+   "onaddtrack": "EventHandler",
+   "onremovetrack": "EventHandler"
+  },
+  "indexed": {
+   "itemType": "AudioTrack",
+   "readonly": true
+  }
+ },
+ "AutoKeyword": {
+  "type": "enum",
+  "values": [
+   "auto"
+  ]
+ },
+ "BarProp": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "visible": "Boolean"
+  }
+ },
+ "BeforeUnloadEvent": {
+  "type": "interface",
+  "inherits": [
+   "Event"
+  ],
+  "properties": {
+   "returnValue": "String"
+  }
+ },
+ "BinaryType": {
+  "type": "enum",
+  "values": [
+   "blob",
+   "arraybuffer"
+  ]
+ },
+ "CanvasGradient": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "addColorStop": {
+    "args": {
+     "offset": "Float64",
+     "color": "String"
+    }
+   }
+  }
+ },
+ "CanvasPattern": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "setTransform": {
+    "args": {
+     "transform": "SVGMatrix"
+    }
+   }
+  }
+ },
+ "CanvasRenderingContext2D": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "canvas": "HTMLCanvasElement"
+  },
+  "methods": {
+   "save": {},
+   "restore": {},
+   "scale": {
+    "args": {
+     "x": "Float64",
+     "y": "Float64"
+    }
+   },
+   "rotate": {
+    "args": {
+     "angle": "Float64"
+    }
+   },
+   "translate": {
+    "args": {
+     "x": "Float64",
+     "y": "Float64"
+    }
+   },
+   "transform": {
+    "args": {
+     "a": "Float64",
+     "b": "Float64",
+     "c": "Float64",
+     "d": "Float64",
+     "e": "Float64",
+     "f": "Float64"
+    }
+   },
+   "setTransform": {
+    "args": {
+     "a": "Float64",
+     "b": "Float64",
+     "c": "Float64",
+     "d": "Float64",
+     "e": "Float64",
+     "f": "Float64"
+    }
+   },
+   "resetTransform": {},
+   "createLinearGradient": {
+    "returns": "CanvasGradient",
+    "args": {
+     "x0": "Float64",
+     "y0": "Float64",
+     "x1": "Float64",
+     "y1": "Float64"
+    }
+   },
+   "createRadialGradient": {
+    "returns": "CanvasGradient",
+    "args": {
+     "x0": "Float64",
+     "y0": "Float64",
+     "r0": "Float64",
+     "x1": "Float64",
+     "y1": "Float64",
+     "r1": "Float64"
+    }
+   },
+   "createPattern": {
+    "returns": "CanvasPattern",
+    "args": {
+     "image": [
+      "HTMLImageElement",
+      "HTMLCanvasElement",
+      "HTMLVideoElement"
+     ],
+     "repetition": "String"
+    }
+   },
+   "clearRect": {
+    "args": {
+     "x": "Float64",
+     "y": "Float64",
+     "w": "Float64",
+     "h": "Float64"
+    }
+   },
+   "fillRect": {
+    "args": {
+     "x": "Float64",
+     "y": "Float64",
+     "w": "Float64",
+     "h": "Float64"
+    }
+   },
+   "strokeRect": {
+    "args": {
+     "x": "Float64",
+     "y": "Float64",
+     "w": "Float64",
+     "h": "Float64"
+    }
+   },
+   "beginPath": {},
+   "fill": {
+    "args": {
+     "path": "Path"
+    }
+   },
+   "stroke": {
+    "args": {
+     "path": "Path"
+    }
+   },
+   "drawSystemFocusRing": {
+    "args": {
+     "element": "Element",
+     "path": "Path"
+    }
+   },
+   "drawCustomFocusRing": {
+    "returns": "Boolean",
+    "args": {
+     "element": "Element",
+     "path": "Path"
+    }
+   },
+   "scrollPathIntoView": {
+    "args": {
+     "path": "Path"
+    }
+   },
+   "clip": {
+    "args": {
+     "path": "Path"
+    }
+   },
+   "resetClip": {},
+   "isPointInPath": {
+    "returns": "Boolean",
+    "args": {
+     "x": "Float64",
+     "y": "Float64",
+     "path": "Path"
+    }
+   },
+   "fillText": {
+    "args": {
+     "text": "String",
+     "x": "Float64",
+     "y": "Float64",
+     "maxWidth": "Float64"
+    }
+   },
+   "strokeText": {
+    "args": {
+     "text": "String",
+     "x": "Float64",
+     "y": "Float64",
+     "maxWidth": "Float64"
+    }
+   },
+   "measureText": {
+    "returns": "TextMetrics",
+    "args": {
+     "text": "String"
+    }
+   },
+   "drawImage": {
+    "args": {
+     "image": [
+      "HTMLImageElement",
+      "HTMLCanvasElement",
+      "HTMLVideoElement",
+      [
+       "HTMLImageElement",
+       "HTMLCanvasElement",
+       "HTMLVideoElement"
+      ],
+      [
+       "HTMLImageElement",
+       "HTMLCanvasElement",
+       "HTMLVideoElement"
+      ]
+     ],
+     "dx": "Float64",
+     "dy": "Float64",
+     "dw": "Float64",
+     "dh": "Float64",
+     "sx": "Float64",
+     "sy": "Float64",
+     "sw": "Float64",
+     "sh": "Float64"
+    }
+   },
+   "addHitRegion": {
+    "args": {
+     "options": "HitRegionOptions"
+    }
+   },
+   "removeHitRegion": {
+    "args": {
+     "options": "HitRegionOptions"
+    }
+   },
+   "createImageData": {
+    "returns": "ImageData",
+    "args": {
+     "sw": "Float64",
+     "sh": "Float64",
+     "imagedata": "ImageData"
+    }
+   },
+   "createImageDataHD": {
+    "returns": "ImageData",
+    "args": {
+     "sw": "Float64",
+     "sh": "Float64"
+    }
+   },
+   "getImageData": {
+    "returns": "ImageData",
+    "args": {
+     "sx": "Float64",
+     "sy": "Float64",
+     "sw": "Float64",
+     "sh": "Float64"
+    }
+   },
+   "getImageDataHD": {
+    "returns": "ImageData",
+    "args": {
+     "sx": "Float64",
+     "sy": "Float64",
+     "sw": "Float64",
+     "sh": "Float64"
+    }
+   },
+   "putImageData": {
+    "args": {
+     "imagedata": "ImageData",
+     "dx": "Float64",
+     "dy": "Float64"
+    }
+   },
+   "putImageDataHD": {
+    "args": {
+     "imagedata": "ImageData",
+     "dx": "Float64",
+     "dy": "Float64",
+     "dirtyX": "Float64",
+     "dirtyY": "Float64",
+     "dirtyWidth": "Float64",
+     "dirtyHeight": "Float64"
+    }
+   },
+   "setLineDash": {
+    "args": {
+     "segments": "Float64..."
+    }
+   },
+   "getLineDash": {
+    "returns": "Float64..."
+   },
+   "closePath": {},
+   "moveTo": {
+    "args": {
+     "x": "Float64",
+     "y": "Float64"
+    }
+   },
+   "lineTo": {
+    "args": {
+     "x": "Float64",
+     "y": "Float64"
+    }
+   },
+   "quadraticCurveTo": {
+    "args": {
+     "cpx": "Float64",
+     "cpy": "Float64",
+     "x": "Float64",
+     "y": "Float64"
+    }
+   },
+   "bezierCurveTo": {
+    "args": {
+     "cp1x": "Float64",
+     "cp1y": "Float64",
+     "cp2x": "Float64",
+     "cp2y": "Float64",
+     "x": "Float64",
+     "y": "Float64"
+    }
+   },
+   "arcTo": {
+    "args": {
+     "x1": "Float64",
+     "y1": "Float64",
+     "x2": "Float64",
+     "y2": "Float64",
+     "radius": "Float64",
+     "radiusX": "Float64",
+     "radiusY": "Float64",
+     "rotation": "Float64"
+    }
+   },
+   "rect": {
+    "args": {
+     "x": "Float64",
+     "y": "Float64",
+     "w": "Float64",
+     "h": "Float64"
+    }
+   },
+   "arc": {
+    "args": {
+     "x": "Float64",
+     "y": "Float64",
+     "radius": "Float64",
+     "startAngle": "Float64",
+     "endAngle": "Float64",
+     "anticlockwise": "Boolean"
+    }
+   },
+   "ellipse": {
+    "args": {
+     "x": "Float64",
+     "y": "Float64",
+     "radiusX": "Float64",
+     "radiusY": "Float64",
+     "rotation": "Float64",
+     "startAngle": "Float64",
+     "endAngle": "Float64",
+     "anticlockwise": "Boolean"
+    }
+   }
+  },
+  "properties": {
+   "currentTransform": "SVGMatrix",
+   "globalAlpha": "Float64",
+   "globalCompositeOperation": "String",
+   "imageSmoothingEnabled": "Boolean",
+   "strokeStyle": [
+    "String",
+    "CanvasGradient",
+    "CanvasPattern"
+   ],
+   "fillStyle": [
+    "String",
+    "CanvasGradient",
+    "CanvasPattern"
+   ],
+   "shadowOffsetX": "Float64",
+   "shadowOffsetY": "Float64",
+   "shadowBlur": "Float64",
+   "shadowColor": "String",
+   "lineWidth": "Float64",
+   "lineCap": "String",
+   "lineJoin": "String",
+   "miterLimit": "Float64",
+   "lineDashOffset": "Float64",
+   "font": "String",
+   "textAlign": "String",
+   "textBaseline": "String"
+  }
+ },
+ "CloseEvent": {
+  "type": "interface",
+  "inherits": [
+   "Event"
+  ],
+  "readonly": {
+   "wasClean": "Boolean",
+   "code": "Uint16",
+   "reason": "String"
+  },
+  "construct": {
+   "args": {
+    "type": "String",
+    "eventInitDict": "CloseEventInit"
+   }
+  }
+ },
+ "CloseEventInit": {
+  "type": "dictionary",
+  "inherits": [
+   "EventInit"
+  ],
+  "defaults": {
+   "wasClean": false,
+   "code": 0,
+   "reason": ""
+  }
+ },
+ "DOMElementMap": {
+  "type": "interface",
+  "inherits": [],
+  "keyed": {
+   "itemType": "Element",
+   "writable": true,
+   "deletable": true,
+   "creatable": true
+  }
+ },
+ "DOMStringMap": {
+  "type": "interface",
+  "inherits": [],
+  "keyed": {
+   "itemType": "String",
+   "writable": true,
+   "deletable": true,
+   "creatable": true
+  }
+ },
+ "DataTransfer": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "dropEffect": "String",
+   "effectAllowed": "String"
+  },
+  "readonly": {
+   "items": "DataTransferItemList",
+   "types": "String...",
+   "files": "FileList"
+  },
+  "methods": {
+   "setDragImage": {
+    "args": {
+     "image": "Element",
+     "x": "Int32",
+     "y": "Int32"
+    }
+   },
+   "getData": {
+    "returns": "String",
+    "args": {
+     "format": "String"
+    }
+   },
+   "setData": {
+    "args": {
+     "format": "String",
+     "data": "String"
+    }
+   },
+   "clearData": {
+    "args": {
+     "format": "String"
+    }
+   }
+  }
+ },
+ "DataTransferItem": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "kind": "String",
+   "type": "String"
+  },
+  "methods": {
+   "getAsString": {
+    "args": {
+     "_callback": "FunctionStringCallback"
+    }
+   },
+   "getAsFile": {
+    "returns": "File"
+   }
+  }
+ },
+ "DataTransferItemList": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "clear": {},
+   "add": {
+    "returns": "DataTransferItem",
+    "args": {
+     "data": [
+      "String",
+      "File"
+     ],
+     "type": "String"
+    }
+   }
+  },
+  "indexed": {
+   "itemType": "DataTransferItem",
+   "deletable": true
+  }
+ },
+ "DedicatedWorkerGlobalScope": {
+  "type": "interface",
+  "inherits": [
+   "WorkerGlobalScope"
+  ],
+  "methods": {
+   "postMessage": {
+    "args": {
+     "message": "Any",
+     "transfer": "Transferable..."
+    }
+   }
+  },
+  "properties": {
+   "onmessage": "EventHandlerNonNull"
+  }
+ },
+ "DragEvent": {
+  "type": "interface",
+  "inherits": [
+   "MouseEvent"
+  ],
+  "readonly": {
+   "dataTransfer": "DataTransfer"
+  },
+  "construct": {
+   "args": {
+    "type": "String",
+    "eventInitDict": "DragEventInit"
+   }
+  }
+ },
+ "DragEventInit": {
+  "type": "dictionary",
+  "inherits": [
+   "MouseEventInit"
+  ],
+  "defaults": {
+   "dataTransfer": ""
+  }
+ },
+ "DrawingStyle": {
+  "type": "interface",
+  "inherits": [],
+  "construct": {
+   "args": {
+    "scope": "Element"
+   }
+  },
+  "properties": {
+   "lineWidth": "Float64",
+   "lineCap": "String",
+   "lineJoin": "String",
+   "miterLimit": "Float64",
+   "lineDashOffset": "Float64",
+   "font": "String",
+   "textAlign": "String",
+   "textBaseline": "String"
+  },
+  "methods": {
+   "setLineDash": {
+    "args": {
+     "segments": "Float64..."
+    }
+   },
+   "getLineDash": {
+    "returns": "Float64..."
+   }
+  }
+ },
+ "ErrorEvent": {
+  "type": "interface",
+  "inherits": [
+   "Event"
+  ],
+  "readonly": {
+   "message": "String",
+   "filename": "String",
+   "lineno": "Uint32"
+  },
+  "construct": {
+   "args": {
+    "type": "String",
+    "eventInitDict": "ErrorEventInit"
+   }
+  }
+ },
+ "ErrorEventInit": {
+  "type": "dictionary",
+  "inherits": [
+   "EventInit"
+  ],
+  "defaults": {
+   "message": "",
+   "filename": "",
+   "lineno": 0
+  }
+ },
+ "EventHandlerNonNull": {
+  "type": "callback",
+  "returns": "Any",
+  "TreatNonCallableAsNull": true
+ },
+ "EventSource": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "readonly": {
+   "url": "String",
+   "withCredentials": "Boolean",
+   "readyState": "Uint16"
+  },
+  "constants": {
+   "CONNECTING": 0,
+   "OPEN": 1,
+   "CLOSED": 2
+  },
+  "properties": {
+   "onopen": "EventHandlerNonNull",
+   "onmessage": "EventHandlerNonNull",
+   "onerror": "EventHandlerNonNull"
+  },
+  "methods": {
+   "close": {}
+  },
+  "construct": {
+   "args": {
+    "url": "String",
+    "eventSourceInitDict": "EventSourceInit"
+   }
+  }
+ },
+ "EventSourceInit": {
+  "type": "dictionary",
+  "inherits": [],
+  "defaults": {
+   "withCredentials": false
+  }
+ },
+ "External": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "AddSearchProvider": {
+    "args": {
+     "engineURL": "String"
+    }
+   },
+   "IsSearchProviderInstalled": {
+    "returns": "Uint32",
+    "args": {
+     "engineURL": "String"
+    }
+   }
+  }
+ },
+ "FormData": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "append": {
+    "args": {
+     "name": "String",
+     "value": [
+      "Blob",
+      "String"
+     ],
+     "filename": "String"
+    }
+   }
+  },
+  "construct": {
+   "args": {
+    "form": "HTMLFormElement"
+   }
+  }
+ },
+ "FunctionStringCallback": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "handleEvent": {
+    "args": {
+     "data": "String"
+    }
+   }
+  },
+  "Callback": true,
+  "NoInterfaceObject": true
+ },
+ "HTMLAllCollection": {
+  "type": "interface",
+  "inherits": [
+   "HTMLCollection"
+  ],
+  "methods": {
+   "namedItem": {
+    "returns": "Object",
+    "args": {
+     "name": "String"
+    }
+   },
+   "tags": {
+    "returns": "HTMLAllCollection",
+    "args": {
+     "tagName": "String"
+    }
+   }
+  }
+ },
+ "HTMLAnchorElement": {
+  "type": "interface",
+  "tag": "a",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "href": "String",
+   "target": "String",
+   "download": "String",
+   "ping": "String",
+   "rel": "String",
+   "media": "String",
+   "hreflang": "String",
+   "type": "String",
+   "text": "String",
+   "protocol": "String",
+   "host": "String",
+   "hostname": "String",
+   "port": "String",
+   "pathname": "String",
+   "search": "String",
+   "hash": "String",
+   "coords": "String",
+   "charset": "String",
+   "name": "String",
+   "rev": "String",
+   "shape": "String"
+  },
+  "readonly": {
+   "relList": "DOMTokenList"
+  }
+ },
+ "HTMLAppletElement": {
+  "type": "interface",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "align": "String",
+   "alt": "String",
+   "archive": "String",
+   "code": "String",
+   "codeBase": "String",
+   "height": "String",
+   "hspace": "Uint32",
+   "name": "String",
+   "_object": "String",
+   "vspace": "Uint32",
+   "width": "String"
+  }
+ },
+ "HTMLAreaElement": {
+  "type": "interface",
+  "tag": "area",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "alt": "String",
+   "coords": "String",
+   "shape": "String",
+   "href": "String",
+   "target": "String",
+   "download": "String",
+   "ping": "String",
+   "rel": "String",
+   "media": "String",
+   "hreflang": "String",
+   "type": "String",
+   "protocol": "String",
+   "host": "String",
+   "hostname": "String",
+   "port": "String",
+   "pathname": "String",
+   "search": "String",
+   "hash": "String",
+   "noHref": "Boolean"
+  },
+  "readonly": {
+   "relList": "DOMTokenList"
+  }
+ },
+ "HTMLAudioElement": {
+  "type": "interface",
+  "tag": "audio",
+  "inherits": [
+   "HTMLMediaElement"
+  ],
+  "construct": {
+   "name": "Audio",
+   "args": {
+    "src": "String"
+   }
+  }
+ },
+ "HTMLBRElement": {
+  "type": "interface",
+  "tag": "br",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "clear": "String"
+  }
+ },
+ "HTMLBaseElement": {
+  "type": "interface",
+  "tag": "base",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "href": "String",
+   "target": "String"
+  }
+ },
+ "HTMLBaseFontElement": {
+  "type": "interface",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "color": "String",
+   "face": "String",
+   "size": "Int32"
+  }
+ },
+ "HTMLBodyElement": {
+  "type": "interface",
+  "tag": "body",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "onafterprint": "EventHandler",
+   "onbeforeprint": "EventHandler",
+   "onbeforeunload": "EventHandler",
+   "onblur": "EventHandler",
+   "onerror": "OnErrorEventHandler",
+   "onfocus": "EventHandler",
+   "onhashchange": "EventHandler",
+   "onload": "EventHandler",
+   "onmessage": "EventHandler",
+   "onoffline": "EventHandler",
+   "ononline": "EventHandler",
+   "onpopstate": "EventHandler",
+   "onpagehide": "EventHandler",
+   "onpageshow": "EventHandler",
+   "onresize": "EventHandler",
+   "onscroll": "EventHandler",
+   "onstorage": "EventHandler",
+   "onunload": "EventHandler",
+   "text": "String",
+   "link": "String",
+   "vLink": "String",
+   "aLink": "String",
+   "bgColor": "String",
+   "background": "String"
+  }
+ },
+ "HTMLButtonElement": {
+  "type": "interface",
+  "tag": "button",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "autofocus": "Boolean",
+   "disabled": "Boolean",
+   "formAction": "String",
+   "formEnctype": "String",
+   "formMethod": "String",
+   "formNoValidate": "Boolean",
+   "formTarget": "String",
+   "name": "String",
+   "type": "String",
+   "value": "String"
+  },
+  "readonly": {
+   "form": "HTMLFormElement",
+   "willValidate": "Boolean",
+   "validity": "ValidityState",
+   "validationMessage": "String",
+   "labels": "NodeList"
+  },
+  "methods": {
+   "checkValidity": {
+    "returns": "Boolean"
+   },
+   "setCustomValidity": {
+    "args": {
+     "error": "String"
+    }
+   }
+  }
+ },
+ "HTMLCanvasElement": {
+  "type": "interface",
+  "tag": "canvas",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "width": "Uint32",
+   "height": "Uint32"
+  },
+  "methods": {
+   "toDataURL": {
+    "returns": "String",
+    "args": {
+     "type": "String",
+     "arguments": "Any"
+    }
+   },
+   "toDataURLHD": {
+    "returns": "String",
+    "args": {
+     "type": "String",
+     "arguments": "Any"
+    }
+   },
+   "toBlob": {
+    "args": {
+     "_callback": "FileCallback",
+     "type": "String",
+     "arguments": "Any"
+    }
+   },
+   "toBlobHD": {
+    "args": {
+     "_callback": "FileCallback",
+     "type": "String",
+     "arguments": "Any"
+    }
+   },
+   "getContext": {
+    "returns": "Object",
+    "args": {
+     "contextId": "String",
+     "arguments": "Any"
+    }
+   }
+  }
+ },
+ "HTMLCommandElement": {
+  "type": "interface",
+  "tag": "command",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "type": "String",
+   "label": "String",
+   "icon": "String",
+   "disabled": "Boolean",
+   "checked": "Boolean",
+   "radiogroup": "String"
+  },
+  "readonly": {
+   "command": "HTMLElement"
+  }
+ },
+ "HTMLContentElement": {
+  "type": "interface",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "select": "String",
+   "resetStyleInheritance": "Boolean"
+  }
+ },
+ "HTMLDListElement": {
+  "type": "interface",
+  "tag": "dl",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "compact": "Boolean"
+  }
+ },
+ "HTMLDataElement": {
+  "type": "interface",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "value": "String"
+  }
+ },
+ "HTMLDataListElement": {
+  "type": "interface",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "readonly": {
+   "options": "HTMLCollection"
+  }
+ },
+ "HTMLDetailsElement": {
+  "type": "interface",
+  "tag": "details",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "open": "Boolean"
+  }
+ },
+ "HTMLDialogElement": {
+  "type": "interface",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "open": "Boolean",
+   "returnValue": "String"
+  },
+  "methods": {
+   "show": {
+    "args": {
+     "anchor": [
+      "MouseEvent",
+      "Element"
+     ]
+    }
+   },
+   "showModal": {
+    "args": {
+     "anchor": [
+      "MouseEvent",
+      "Element"
+     ]
+    }
+   },
+   "close": {
+    "args": {
+     "returnValue": "String"
+    }
+   }
+  }
+ },
+ "HTMLDirectoryElement": {
+  "type": "interface",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "compact": "Boolean"
+  }
+ },
+ "HTMLDivElement": {
+  "type": "interface",
+  "tag": "div",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "align": "String"
+  }
+ },
+ "HTMLElement": {
+  "type": "interface",
+  "inherits": [
+   "Element"
+  ],
+  "properties": {
+   "title": "String",
+   "lang": "String",
+   "translate": "Boolean",
+   "dir": "String",
+   "itemScope": "Boolean",
+   "itemId": "String",
+   "itemValue": "Any",
+   "hidden": "Boolean",
+   "tabIndex": "Int32",
+   "accessKey": "String",
+   "draggable": "Boolean",
+   "contentEditable": "String",
+   "contextMenu": "HTMLMenuElement",
+   "spellcheck": "Boolean",
+   "onabort": "EventHandler",
+   "onblur": "EventHandler",
+   "oncancel": "EventHandler",
+   "oncanplay": "EventHandler",
+   "oncanplaythrough": "EventHandler",
+   "onchange": "EventHandler",
+   "onclick": "EventHandler",
+   "onclose": "EventHandler",
+   "oncontextmenu": "EventHandler",
+   "oncuechange": "EventHandler",
+   "ondblclick": "EventHandler",
+   "ondrag": "EventHandler",
+   "ondragend": "EventHandler",
+   "ondragenter": "EventHandler",
+   "ondragleave": "EventHandler",
+   "ondragover": "EventHandler",
+   "ondragstart": "EventHandler",
+   "ondrop": "EventHandler",
+   "ondurationchange": "EventHandler",
+   "onemptied": "EventHandler",
+   "onended": "EventHandler",
+   "onerror": "OnErrorEventHandler",
+   "onfocus": "EventHandler",
+   "oninput": "EventHandler",
+   "oninvalid": "EventHandler",
+   "onkeydown": "EventHandler",
+   "onkeypress": "EventHandler",
+   "onkeyup": "EventHandler",
+   "onload": "EventHandler",
+   "onloadeddata": "EventHandler",
+   "onloadedmetadata": "EventHandler",
+   "onloadstart": "EventHandler",
+   "onmousedown": "EventHandler",
+   "onmousemove": "EventHandler",
+   "onmouseout": "EventHandler",
+   "onmouseover": "EventHandler",
+   "onmouseup": "EventHandler",
+   "onmousewheel": "EventHandler",
+   "onpause": "EventHandler",
+   "onplay": "EventHandler",
+   "onplaying": "EventHandler",
+   "onprogress": "EventHandler",
+   "onratechange": "EventHandler",
+   "onreset": "EventHandler",
+   "onscroll": "EventHandler",
+   "onseeked": "EventHandler",
+   "onseeking": "EventHandler",
+   "onselect": "EventHandler",
+   "onshow": "EventHandler",
+   "onstalled": "EventHandler",
+   "onsubmit": "EventHandler",
+   "onsuspend": "EventHandler",
+   "ontimeupdate": "EventHandler",
+   "onvolumechange": "EventHandler",
+   "onwaiting": "EventHandler"
+  },
+  "readonly": {
+   "dataset": "DOMStringMap",
+   "itemType": "DOMSettableTokenList",
+   "itemRef": "DOMSettableTokenList",
+   "itemProp": "DOMSettableTokenList",
+   "properties": "HTMLPropertiesCollection",
+   "accessKeyLabel": "String",
+   "dropzone": "DOMSettableTokenList",
+   "isContentEditable": "Boolean",
+   "commandType": "String",
+   "commandLabel": "String",
+   "commandIcon": "String",
+   "commandHidden": "Boolean",
+   "commandDisabled": "Boolean",
+   "commandChecked": "Boolean",
+   "style": "CSSStyleDeclaration"
+  },
+  "methods": {
+   "click": {},
+   "focus": {},
+   "blur": {}
+  }
+ },
+ "HTMLEmbedElement": {
+  "type": "interface",
+  "tag": "embed",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "src": "String",
+   "type": "String",
+   "width": "String",
+   "height": "String",
+   "align": "String",
+   "name": "String"
+  },
+  "legacyCaller": {
+   "args": {
+    "arguments": "Any"
+   }
+  }
+ },
+ "HTMLFieldSetElement": {
+  "type": "interface",
+  "tag": "fieldset",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "disabled": "Boolean",
+   "name": "String"
+  },
+  "readonly": {
+   "form": "HTMLFormElement",
+   "type": "String",
+   "elements": "HTMLFormControlsCollection",
+   "willValidate": "Boolean",
+   "validity": "ValidityState",
+   "validationMessage": "String"
+  },
+  "methods": {
+   "checkValidity": {
+    "returns": "Boolean"
+   },
+   "setCustomValidity": {
+    "args": {
+     "error": "String"
+    }
+   }
+  }
+ },
+ "HTMLFontElement": {
+  "type": "interface",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "color": "String",
+   "face": "String",
+   "size": "String"
+  }
+ },
+ "HTMLFormControlsCollection": {
+  "type": "interface",
+  "inherits": [
+   "HTMLCollection"
+  ],
+  "methods": {
+   "namedItem": {
+    "returns": "Object",
+    "args": {
+     "name": "String"
+    }
+   }
+  }
+ },
+ "HTMLFormElement": {
+  "type": "interface",
+  "tag": "form",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "acceptCharset": "String",
+   "action": "String",
+   "autocomplete": "String",
+   "enctype": "String",
+   "encoding": "String",
+   "method": "String",
+   "name": "String",
+   "noValidate": "Boolean",
+   "target": "String"
+  },
+  "readonly": {
+   "elements": "HTMLFormControlsCollection",
+   "length": "Int32"
+  },
+  "methods": {
+   "submit": {},
+   "reset": {},
+   "checkValidity": {
+    "returns": "Boolean"
+   }
+  },
+  "keyed": {
+   "itemType": "Object",
+   "readonly": true
+  },
+  "OverrideBuiltins": true
+ },
+ "HTMLFrameElement": {
+  "type": "interface",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "name": "String",
+   "scrolling": "String",
+   "src": "String",
+   "frameBorder": "String",
+   "longDesc": "String",
+   "noResize": "Boolean",
+   "marginHeight": "String",
+   "marginWidth": "String"
+  },
+  "readonly": {
+   "contentDocument": "Document",
+   "contentWindow": "Window"
+  }
+ },
+ "HTMLFrameSetElement": {
+  "type": "interface",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "cols": "String",
+   "rows": "String",
+   "onafterprint": "EventHandlerNonNull",
+   "onbeforeprint": "EventHandlerNonNull",
+   "onbeforeunload": "EventHandlerNonNull",
+   "onblur": "EventHandlerNonNull",
+   "onerror": "EventHandlerNonNull",
+   "onfocus": "EventHandlerNonNull",
+   "onhashchange": "EventHandlerNonNull",
+   "onload": "EventHandlerNonNull",
+   "onmessage": "EventHandlerNonNull",
+   "onoffline": "EventHandlerNonNull",
+   "ononline": "EventHandlerNonNull",
+   "onpagehide": "EventHandlerNonNull",
+   "onpageshow": "EventHandlerNonNull",
+   "onpopstate": "EventHandlerNonNull",
+   "onresize": "EventHandlerNonNull",
+   "onscroll": "EventHandlerNonNull",
+   "onstorage": "EventHandlerNonNull",
+   "onunload": "EventHandlerNonNull"
+  }
+ },
+ "HTMLHRElement": {
+  "type": "interface",
+  "tag": "hr",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "align": "String",
+   "color": "String",
+   "noShade": "Boolean",
+   "size": "String",
+   "width": "String"
+  }
+ },
+ "HTMLHeadElement": {
+  "type": "interface",
+  "tag": "head",
+  "inherits": [
+   "HTMLElement"
+  ]
+ },
+ "HTMLHeadingElement": {
+  "type": "interface",
+  "tag": "h6",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "align": "String"
+  }
+ },
+ "HTMLHtmlElement": {
+  "type": "interface",
+  "tag": "html",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "version": "String"
+  }
+ },
+ "HTMLIFrameElement": {
+  "type": "interface",
+  "tag": "iframe",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "src": "String",
+   "srcdoc": "String",
+   "name": "String",
+   "seamless": "Boolean",
+   "width": "String",
+   "height": "String",
+   "align": "String",
+   "scrolling": "String",
+   "frameBorder": "String",
+   "longDesc": "String",
+   "marginHeight": "String",
+   "marginWidth": "String"
+  },
+  "readonly": {
+   "sandbox": "DOMSettableTokenList",
+   "contentDocument": "Document",
+   "contentWindow": "Window"
+  }
+ },
+ "HTMLImageElement": {
+  "type": "interface",
+  "tag": "img",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "alt": "String",
+   "src": "String",
+   "srcset": "String",
+   "crossOrigin": "String",
+   "useMap": "String",
+   "isMap": "Boolean",
+   "width": "Uint32",
+   "height": "Uint32",
+   "name": "String",
+   "align": "String",
+   "hspace": "Uint32",
+   "vspace": "Uint32",
+   "longDesc": "String",
+   "border": "String"
+  },
+  "readonly": {
+   "naturalWidth": "Uint32",
+   "naturalHeight": "Uint32",
+   "complete": "Boolean"
+  },
+  "construct": {
+   "name": "Image",
+   "args": {
+    "width": "Uint32",
+    "height": "Uint32"
+   }
+  }
+ },
+ "HTMLInputElement": {
+  "type": "interface",
+  "tag": "input",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "accept": "String",
+   "alt": "String",
+   "autocomplete": "String",
+   "autofocus": "Boolean",
+   "defaultChecked": "Boolean",
+   "checked": "Boolean",
+   "dirName": "String",
+   "disabled": "Boolean",
+   "formAction": "String",
+   "formEnctype": "String",
+   "formMethod": "String",
+   "formNoValidate": "Boolean",
+   "formTarget": "String",
+   "height": "Uint32",
+   "indeterminate": "Boolean",
+   "inputMode": "String",
+   "max": "String",
+   "maxLength": "Int32",
+   "min": "String",
+   "multiple": "Boolean",
+   "name": "String",
+   "pattern": "String",
+   "placeholder": "String",
+   "readOnly": "Boolean",
+   "required": "Boolean",
+   "size": "Uint32",
+   "src": "String",
+   "step": "String",
+   "type": "String",
+   "defaultValue": "String",
+   "value": "String",
+   "valueAsDate": "Date",
+   "valueAsNumber": "Float64",
+   "width": "Uint32",
+   "selectionStart": "Uint32",
+   "selectionEnd": "Uint32",
+   "selectionDirection": "String",
+   "align": "String",
+   "useMap": "String"
+  },
+  "readonly": {
+   "form": "HTMLFormElement",
+   "files": "FileList",
+   "list": "HTMLElement",
+   "willValidate": "Boolean",
+   "validity": "ValidityState",
+   "validationMessage": "String",
+   "labels": "NodeList"
+  },
+  "methods": {
+   "stepUp": {
+    "args": {
+     "n": "Int32"
+    }
+   },
+   "stepDown": {
+    "args": {
+     "n": "Int32"
+    }
+   },
+   "checkValidity": {
+    "returns": "Boolean"
+   },
+   "setCustomValidity": {
+    "args": {
+     "error": "String"
+    }
+   },
+   "select": {},
+   "setRangeText": {
+    "args": {
+     "replacement": "String",
+     "start": "Uint32",
+     "end": "Uint32",
+     "selectionMode": "SelectionMode"
+    }
+   },
+   "setSelectionRange": {
+    "args": {
+     "start": "Uint32",
+     "end": "Uint32",
+     "direction": "String"
+    }
+   }
+  }
+ },
+ "HTMLKeygenElement": {
+  "type": "interface",
+  "tag": "keygen",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "autofocus": "Boolean",
+   "challenge": "String",
+   "disabled": "Boolean",
+   "keytype": "String",
+   "name": "String"
+  },
+  "readonly": {
+   "form": "HTMLFormElement",
+   "type": "String",
+   "willValidate": "Boolean",
+   "validity": "ValidityState",
+   "validationMessage": "String",
+   "labels": "NodeList"
+  },
+  "methods": {
+   "checkValidity": {
+    "returns": "Boolean"
+   },
+   "setCustomValidity": {
+    "args": {
+     "error": "String"
+    }
+   }
+  }
+ },
+ "HTMLLIElement": {
+  "type": "interface",
+  "tag": "li",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "value": "Int32",
+   "type": "String"
+  }
+ },
+ "HTMLLabelElement": {
+  "type": "interface",
+  "tag": "label",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "readonly": {
+   "form": "HTMLFormElement",
+   "control": "HTMLElement"
+  },
+  "properties": {
+   "htmlFor": "String"
+  }
+ },
+ "HTMLLegendElement": {
+  "type": "interface",
+  "tag": "legend",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "readonly": {
+   "form": "HTMLFormElement"
+  },
+  "properties": {
+   "align": "String"
+  }
+ },
+ "HTMLLinkElement": {
+  "type": "interface",
+  "tag": "link",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "disabled": "Boolean",
+   "href": "String",
+   "rel": "String",
+   "media": "String",
+   "hreflang": "String",
+   "type": "String",
+   "charset": "String",
+   "rev": "String",
+   "target": "String"
+  },
+  "readonly": {
+   "relList": "DOMTokenList",
+   "sizes": "DOMSettableTokenList",
+   "sheet": "StyleSheet"
+  }
+ },
+ "HTMLMapElement": {
+  "type": "interface",
+  "tag": "map",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "name": "String"
+  },
+  "readonly": {
+   "areas": "HTMLCollection",
+   "images": "HTMLCollection"
+  }
+ },
+ "HTMLMarqueeElement": {
+  "type": "interface",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "behavior": "String",
+   "bgColor": "String",
+   "direction": "String",
+   "height": "String",
+   "hspace": "Uint32",
+   "loop": "Int32",
+   "scrollAmount": "Uint32",
+   "scrollDelay": "Uint32",
+   "trueSpeed": "Boolean",
+   "vspace": "Uint32",
+   "width": "String",
+   "onbounce": "EventHandlerNonNull",
+   "onfinish": "EventHandlerNonNull",
+   "onstart": "EventHandlerNonNull"
+  },
+  "methods": {
+   "start": {},
+   "stop": {}
+  }
+ },
+ "HTMLMediaElement": {
+  "type": "interface",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "readonly": {
+   "error": "MediaError",
+   "currentSrc": "String",
+   "networkState": "Uint16",
+   "buffered": "TimeRanges",
+   "readyState": "Uint16",
+   "seeking": "Boolean",
+   "duration": "Float64",
+   "startDate": "Date",
+   "paused": "Boolean",
+   "played": "TimeRanges",
+   "seekable": "TimeRanges",
+   "ended": "Boolean",
+   "audioTracks": "AudioTrackList",
+   "videoTracks": "VideoTrackList",
+   "textTracks": "TextTrackList"
+  },
+  "properties": {
+   "src": "String",
+   "crossOrigin": "String",
+   "preload": "String",
+   "currentTime": "Float64",
+   "defaultPlaybackRate": "Float64",
+   "playbackRate": "Float64",
+   "autoplay": "Boolean",
+   "loop": "Boolean",
+   "mediaGroup": "String",
+   "controller": "MediaController",
+   "controls": "Boolean",
+   "volume": "Float64",
+   "muted": "Boolean",
+   "defaultMuted": "Boolean"
+  },
+  "constants": {
+   "NETWORK_EMPTY": 0,
+   "NETWORK_IDLE": 1,
+   "NETWORK_LOADING": 2,
+   "NETWORK_NO_SOURCE": 3,
+   "HAVE_NOTHING": 0,
+   "HAVE_METADATA": 1,
+   "HAVE_CURRENT_DATA": 2,
+   "HAVE_FUTURE_DATA": 3,
+   "HAVE_ENOUGH_DATA": 4
+  },
+  "methods": {
+   "load": {},
+   "canPlayType": {
+    "returns": "String",
+    "args": {
+     "type": "String"
+    }
+   },
+   "play": {},
+   "pause": {},
+   "addTextTrack": {
+    "returns": "TextTrack",
+    "args": {
+     "kind": "String",
+     "label": "String",
+     "language": "String"
+    }
+   }
+  }
+ },
+ "HTMLMenuElement": {
+  "type": "interface",
+  "tag": "menu",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "type": "String",
+   "label": "String",
+   "compact": "Boolean"
+  }
+ },
+ "HTMLMetaElement": {
+  "type": "interface",
+  "tag": "meta",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "name": "String",
+   "httpEquiv": "String",
+   "content": "String",
+   "scheme": "String"
+  }
+ },
+ "HTMLMeterElement": {
+  "type": "interface",
+  "tag": "meter",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "value": "Float64",
+   "min": "Float64",
+   "max": "Float64",
+   "low": "Float64",
+   "high": "Float64",
+   "optimum": "Float64"
+  },
+  "readonly": {
+   "labels": "NodeList"
+  }
+ },
+ "HTMLModElement": {
+  "type": "interface",
+  "tag": "ins",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "cite": "String",
+   "dateTime": "String"
+  }
+ },
+ "HTMLOListElement": {
+  "type": "interface",
+  "tag": "ol",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "reversed": "Boolean",
+   "start": "Int32",
+   "type": "String",
+   "compact": "Boolean"
+  }
+ },
+ "HTMLObjectElement": {
+  "type": "interface",
+  "tag": "object",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "data": "String",
+   "type": "String",
+   "typeMustMatch": "Boolean",
+   "name": "String",
+   "useMap": "String",
+   "width": "String",
+   "height": "String",
+   "align": "String",
+   "archive": "String",
+   "code": "String",
+   "declare": "Boolean",
+   "hspace": "Uint32",
+   "standby": "String",
+   "vspace": "Uint32",
+   "codeBase": "String",
+   "codeType": "String",
+   "border": "String"
+  },
+  "readonly": {
+   "form": "HTMLFormElement",
+   "contentDocument": "Document",
+   "contentWindow": "Window",
+   "willValidate": "Boolean",
+   "validity": "ValidityState",
+   "validationMessage": "String"
+  },
+  "methods": {
+   "checkValidity": {
+    "returns": "Boolean"
+   },
+   "setCustomValidity": {
+    "args": {
+     "error": "String"
+    }
+   }
+  },
+  "legacyCaller": {
+   "args": {
+    "arguments": "Any"
+   }
+  }
+ },
+ "HTMLOptGroupElement": {
+  "type": "interface",
+  "tag": "optgroup",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "disabled": "Boolean",
+   "label": "String"
+  }
+ },
+ "HTMLOptionElement": {
+  "type": "interface",
+  "tag": "option",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "disabled": "Boolean",
+   "label": "String",
+   "defaultSelected": "Boolean",
+   "selected": "Boolean",
+   "value": "String",
+   "text": "String"
+  },
+  "readonly": {
+   "form": "HTMLFormElement",
+   "index": "Int32"
+  },
+  "construct": {
+   "name": "Option",
+   "args": {
+    "text": "String",
+    "value": "String",
+    "defaultSelected": "Boolean",
+    "selected": "Boolean"
+   }
+  }
+ },
+ "HTMLOptionsCollection": {
+  "type": "interface",
+  "inherits": [
+   "HTMLCollection"
+  ],
+  "properties": {
+   "length": "Uint32",
+   "selectedIndex": "Int32"
+  },
+  "methods": {
+   "namedItem": {
+    "returns": "Object",
+    "args": {
+     "name": "String"
+    }
+   },
+   "add": {
+    "args": {
+     "element": [
+      "HTMLOptionElement",
+      "HTMLOptGroupElement"
+     ],
+     "before": [
+      "HTMLElement",
+      "Int32"
+     ]
+    }
+   },
+   "remove": {
+    "args": {
+     "index": "Int32"
+    }
+   }
+  },
+  "indexed": {
+   "itemType": "HTMLOptionElement",
+   "writable": true
+  }
+ },
+ "HTMLOutputElement": {
+  "type": "interface",
+  "tag": "output",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "readonly": {
+   "htmlFor": "DOMSettableTokenList",
+   "form": "HTMLFormElement",
+   "type": "String",
+   "willValidate": "Boolean",
+   "validity": "ValidityState",
+   "validationMessage": "String",
+   "labels": "NodeList"
+  },
+  "properties": {
+   "name": "String",
+   "defaultValue": "String",
+   "value": "String"
+  },
+  "methods": {
+   "checkValidity": {
+    "returns": "Boolean"
+   },
+   "setCustomValidity": {
+    "args": {
+     "error": "String"
+    }
+   }
+  }
+ },
+ "HTMLParagraphElement": {
+  "type": "interface",
+  "tag": "p",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "align": "String"
+  }
+ },
+ "HTMLParamElement": {
+  "type": "interface",
+  "tag": "param",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "name": "String",
+   "value": "String",
+   "type": "String",
+   "valueType": "String"
+  }
+ },
+ "HTMLPreElement": {
+  "type": "interface",
+  "tag": "pre",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "width": "Int32"
+  }
+ },
+ "HTMLProgressElement": {
+  "type": "interface",
+  "tag": "progress",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "value": "Float64",
+   "max": "Float64"
+  },
+  "readonly": {
+   "position": "Float64",
+   "labels": "NodeList"
+  }
+ },
+ "HTMLPropertiesCollection": {
+  "type": "interface",
+  "inherits": [
+   "HTMLCollection"
+  ],
+  "methods": {
+   "namedItem": {
+    "returns": "PropertyNodeList",
+    "args": {
+     "name": "String"
+    }
+   }
+  },
+  "readonly": {
+   "names": "String..."
+  }
+ },
+ "HTMLQuoteElement": {
+  "type": "interface",
+  "tag": "q",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "cite": "String"
+  }
+ },
+ "HTMLScriptElement": {
+  "type": "interface",
+  "tag": "script",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "src": "String",
+   "async": "Boolean",
+   "defer": "Boolean",
+   "type": "String",
+   "charset": "String",
+   "text": "String",
+   "event": "String",
+   "htmlFor": "String"
+  }
+ },
+ "HTMLSelectElement": {
+  "type": "interface",
+  "tag": "select",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "autofocus": "Boolean",
+   "disabled": "Boolean",
+   "multiple": "Boolean",
+   "name": "String",
+   "required": "Boolean",
+   "size": "Uint32",
+   "length": "Uint32",
+   "selectedIndex": "Int32",
+   "value": "String"
+  },
+  "readonly": {
+   "form": "HTMLFormElement",
+   "type": "String",
+   "options": "HTMLOptionsCollection",
+   "selectedOptions": "HTMLCollection",
+   "willValidate": "Boolean",
+   "validity": "ValidityState",
+   "validationMessage": "String",
+   "labels": "NodeList"
+  },
+  "methods": {
+   "item": {
+    "returns": "Element",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "namedItem": {
+    "returns": "Object",
+    "args": {
+     "name": "String"
+    }
+   },
+   "add": {
+    "args": {
+     "element": [
+      "HTMLOptionElement",
+      "HTMLOptGroupElement"
+     ],
+     "before": [
+      "HTMLElement",
+      "Int32"
+     ]
+    }
+   },
+   "remove": {
+    "args": {
+     "index": "Int32"
+    }
+   },
+   "checkValidity": {
+    "returns": "Boolean"
+   },
+   "setCustomValidity": {
+    "args": {
+     "error": "String"
+    }
+   }
+  },
+  "indexed": {
+   "itemType": "HTMLOptionElement",
+   "writable": true
+  }
+ },
+ "HTMLSourceElement": {
+  "type": "interface",
+  "tag": "source",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "src": "String",
+   "type": "String",
+   "media": "String"
+  }
+ },
+ "HTMLSpanElement": {
+  "type": "interface",
+  "tag": "span",
+  "inherits": [
+   "HTMLElement"
+  ]
+ },
+ "HTMLStyleElement": {
+  "type": "interface",
+  "tag": "style",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "disabled": "Boolean",
+   "media": "String",
+   "type": "String",
+   "scoped": "Boolean"
+  },
+  "readonly": {
+   "sheet": "StyleSheet"
+  }
+ },
+ "HTMLTableCaptionElement": {
+  "type": "interface",
+  "tag": "caption",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "align": "String"
+  }
+ },
+ "HTMLTableCellElement": {
+  "type": "interface",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "colSpan": "Uint32",
+   "rowSpan": "Uint32",
+   "abbr": "String",
+   "align": "String",
+   "axis": "String",
+   "height": "String",
+   "width": "String",
+   "ch": "String",
+   "chOff": "String",
+   "noWrap": "Boolean",
+   "vAlign": "String",
+   "bgColor": "String"
+  },
+  "readonly": {
+   "headers": "DOMSettableTokenList",
+   "cellIndex": "Int32"
+  }
+ },
+ "HTMLTableColElement": {
+  "type": "interface",
+  "tag": "colgroup",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "span": "Uint32",
+   "align": "String",
+   "ch": "String",
+   "chOff": "String",
+   "vAlign": "String",
+   "width": "String"
+  }
+ },
+ "HTMLTableDataCellElement": {
+  "type": "interface",
+  "tag": "td",
+  "inherits": [
+   "HTMLTableCellElement"
+  ]
+ },
+ "HTMLTableElement": {
+  "type": "interface",
+  "tag": "table",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "caption": "HTMLTableCaptionElement",
+   "tHead": "HTMLTableSectionElement",
+   "tFoot": "HTMLTableSectionElement",
+   "align": "String",
+   "border": "String",
+   "frame": "String",
+   "rules": "String",
+   "summary": "String",
+   "width": "String",
+   "bgColor": "String",
+   "cellPadding": "String",
+   "cellSpacing": "String"
+  },
+  "methods": {
+   "createCaption": {
+    "returns": "HTMLElement"
+   },
+   "deleteCaption": {},
+   "createTHead": {
+    "returns": "HTMLElement"
+   },
+   "deleteTHead": {},
+   "createTFoot": {
+    "returns": "HTMLElement"
+   },
+   "deleteTFoot": {},
+   "createTBody": {
+    "returns": "HTMLElement"
+   },
+   "insertRow": {
+    "returns": "HTMLElement",
+    "args": {
+     "index": "Int32"
+    }
+   },
+   "deleteRow": {
+    "args": {
+     "index": "Int32"
+    }
+   }
+  },
+  "readonly": {
+   "tBodies": "HTMLCollection",
+   "rows": "HTMLCollection"
+  }
+ },
+ "HTMLTableHeaderCellElement": {
+  "type": "interface",
+  "tag": "th",
+  "inherits": [
+   "HTMLTableCellElement"
+  ],
+  "properties": {
+   "scope": "String"
+  }
+ },
+ "HTMLTableRowElement": {
+  "type": "interface",
+  "tag": "tr",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "readonly": {
+   "rowIndex": "Int32",
+   "sectionRowIndex": "Int32",
+   "cells": "HTMLCollection"
+  },
+  "methods": {
+   "insertCell": {
+    "returns": "HTMLElement",
+    "args": {
+     "index": "Int32"
+    }
+   },
+   "deleteCell": {
+    "args": {
+     "index": "Int32"
+    }
+   }
+  },
+  "properties": {
+   "align": "String",
+   "ch": "String",
+   "chOff": "String",
+   "vAlign": "String",
+   "bgColor": "String"
+  }
+ },
+ "HTMLTableSectionElement": {
+  "type": "interface",
+  "tag": "thead",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "readonly": {
+   "rows": "HTMLCollection"
+  },
+  "methods": {
+   "insertRow": {
+    "returns": "HTMLElement",
+    "args": {
+     "index": "Int32"
+    }
+   },
+   "deleteRow": {
+    "args": {
+     "index": "Int32"
+    }
+   }
+  },
+  "properties": {
+   "align": "String",
+   "ch": "String",
+   "chOff": "String",
+   "vAlign": "String"
+  }
+ },
+ "HTMLTextAreaElement": {
+  "type": "interface",
+  "tag": "textarea",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "autocomplete": "String",
+   "autofocus": "Boolean",
+   "cols": "Uint32",
+   "dirName": "String",
+   "disabled": "Boolean",
+   "inputMode": "String",
+   "maxLength": "Int32",
+   "name": "String",
+   "placeholder": "String",
+   "readOnly": "Boolean",
+   "required": "Boolean",
+   "rows": "Uint32",
+   "wrap": "String",
+   "defaultValue": "String",
+   "value": "String",
+   "selectionStart": "Uint32",
+   "selectionEnd": "Uint32",
+   "selectionDirection": "String"
+  },
+  "readonly": {
+   "form": "HTMLFormElement",
+   "type": "String",
+   "textLength": "Uint32",
+   "willValidate": "Boolean",
+   "validity": "ValidityState",
+   "validationMessage": "String",
+   "labels": "NodeList"
+  },
+  "methods": {
+   "checkValidity": {
+    "returns": "Boolean"
+   },
+   "setCustomValidity": {
+    "args": {
+     "error": "String"
+    }
+   },
+   "select": {},
+   "setRangeText": {
+    "args": {
+     "replacement": "String",
+     "start": "Uint32",
+     "end": "Uint32",
+     "selectionMode": "SelectionMode"
+    }
+   },
+   "setSelectionRange": {
+    "args": {
+     "start": "Uint32",
+     "end": "Uint32",
+     "direction": "String"
+    }
+   }
+  }
+ },
+ "HTMLTimeElement": {
+  "type": "interface",
+  "tag": "time",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "datetime": "String"
+  }
+ },
+ "HTMLTitleElement": {
+  "type": "interface",
+  "tag": "title",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "text": "String"
+  }
+ },
+ "HTMLTrackElement": {
+  "type": "interface",
+  "tag": "track",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "kind": "String",
+   "src": "String",
+   "srclang": "String",
+   "label": "String",
+   "default": "Boolean"
+  },
+  "constants": {
+   "NONE": 0,
+   "LOADING": 1,
+   "LOADED": 2,
+   "ERROR": 3
+  },
+  "readonly": {
+   "readyState": "Uint16",
+   "track": "TextTrack"
+  }
+ },
+ "HTMLUListElement": {
+  "type": "interface",
+  "tag": "ul",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "compact": "Boolean",
+   "type": "String"
+  }
+ },
+ "HTMLUnknownElement": {
+  "type": "interface",
+  "inherits": [
+   "HTMLElement"
+  ]
+ },
+ "HTMLVideoElement": {
+  "type": "interface",
+  "tag": "video",
+  "inherits": [
+   "HTMLMediaElement"
+  ],
+  "properties": {
+   "width": "Uint32",
+   "height": "Uint32",
+   "poster": "String"
+  },
+  "readonly": {
+   "videoWidth": "Uint32",
+   "videoHeight": "Uint32"
+  }
+ },
+ "HashChangeEvent": {
+  "type": "interface",
+  "inherits": [
+   "Event"
+  ],
+  "readonly": {
+   "oldURL": "String",
+   "newURL": "String"
+  },
+  "construct": {
+   "args": {
+    "type": "String",
+    "eventInitDict": "HashChangeEventInit"
+   }
+  }
+ },
+ "HashChangeEventInit": {
+  "type": "dictionary",
+  "inherits": [
+   "EventInit"
+  ],
+  "defaults": {
+   "oldURL": "",
+   "newURL": ""
+  }
+ },
+ "HistorySection": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "length": "Int32",
+   "state": "Any"
+  },
+  "methods": {
+   "go": {
+    "args": {
+     "delta": "Int32"
+    }
+   },
+   "back": {},
+   "forward": {},
+   "pushState": {
+    "args": {
+     "data": "Any",
+     "title": "String",
+     "url": "String"
+    }
+   },
+   "replaceState": {
+    "args": {
+     "data": "Any",
+     "title": "String",
+     "url": "String"
+    }
+   }
+  }
+ },
+ "HitRegionOptions": {
+  "type": "dictionary",
+  "inherits": [],
+  "defaults": {
+   "path": "",
+   "id": "",
+   "parentID": "",
+   "cursor": "inherit",
+   "control": "",
+   "label": "",
+   "role": ""
+  }
+ },
+ "ImageData": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "width": "Uint32",
+   "height": "Uint32",
+   "data": "Uint8ClampedArray"
+  }
+ },
+ "Location": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "href": "String",
+   "protocol": "String",
+   "host": "String",
+   "hostname": "String",
+   "port": "String",
+   "pathname": "String",
+   "search": "String",
+   "hash": "String"
+  },
+  "methods": {
+   "assign": {
+    "args": {
+     "url": "String"
+    }
+   },
+   "replace": {
+    "args": {
+     "url": "String"
+    }
+   },
+   "reload": {}
+  }
+ },
+ "MediaControllerPlaybackState": {
+  "type": "enum",
+  "values": [
+   "waiting",
+   "playing",
+   "ended"
+  ]
+ },
+ "MediaControllerSection": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "readyState": "Uint16",
+   "buffered": "TimeRanges",
+   "seekable": "TimeRanges",
+   "duration": "Float64",
+   "paused": "Boolean",
+   "playbackState": "MediaControllerPlaybackState",
+   "played": "TimeRanges"
+  },
+  "properties": {
+   "currentTime": "Float64",
+   "defaultPlaybackRate": "Float64",
+   "playbackRate": "Float64",
+   "volume": "Float64",
+   "muted": "Boolean",
+   "onemptied": "EventHandler",
+   "onloadedmetadata": "EventHandler",
+   "onloadeddata": "EventHandler",
+   "oncanplay": "EventHandler",
+   "oncanplaythrough": "EventHandler",
+   "onplaying": "EventHandler",
+   "onended": "EventHandler",
+   "onwaiting": "EventHandler",
+   "ondurationchange": "EventHandler",
+   "ontimeupdate": "EventHandler",
+   "onplay": "EventHandler",
+   "onpause": "EventHandler",
+   "onratechange": "EventHandler",
+   "onvolumechange": "EventHandler"
+  },
+  "methods": {
+   "play": {},
+   "pause": {}
+  },
+  "construct": {}
+ },
+ "MediaError": {
+  "type": "interface",
+  "inherits": [],
+  "constants": {
+   "MEDIA_ERR_ABORTED": 1,
+   "MEDIA_ERR_NETWORK": 2,
+   "MEDIA_ERR_DECODE": 3,
+   "MEDIA_ERR_SRC_NOT_SUPPORTED": 4
+  },
+  "readonly": {
+   "code": "Uint16"
+  }
+ },
+ "MessageChannel": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "port1": "MessagePort",
+   "port2": "MessagePort"
+  },
+  "construct": {}
+ },
+ "MessageEvent": {
+  "type": "interface",
+  "inherits": [
+   "Event"
+  ],
+  "readonly": {
+   "data": "Any",
+   "origin": "String",
+   "lastEventId": "String",
+   "source": [
+    "Window",
+    "MessagePort"
+   ],
+   "ports": "MessagePort..."
+  },
+  "construct": {
+   "args": {
+    "type": "String",
+    "eventInitDict": "MessageEventInit"
+   }
+  }
+ },
+ "MessageEventInit": {
+  "type": "dictionary",
+  "inherits": [
+   "EventInit"
+  ],
+  "defaults": {
+   "data": "",
+   "origin": "",
+   "lastEventId": "",
+   "source": "",
+   "ports": ""
+  }
+ },
+ "MessagePort": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "methods": {
+   "postMessage": {
+    "args": {
+     "message": "Any",
+     "transfer": "Transferable..."
+    }
+   },
+   "start": {},
+   "close": {}
+  },
+  "properties": {
+   "onmessage": "EventHandlerNonNull"
+  }
+ },
+ "Navigator": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "appName": "String",
+   "appVersion": "String",
+   "platform": "String",
+   "userAgent": "String",
+   "onLine": "Boolean"
+  },
+  "methods": {
+   "registerProtocolHandler": {
+    "args": {
+     "scheme": "String",
+     "url": "String",
+     "title": "String"
+    }
+   },
+   "registerContentHandler": {
+    "args": {
+     "mimeType": "String",
+     "url": "String",
+     "title": "String"
+    }
+   },
+   "isProtocolHandlerRegistered": {
+    "returns": "String",
+    "args": {
+     "scheme": "String",
+     "url": "String"
+    }
+   },
+   "isContentHandlerRegistered": {
+    "returns": "String",
+    "args": {
+     "mimeType": "String",
+     "url": "String"
+    }
+   },
+   "unregisterProtocolHandler": {
+    "args": {
+     "scheme": "String",
+     "url": "String"
+    }
+   },
+   "unregisterContentHandler": {
+    "args": {
+     "mimeType": "String",
+     "url": "String"
+    }
+   },
+   "yieldForStorageUpdates": {}
+  }
+ },
+ "OnErrorEventHandlerNonNull": {
+  "type": "callback",
+  "returns": "Any",
+  "TreatNonCallableAsNull": true
+ },
+ "PageTransitionEvent": {
+  "type": "interface",
+  "inherits": [
+   "Event"
+  ],
+  "readonly": {
+   "persisted": "Boolean"
+  },
+  "construct": {
+   "args": {
+    "type": "String",
+    "eventInitDict": "PageTransitionEventInit"
+   }
+  }
+ },
+ "PageTransitionEventInit": {
+  "type": "dictionary",
+  "inherits": [
+   "EventInit"
+  ],
+  "defaults": {
+   "persisted": false
+  }
+ },
+ "Path": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "addPath": {
+    "args": {
+     "path": "Path",
+     "transformation": "SVGMatrix"
+    }
+   },
+   "addPathByStrokingPath": {
+    "args": {
+     "path": "Path",
+     "styles": "CanvasDrawingStyles",
+     "transformation": "SVGMatrix"
+    }
+   },
+   "addText": {
+    "args": {
+     "text": "String",
+     "styles": "CanvasDrawingStyles",
+     "transformation": "SVGMatrix",
+     "x": "Float64",
+     "y": "Float64",
+     "maxWidth": "Float64",
+     "path": "Path"
+    }
+   },
+   "addPathByStrokingText": {
+    "args": {
+     "text": "String",
+     "styles": "CanvasDrawingStyles",
+     "transformation": "SVGMatrix",
+     "x": "Float64",
+     "y": "Float64",
+     "maxWidth": "Float64",
+     "path": "Path"
+    }
+   },
+   "closePath": {},
+   "moveTo": {
+    "args": {
+     "x": "Float64",
+     "y": "Float64"
+    }
+   },
+   "lineTo": {
+    "args": {
+     "x": "Float64",
+     "y": "Float64"
+    }
+   },
+   "quadraticCurveTo": {
+    "args": {
+     "cpx": "Float64",
+     "cpy": "Float64",
+     "x": "Float64",
+     "y": "Float64"
+    }
+   },
+   "bezierCurveTo": {
+    "args": {
+     "cp1x": "Float64",
+     "cp1y": "Float64",
+     "cp2x": "Float64",
+     "cp2y": "Float64",
+     "x": "Float64",
+     "y": "Float64"
+    }
+   },
+   "arcTo": {
+    "args": {
+     "x1": "Float64",
+     "y1": "Float64",
+     "x2": "Float64",
+     "y2": "Float64",
+     "radius": "Float64",
+     "radiusX": "Float64",
+     "radiusY": "Float64",
+     "rotation": "Float64"
+    }
+   },
+   "rect": {
+    "args": {
+     "x": "Float64",
+     "y": "Float64",
+     "w": "Float64",
+     "h": "Float64"
+    }
+   },
+   "arc": {
+    "args": {
+     "x": "Float64",
+     "y": "Float64",
+     "radius": "Float64",
+     "startAngle": "Float64",
+     "endAngle": "Float64",
+     "anticlockwise": "Boolean"
+    }
+   },
+   "ellipse": {
+    "args": {
+     "x": "Float64",
+     "y": "Float64",
+     "radiusX": "Float64",
+     "radiusY": "Float64",
+     "rotation": "Float64",
+     "startAngle": "Float64",
+     "endAngle": "Float64",
+     "anticlockwise": "Boolean"
+    }
+   }
+  },
+  "construct": {
+   "args": {
+    "d": "String"
+   }
+  }
+ },
+ "PopStateEvent": {
+  "type": "interface",
+  "inherits": [
+   "Event"
+  ],
+  "readonly": {
+   "state": "Any"
+  },
+  "construct": {
+   "args": {
+    "type": "String",
+    "eventInitDict": "PopStateEventInit"
+   }
+  }
+ },
+ "PopStateEventInit": {
+  "type": "dictionary",
+  "inherits": [
+   "EventInit"
+  ],
+  "defaults": {
+   "state": ""
+  }
+ },
+ "ProgressEvent": {
+  "type": "interface",
+  "inherits": [
+   "Event"
+  ],
+  "readonly": {
+   "lengthComputable": "Boolean",
+   "loaded": "Uint64",
+   "total": "Uint64"
+  },
+  "construct": {
+   "args": {
+    "type": "String",
+    "eventInitDict": "ProgressEventInit"
+   }
+  }
+ },
+ "ProgressEventInit": {
+  "type": "dictionary",
+  "inherits": [
+   "EventInit"
+  ],
+  "defaults": {
+   "lengthComputable": false,
+   "loaded": "",
+   "total": ""
+  }
+ },
+ "PropertyNodeList": {
+  "type": "interface",
+  "inherits": [
+   "NodeList"
+  ],
+  "methods": {
+   "getValues": {
+    "returns": "Any..."
+   }
+  }
+ },
+ "RadioNodeList": {
+  "type": "interface",
+  "inherits": [
+   "NodeList"
+  ],
+  "properties": {
+   "value": "String"
+  }
+ },
+ "SelectionMode": {
+  "type": "enum",
+  "values": [
+   "select",
+   "start",
+   "end",
+   "preserve"
+  ]
+ },
+ "ShadowRoot": {
+  "type": "interface",
+  "inherits": [
+   "DocumentFragment"
+  ],
+  "methods": {
+   "getElementById": {
+    "returns": "HTMLElement",
+    "args": {
+     "elementId": "String"
+    }
+   },
+   "getElementsByClassName": {
+    "returns": "NodeList",
+    "args": {
+     "tagName": "String"
+    }
+   },
+   "getElementsByTagName": {
+    "returns": "NodeList",
+    "args": {
+     "className": "String"
+    }
+   },
+   "getElementsByTagNameNS": {
+    "returns": "NodeList",
+    "args": {
+     "namespace": "String",
+     "localName": "String"
+    }
+   },
+   "getSelection": {
+    "returns": "Selection"
+   },
+   "addStyleSheet": {
+    "returns": "CSSStyleSheet",
+    "args": {
+     "element": "HTMLElement"
+    }
+   },
+   "removeStyleSheet": {
+    "returns": "CSSStyleSheet",
+    "args": {
+     "styleSheet": "CSSStyleSheet"
+    }
+   }
+  },
+  "properties": {
+   "applyAuthorStyles": "bool",
+   "resetStyleInheritance": "bool",
+   "innerHTML": "String"
+  },
+  "readonly": {
+   "activeElement": "Element",
+   "styleSheets": "StyleSheetList"
+  },
+  "construct": {
+   "args": {
+    "host": "HTMLElement"
+   }
+  }
+ },
+ "SharedWorker": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "readonly": {
+   "port": "MessagePort"
+  },
+  "construct": {
+   "args": {
+    "scriptURL": "String",
+    "name": "String"
+   }
+  },
+  "properties": {
+   "onerror": "EventHandlerNonNull"
+  }
+ },
+ "SharedWorkerGlobalScope": {
+  "type": "interface",
+  "inherits": [
+   "WorkerGlobalScope"
+  ],
+  "readonly": {
+   "name": "String",
+   "applicationCache": "ApplicationCache"
+  },
+  "properties": {
+   "onconnect": "EventHandlerNonNull"
+  }
+ },
+ "Storage": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "key": {
+    "returns": "String",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "getItem": {
+    "returns": "String",
+    "args": {
+     "key": "String"
+    }
+   },
+   "setItem": {
+    "args": {
+     "key": "String",
+     "value": "String"
+    }
+   },
+   "removeItem": {
+    "args": {
+     "key": "String"
+    }
+   },
+   "clear": {}
+  }
+ },
+ "StorageEvent": {
+  "type": "interface",
+  "inherits": [
+   "Event"
+  ],
+  "readonly": {
+   "key": "String",
+   "oldValue": "String",
+   "newValue": "String",
+   "url": "String",
+   "storageArea": "Storage"
+  },
+  "construct": {
+   "args": {
+    "type": "String",
+    "eventInitDict": "StorageEventInit"
+   }
+  }
+ },
+ "StorageEventInit": {
+  "type": "dictionary",
+  "inherits": [
+   "EventInit"
+  ],
+  "defaults": {
+   "key": "",
+   "oldValue": "",
+   "newValue": "",
+   "url": "",
+   "storageArea": ""
+  }
+ },
+ "TextMetrics": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "width": "Float64",
+   "actualBoundingBoxLeft": "Float64",
+   "actualBoundingBoxRight": "Float64",
+   "fontBoundingBoxAscent": "Float64",
+   "fontBoundingBoxDescent": "Float64",
+   "actualBoundingBoxAscent": "Float64",
+   "actualBoundingBoxDescent": "Float64",
+   "emHeightAscent": "Float64",
+   "emHeightDescent": "Float64",
+   "hangingBaseline": "Float64",
+   "alphabeticBaseline": "Float64",
+   "ideographicBaseline": "Float64"
+  }
+ },
+ "TextTrack": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "readonly": {
+   "kind": "String",
+   "label": "String",
+   "language": "String",
+   "inBandMetadataTrackDispatchType": "String",
+   "cues": "TextTrackCueList",
+   "activeCues": "TextTrackCueList"
+  },
+  "properties": {
+   "mode": "TextTrackMode",
+   "oncuechange": "EventHandler"
+  },
+  "methods": {
+   "addCue": {
+    "args": {
+     "cue": "TextTrackCue"
+    }
+   },
+   "removeCue": {
+    "args": {
+     "cue": "TextTrackCue"
+    }
+   }
+  }
+ },
+ "TextTrackCue": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "readonly": {
+   "track": "TextTrack"
+  },
+  "properties": {
+   "id": "String",
+   "startTime": "Float64",
+   "endTime": "Float64",
+   "pauseOnExit": "Boolean",
+   "vertical": "String",
+   "snapToLines": "Boolean",
+   "line": [
+    "Int32",
+    "AutoKeyword"
+   ],
+   "position": "Int32",
+   "size": "Int32",
+   "align": "String",
+   "text": "String",
+   "onenter": "EventHandler",
+   "onexit": "EventHandler"
+  },
+  "methods": {
+   "getCueAsHTML": {
+    "returns": "DocumentFragment"
+   }
+  },
+  "construct": {
+   "args": {
+    "startTime": "Float64",
+    "endTime": "Float64",
+    "text": "String"
+   }
+  }
+ },
+ "TextTrackCueList": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "getCueById": {
+    "returns": "TextTrackCue",
+    "args": {
+     "id": "String"
+    }
+   }
+  },
+  "indexed": {
+   "itemType": "TextTrackCue",
+   "readonly": true
+  }
+ },
+ "TextTrackList": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "readonly": {
+   "length": "Uint32"
+  },
+  "properties": {
+   "onaddtrack": "EventHandler",
+   "onremovetrack": "EventHandler"
+  },
+  "indexed": {
+   "itemType": "TextTrack",
+   "readonly": true
+  }
+ },
+ "TextTrackMode": {
+  "type": "enum",
+  "values": [
+   "disabled",
+   "hidden",
+   "showing"
+  ]
+ },
+ "TimeRanges": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "start": {
+    "returns": "Float64",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "end": {
+    "returns": "Float64",
+    "args": {
+     "index": "Uint32"
+    }
+   }
+  }
+ },
+ "TrackEvent": {
+  "type": "interface",
+  "inherits": [
+   "Event"
+  ],
+  "readonly": {
+   "track": "Object"
+  },
+  "construct": {
+   "args": {
+    "type": "String",
+    "eventInitDict": "TrackEventInit"
+   }
+  }
+ },
+ "TrackEventInit": {
+  "type": "dictionary",
+  "inherits": [
+   "EventInit"
+  ],
+  "defaults": {
+   "track": {}
+  }
+ },
+ "ValidityState": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "valueMissing": "Boolean",
+   "typeMismatch": "Boolean",
+   "patternMismatch": "Boolean",
+   "tooLong": "Boolean",
+   "rangeUnderflow": "Boolean",
+   "rangeOverflow": "Boolean",
+   "stepMismatch": "Boolean",
+   "customError": "Boolean",
+   "valid": "Boolean"
+  }
+ },
+ "VideoTrack": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "id": "String",
+   "kind": "String",
+   "label": "String",
+   "language": "String"
+  },
+  "properties": {
+   "selected": "Boolean"
+  }
+ },
+ "VideoTrackList": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "readonly": {
+   "length": "Uint32",
+   "selectedIndex": "Int32"
+  },
+  "methods": {
+   "getTrackById": {
+    "returns": "VideoTrack",
+    "args": {
+     "id": "String"
+    }
+   }
+  },
+  "properties": {
+   "onchange": "EventHandler",
+   "onaddtrack": "EventHandler",
+   "onremovetrack": "EventHandler"
+  },
+  "indexed": {
+   "itemType": "VideoTrack",
+   "readonly": true
+  }
+ },
+ "WebSocket": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "readonly": {
+   "url": "String",
+   "readyState": "Uint16",
+   "bufferedAmount": "Uint32",
+   "extensions": "String",
+   "protocol": "String"
+  },
+  "constants": {
+   "CONNECTING": 0,
+   "OPEN": 1,
+   "CLOSING": 2,
+   "CLOSED": 3
+  },
+  "properties": {
+   "onopen": "EventHandlerNonNull",
+   "onerror": "EventHandlerNonNull",
+   "onclose": "EventHandlerNonNull",
+   "onmessage": "EventHandlerNonNull",
+   "binaryType": "BinaryType"
+  },
+  "methods": {
+   "close": {
+    "args": {
+     "code": "Uint16",
+     "reason": "String"
+    }
+   },
+   "send": {
+    "args": {
+     "data": [
+      "String",
+      "Blob",
+      "ArrayBuffer",
+      "ArrayBufferView"
+     ]
+    }
+   }
+  },
+  "construct": {
+   "args": {
+    "url": "String",
+    "protocols": [
+     "String",
+     "String..."
+    ]
+   }
+  }
+ },
+ "Window": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "readonly": {
+   "window": "Window",
+   "self": "Window",
+   "document": "Document",
+   "location": "Location",
+   "history": "History",
+   "locationbar": "BarProp",
+   "menubar": "BarProp",
+   "personalbar": "BarProp",
+   "scrollbars": "BarProp",
+   "statusbar": "BarProp",
+   "toolbar": "BarProp",
+   "frames": "Window",
+   "length": "Uint32",
+   "top": "Window",
+   "parent": "Window",
+   "frameElement": "Element",
+   "navigator": "Navigator",
+   "external": "External",
+   "applicationCache": "ApplicationCache",
+   "sessionStorage": "Storage",
+   "localStorage": "Storage"
+  },
+  "properties": {
+   "name": "String",
+   "status": "String",
+   "opener": "Window",
+   "onabort": "EventHandler",
+   "onafterprint": "EventHandler",
+   "onbeforeprint": "EventHandler",
+   "onbeforeunload": "EventHandler",
+   "onblur": "EventHandler",
+   "oncancel": "EventHandler",
+   "oncanplay": "EventHandler",
+   "oncanplaythrough": "EventHandler",
+   "onchange": "EventHandler",
+   "onclick": "EventHandler",
+   "onclose": "EventHandler",
+   "oncontextmenu": "EventHandler",
+   "oncuechange": "EventHandler",
+   "ondblclick": "EventHandler",
+   "ondrag": "EventHandler",
+   "ondragend": "EventHandler",
+   "ondragenter": "EventHandler",
+   "ondragleave": "EventHandler",
+   "ondragover": "EventHandler",
+   "ondragstart": "EventHandler",
+   "ondrop": "EventHandler",
+   "ondurationchange": "EventHandler",
+   "onemptied": "EventHandler",
+   "onended": "EventHandler",
+   "onerror": "OnErrorEventHandler",
+   "onfocus": "EventHandler",
+   "onhashchange": "EventHandler",
+   "oninput": "EventHandler",
+   "oninvalid": "EventHandler",
+   "onkeydown": "EventHandler",
+   "onkeypress": "EventHandler",
+   "onkeyup": "EventHandler",
+   "onload": "EventHandler",
+   "onloadeddata": "EventHandler",
+   "onloadedmetadata": "EventHandler",
+   "onloadstart": "EventHandler",
+   "onmessage": "EventHandler",
+   "onmousedown": "EventHandler",
+   "onmousemove": "EventHandler",
+   "onmouseout": "EventHandler",
+   "onmouseover": "EventHandler",
+   "onmouseup": "EventHandler",
+   "onmousewheel": "EventHandler",
+   "onoffline": "EventHandler",
+   "ononline": "EventHandler",
+   "onpause": "EventHandler",
+   "onplay": "EventHandler",
+   "onplaying": "EventHandler",
+   "onpagehide": "EventHandler",
+   "onpageshow": "EventHandler",
+   "onpopstate": "EventHandler",
+   "onprogress": "EventHandler",
+   "onratechange": "EventHandler",
+   "onreset": "EventHandler",
+   "onresize": "EventHandler",
+   "onscroll": "EventHandler",
+   "onseeked": "EventHandler",
+   "onseeking": "EventHandler",
+   "onselect": "EventHandler",
+   "onshow": "EventHandler",
+   "onstalled": "EventHandler",
+   "onstorage": "EventHandler",
+   "onsubmit": "EventHandler",
+   "onsuspend": "EventHandler",
+   "ontimeupdate": "EventHandler",
+   "onunload": "EventHandler",
+   "onvolumechange": "EventHandler",
+   "onwaiting": "EventHandler"
+  },
+  "methods": {
+   "close": {},
+   "stop": {},
+   "focus": {},
+   "blur": {},
+   "open": {
+    "returns": "Window",
+    "args": {
+     "url": "String",
+     "target": "String",
+     "features": "String",
+     "replace": "Boolean"
+    }
+   },
+   "alert": {
+    "args": {
+     "message": "String"
+    }
+   },
+   "confirm": {
+    "returns": "Boolean",
+    "args": {
+     "message": "String"
+    }
+   },
+   "prompt": {
+    "returns": "String",
+    "args": {
+     "message": "String",
+     "default": "String"
+    }
+   },
+   "print": {},
+   "showModalDialog": {
+    "returns": "Any",
+    "args": {
+     "url": "String",
+     "argument": "Any"
+    }
+   },
+   "postMessage": {
+    "args": {
+     "message": "Any",
+     "targetOrigin": "String",
+     "transfer": "Transferable..."
+    }
+   },
+   "requestFileSystem": {
+    "args": {
+     "type": "Uint16",
+     "size": "Uint64",
+     "successCallback": "FileSystemCallback",
+     "errorCallback": "ErrorCallback"
+    }
+   },
+   "resolveLocalFileSystemURL": {
+    "args": {
+     "url": "String",
+     "successCallback": "EntryCallback",
+     "errorCallback": "ErrorCallback"
+    }
+   },
+   "btoa": {
+    "returns": "String",
+    "args": {
+     "btoa": "String"
+    }
+   },
+   "atob": {
+    "returns": "String",
+    "args": {
+     "atob": "String"
+    }
+   },
+   "setTimeout": {
+    "returns": "Int32",
+    "args": {
+     "handler": [
+      "Function",
+      "String"
+     ],
+     "timeout": "Int32",
+     "arguments": "Any"
+    }
+   },
+   "clearTimeout": {
+    "args": {
+     "handle": "Int32"
+    }
+   },
+   "setInterval": {
+    "returns": "Int32",
+    "args": {
+     "handler": [
+      "Function",
+      "String"
+     ],
+     "timeout": "Int32",
+     "arguments": "Any"
+    }
+   },
+   "clearInterval": {
+    "args": {
+     "handle": "Int32"
+    }
+   }
+  },
+  "keyed": {
+   "itemType": "Object",
+   "readonly": true
+  },
+  "NamedPropertiesObject": true,
+  "constants": {
+   "TEMPORARY": 0,
+   "PERSISTENT": 1
+  }
+ },
+ "WindowModal": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "dialogArguments": "Any"
+  },
+  "properties": {
+   "returnValue": "String"
+  },
+  "NoInterfaceObject": true
+ },
+ "Worker": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "methods": {
+   "terminate": {},
+   "postMessage": {
+    "args": {
+     "message": "Any",
+     "transfer": "Transferable..."
+    }
+   }
+  },
+  "properties": {
+   "onmessage": "EventHandlerNonNull",
+   "onerror": "EventHandlerNonNull"
+  },
+  "construct": {
+   "args": {
+    "scriptURL": "String"
+   }
+  }
+ },
+ "WorkerGlobalScope": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "readonly": {
+   "self": "WorkerGlobalScope",
+   "location": "WorkerLocation",
+   "navigator": "WorkerNavigator"
+  },
+  "methods": {
+   "close": {},
+   "requestFileSystem": {
+    "args": {
+     "type": "Uint16",
+     "size": "Uint64",
+     "successCallback": "FileSystemCallback",
+     "errorCallback": "ErrorCallback"
+    }
+   },
+   "resolveLocalFileSystemURL": {
+    "args": {
+     "url": "String",
+     "successCallback": "EntryCallback",
+     "errorCallback": "ErrorCallback"
+    }
+   },
+   "requestFileSystemSync": {
+    "returns": "FileSystemSync",
+    "args": {
+     "type": "Uint16",
+     "size": "Uint64"
+    }
+   },
+   "resolveLocalFileSystemSyncURL": {
+    "returns": "EntrySync",
+    "args": {
+     "url": "String"
+    }
+   },
+   "importScripts": {
+    "args": {
+     "urls": "String"
+    }
+   }
+  },
+  "properties": {
+   "onerror": "EventHandlerNonNull",
+   "onoffline": "EventHandlerNonNull",
+   "ononline": "EventHandlerNonNull"
+  },
+  "constants": {
+   "TEMPORARY": 0,
+   "PERSISTENT": 1
+  }
+ },
+ "WorkerLocation": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "href": "String",
+   "protocol": "String",
+   "host": "String",
+   "hostname": "String",
+   "port": "String",
+   "pathname": "String",
+   "search": "String",
+   "hash": "String"
+  }
+ },
+ "WorkerNavigator": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "appName": "String",
+   "appVersion": "String",
+   "platform": "String",
+   "userAgent": "String",
+   "onLine": "Boolean"
+  }
+ },
+ "XMLHttpRequest": {
+  "type": "interface",
+  "inherits": [
+   "XMLHttpRequestEventTarget"
+  ],
+  "properties": {
+   "onreadystatechange": "EventHandlerNonNull",
+   "timeout": "Uint32",
+   "withCredentials": "Boolean",
+   "responseType": "XMLHttpRequestResponseType"
+  },
+  "constants": {
+   "UNSENT": 0,
+   "OPENED": 1,
+   "HEADERS_RECEIVED": 2,
+   "LOADING": 3,
+   "DONE": 4
+  },
+  "readonly": {
+   "readyState": "Uint16",
+   "upload": "XMLHttpRequestUpload",
+   "status": "Uint16",
+   "statusText": "ByteString",
+   "response": "Any",
+   "responseText": "String",
+   "responseXML": "Document"
+  },
+  "methods": {
+   "open": {
+    "args": {
+     "method": "ByteString",
+     "url": "String",
+     "async": "Boolean",
+     "user": "String",
+     "password": "String"
+    }
+   },
+   "setRequestHeader": {
+    "args": {
+     "header": "ByteString",
+     "value": "ByteString"
+    }
+   },
+   "send": {
+    "args": {
+     "data": [
+      "ArrayBufferView",
+      "Blob",
+      "Document",
+      "String",
+      "FormData"
+     ]
+    }
+   },
+   "abort": {},
+   "getResponseHeader": {
+    "returns": "ByteString",
+    "args": {
+     "header": "ByteString"
+    }
+   },
+   "getAllResponseHeaders": {
+    "returns": "ByteString"
+   },
+   "overrideMimeType": {
+    "args": {
+     "mime": "String"
+    }
+   }
+  },
+  "construct": {}
+ },
+ "XMLHttpRequestEventTarget": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "properties": {
+   "onloadstart": "EventHandlerNonNull",
+   "onprogress": "EventHandlerNonNull",
+   "onabort": "EventHandlerNonNull",
+   "onerror": "EventHandlerNonNull",
+   "onload": "EventHandlerNonNull",
+   "ontimeout": "EventHandlerNonNull",
+   "onloadend": "EventHandlerNonNull"
+  },
+  "NoInterfaceObject": true
+ },
+ "XMLHttpRequestResponseType": {
+  "type": "enum",
+  "values": [
+   "",
+   "arraybuffer",
+   "blob",
+   "document",
+   "json",
+   "text"
+  ]
+ },
+ "XMLHttpRequestUpload": {
+  "type": "interface",
+  "inherits": [
+   "XMLHttpRequestEventTarget"
+  ]
+ }
+}

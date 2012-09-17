@@ -1,19 +1,4 @@
 {
- "FileList": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "item": {
-    "returns": "File",
-    "args": {
-     "index": "Uint32"
-    }
-   }
-  },
-  "readonly": {
-   "length": "Uint32"
-  }
- },
  "Blob": {
   "type": "interface",
   "inherits": [],
@@ -38,13 +23,6 @@
    }
   }
  },
- "EndingTypes": {
-  "type": "enum",
-  "values": [
-   "transparent",
-   "native"
-  ]
- },
  "BlobPropertyBag": {
   "type": "dictionary",
   "inherits": [],
@@ -52,6 +30,13 @@
    "type": "",
    "endings": ""
   }
+ },
+ "EndingTypes": {
+  "type": "enum",
+  "values": [
+   "transparent",
+   "native"
+  ]
  },
  "File": {
   "type": "interface",
@@ -61,6 +46,21 @@
   "readonly": {
    "name": "String",
    "lastModifiedDate": "Date"
+  }
+ },
+ "FileList": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "item": {
+    "returns": "File",
+    "args": {
+     "index": "Uint32"
+    }
+   }
+  },
+  "readonly": {
+   "length": "Uint32"
   }
  },
  "FileReader": {

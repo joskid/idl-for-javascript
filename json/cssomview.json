@@ -1,90 +1,37 @@
 {
- "Window": {
+ "CaretPosition": {
   "type": "interface",
   "inherits": [],
-  "methods": {
-   "matchMedia": {
-    "returns": "MediaQueryList",
-    "args": {
-     "media_query_list": "String"
-    }
-   },
-   "scroll": {
-    "args": {
-     "x": "Int32",
-     "y": "Int32"
-    }
-   },
-   "scrollTo": {
-    "args": {
-     "x": "Int32",
-     "y": "Int32"
-    }
-   },
-   "scrollBy": {
-    "args": {
-     "x": "Int32",
-     "y": "Int32"
-    }
-   }
-  },
   "readonly": {
-   "screen": "Screen",
-   "innerWidth": "Int32",
-   "innerHeight": "Int32",
-   "scrollX": "Int32",
-   "pageXOffset": "Int32",
-   "scrollY": "Int32",
-   "pageYOffset": "Int32",
-   "screenX": "Int32",
-   "screenY": "Int32",
-   "outerWidth": "Int32",
-   "outerHeight": "Int32"
+   "offsetNode": "Node",
+   "offset": "Uint32"
   }
  },
- "MediaQueryList": {
+ "ClientRect": {
   "type": "interface",
   "inherits": [],
   "readonly": {
-   "media": "String",
-   "matches": "Boolean"
-  },
-  "methods": {
-   "addListener": {
-    "args": {
-     "listener": "MediaQueryListListener"
-    }
-   },
-   "removeListener": {
-    "args": {
-     "listener": "MediaQueryListListener"
-    }
-   }
+   "top": "Float32",
+   "right": "Float32",
+   "bottom": "Float32",
+   "left": "Float32",
+   "width": "Float32",
+   "height": "Float32"
   }
  },
- "MediaQueryListListener": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "handleChange": {
-    "args": {
-     "mql": "MediaQueryList"
-    }
-   }
-  },
-  "Callback": true,
-  "NoInterfaceObject": true
- },
- "Screen": {
+ "ClientRectList": {
   "type": "interface",
   "inherits": [],
   "readonly": {
-   "availWidth": "Uint32",
-   "availHeight": "Uint32",
-   "width": "Uint32",
-   "height": "Uint32",
-   "colorDepth": "Uint32",
-   "pixelDepth": "Uint32"
+   "length": "Uint32"
+  },
+  "methods": {
+   "item": {
+    "returns": "ClientRect",
+    "args": {
+     "index": "Uint32"
+    }
+   }
   }
  },
  "Document": {
@@ -105,14 +52,6 @@
      "y": "Float32"
     }
    }
-  }
- },
- "CaretPosition": {
-  "type": "interface",
-  "inherits": [],
-  "readonly": {
-   "offsetNode": "Node",
-   "offset": "Uint32"
   }
  },
  "Element": {
@@ -155,17 +94,38 @@
    "offsetHeight": "Int32"
   }
  },
- "Range": {
+ "MediaQueryList": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "media": "String",
+   "matches": "Boolean"
+  },
+  "methods": {
+   "addListener": {
+    "args": {
+     "listener": "MediaQueryListListener"
+    }
+   },
+   "removeListener": {
+    "args": {
+     "listener": "MediaQueryListListener"
+    }
+   }
+  }
+ },
+ "MediaQueryListListener": {
   "type": "interface",
   "inherits": [],
   "methods": {
-   "getClientRects": {
-    "returns": "ClientRectList"
-   },
-   "getBoundingClientRect": {
-    "returns": "ClientRect"
+   "handleChange": {
+    "args": {
+     "mql": "MediaQueryList"
+    }
    }
-  }
+  },
+  "Callback": true,
+  "NoInterfaceObject": true
  },
  "MouseEvent": {
   "type": "interface",
@@ -183,31 +143,71 @@
    "offsetY": "Int32"
   }
  },
- "ClientRectList": {
+ "Range": {
   "type": "interface",
   "inherits": [],
-  "readonly": {
-   "length": "Uint32"
-  },
   "methods": {
-   "item": {
-    "returns": "ClientRect",
-    "args": {
-     "index": "Uint32"
-    }
+   "getClientRects": {
+    "returns": "ClientRectList"
+   },
+   "getBoundingClientRect": {
+    "returns": "ClientRect"
    }
   }
  },
- "ClientRect": {
+ "Screen": {
   "type": "interface",
   "inherits": [],
   "readonly": {
-   "top": "Float32",
-   "right": "Float32",
-   "bottom": "Float32",
-   "left": "Float32",
-   "width": "Float32",
-   "height": "Float32"
+   "availWidth": "Uint32",
+   "availHeight": "Uint32",
+   "width": "Uint32",
+   "height": "Uint32",
+   "colorDepth": "Uint32",
+   "pixelDepth": "Uint32"
+  }
+ },
+ "Window": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "matchMedia": {
+    "returns": "MediaQueryList",
+    "args": {
+     "media_query_list": "String"
+    }
+   },
+   "scroll": {
+    "args": {
+     "x": "Int32",
+     "y": "Int32"
+    }
+   },
+   "scrollTo": {
+    "args": {
+     "x": "Int32",
+     "y": "Int32"
+    }
+   },
+   "scrollBy": {
+    "args": {
+     "x": "Int32",
+     "y": "Int32"
+    }
+   }
+  },
+  "readonly": {
+   "screen": "Screen",
+   "innerWidth": "Int32",
+   "innerHeight": "Int32",
+   "scrollX": "Int32",
+   "pageXOffset": "Int32",
+   "scrollY": "Int32",
+   "pageYOffset": "Int32",
+   "screenX": "Int32",
+   "screenY": "Int32",
+   "outerWidth": "Int32",
+   "outerHeight": "Int32"
   }
  }
 }

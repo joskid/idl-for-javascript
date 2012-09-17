@@ -1,4 +1,19 @@
 {
+ "WebGLActiveInfo": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "size": "Int32",
+   "type": "Uint32",
+   "name": "String"
+  }
+ },
+ "WebGLBuffer": {
+  "type": "interface",
+  "inherits": [
+   "WebGLObject"
+  ]
+ },
  "WebGLContextAttributes": {
   "type": "dictionary",
   "inherits": [],
@@ -11,21 +26,39 @@
    "preserveDrawingBuffer": false
   }
  },
- "WebGLObject": {
-  "type": "interface",
-  "inherits": []
- },
- "WebGLBuffer": {
+ "WebGLContextEvent": {
   "type": "interface",
   "inherits": [
-   "WebGLObject"
-  ]
+   "Event"
+  ],
+  "readonly": {
+   "statusMessage": "String"
+  },
+  "construct": {
+   "args": {
+    "type": "String",
+    "eventInit": "WebGLContextEventInit"
+   }
+  }
+ },
+ "WebGLContextEventInit": {
+  "type": "dictionary",
+  "inherits": [
+   "EventInit"
+  ],
+  "defaults": {
+   "statusMessage": ""
+  }
  },
  "WebGLFramebuffer": {
   "type": "interface",
   "inherits": [
    "WebGLObject"
   ]
+ },
+ "WebGLObject": {
+  "type": "interface",
+  "inherits": []
  },
  "WebGLProgram": {
   "type": "interface",
@@ -38,40 +71,6 @@
   "inherits": [
    "WebGLObject"
   ]
- },
- "WebGLShader": {
-  "type": "interface",
-  "inherits": [
-   "WebGLObject"
-  ]
- },
- "WebGLTexture": {
-  "type": "interface",
-  "inherits": [
-   "WebGLObject"
-  ]
- },
- "WebGLUniformLocation": {
-  "type": "interface",
-  "inherits": []
- },
- "WebGLActiveInfo": {
-  "type": "interface",
-  "inherits": [],
-  "readonly": {
-   "size": "Int32",
-   "type": "Uint32",
-   "name": "String"
-  }
- },
- "WebGLShaderPrecisionFormat": {
-  "type": "interface",
-  "inherits": [],
-  "readonly": {
-   "rangeMin": "Int32",
-   "rangeMax": "Int32",
-   "precision": "Int32"
-  }
  },
  "WebGLRenderingContext": {
   "type": "interface",
@@ -1326,28 +1325,29 @@
    }
   }
  },
- "WebGLContextEvent": {
+ "WebGLShader": {
   "type": "interface",
   "inherits": [
-   "Event"
-  ],
+   "WebGLObject"
+  ]
+ },
+ "WebGLShaderPrecisionFormat": {
+  "type": "interface",
+  "inherits": [],
   "readonly": {
-   "statusMessage": "String"
-  },
-  "construct": {
-   "args": {
-    "type": "String",
-    "eventInit": "WebGLContextEventInit"
-   }
+   "rangeMin": "Int32",
+   "rangeMax": "Int32",
+   "precision": "Int32"
   }
  },
- "WebGLContextEventInit": {
-  "type": "dictionary",
+ "WebGLTexture": {
+  "type": "interface",
   "inherits": [
-   "EventInit"
-  ],
-  "defaults": {
-   "statusMessage": ""
-  }
+   "WebGLObject"
+  ]
+ },
+ "WebGLUniformLocation": {
+  "type": "interface",
+  "inherits": []
  }
 }

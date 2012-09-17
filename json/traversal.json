@@ -1,21 +1,26 @@
 {
- "NodeIterator": {
+ "DocumentTraversal": {
   "type": "interface",
   "inherits": [],
-  "readonly": {
-   "root": "Node",
-   "whatToShow": "Uint32",
-   "filter": "NodeFilter",
-   "expandEntityReferences": "Boolean"
-  },
   "methods": {
-   "nextNode": {
-    "returns": "Node"
+   "createNodeIterator": {
+    "returns": "NodeIterator",
+    "args": {
+     "root": "Node",
+     "whatToShow": "Uint32",
+     "filter": "NodeFilter",
+     "entityReferenceExpansion": "Boolean"
+    }
    },
-   "previousNode": {
-    "returns": "Node"
-   },
-   "detach": {}
+   "createTreeWalker": {
+    "returns": "TreeWalker",
+    "args": {
+     "root": "Node",
+     "whatToShow": "Uint32",
+     "filter": "NodeFilter",
+     "entityReferenceExpansion": "Boolean"
+    }
+   }
   }
  },
  "NodeFilter": {
@@ -46,6 +51,25 @@
      "n": "Node"
     }
    }
+  }
+ },
+ "NodeIterator": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "root": "Node",
+   "whatToShow": "Uint32",
+   "filter": "NodeFilter",
+   "expandEntityReferences": "Boolean"
+  },
+  "methods": {
+   "nextNode": {
+    "returns": "Node"
+   },
+   "previousNode": {
+    "returns": "Node"
+   },
+   "detach": {}
   }
  },
  "TreeWalker": {
@@ -81,30 +105,6 @@
    },
    "nextNode": {
     "returns": "Node"
-   }
-  }
- },
- "DocumentTraversal": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "createNodeIterator": {
-    "returns": "NodeIterator",
-    "args": {
-     "root": "Node",
-     "whatToShow": "Uint32",
-     "filter": "NodeFilter",
-     "entityReferenceExpansion": "Boolean"
-    }
-   },
-   "createTreeWalker": {
-    "returns": "TreeWalker",
-    "args": {
-     "root": "Node",
-     "whatToShow": "Uint32",
-     "filter": "NodeFilter",
-     "entityReferenceExpansion": "Boolean"
-    }
    }
   }
  }

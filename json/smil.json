@@ -1,4 +1,18 @@
 {
+ "ElementExclusiveTimeContainer": {
+  "type": "interface",
+  "inherits": [
+   "ElementTimeContainer"
+  ],
+  "properties": {
+   "endSync": "String"
+  },
+  "methods": {
+   "getPausedElements": {
+    "returns": "NodeList"
+   }
+  }
+ },
  "ElementLayout": {
   "type": "interface",
   "inherits": [],
@@ -9,50 +23,64 @@
    "width": "Int32"
   }
  },
- "SMILRegionInterface": {
+ "ElementParallelTimeContainer": {
   "type": "interface",
-  "inherits": [],
+  "inherits": [
+   "ElementTimeContainer"
+  ],
   "properties": {
-   "region": "SMILRegionElement"
+   "endSync": "String"
+  },
+  "methods": {
+   "getImplicitDuration": {
+    "returns": "Float32"
+   }
   }
  },
- "Time": {
+ "ElementSequentialTimeContainer": {
+  "type": "interface",
+  "inherits": [
+   "ElementTimeContainer"
+  ]
+ },
+ "ElementSyncBehavior": {
   "type": "interface",
   "inherits": [],
   "readonly": {
-   "resolved": "Boolean",
-   "resolvedOffset": "Float64",
-   "timeType": "Uint16"
+   "syncBehavior": "String",
+   "syncTolerance": "Float32",
+   "defaultSyncBehavior": "String",
+   "defaultSyncTolerance": "Float32",
+   "syncMaster": "Boolean"
+  }
+ },
+ "ElementTargetAttributes": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "attributeName": "String",
+   "attributeType": "Uint16"
   },
   "constants": {
-   "SMIL_TIME_INDEFINITE": 0,
-   "SMIL_TIME_OFFSET": 1,
-   "SMIL_TIME_SYNC_BASED": 2,
-   "SMIL_TIME_EVENT_BASED": 3,
-   "SMIL_TIME_WALLCLOCK": 4,
-   "SMIL_TIME_MEDIA_MARKER": 5
-  },
-  "properties": {
-   "offset": "Float64",
-   "baseElement": "Element",
-   "baseBegin": "Boolean",
-   "event": "String",
-   "marker": "String"
+   "ATTRIBUTE_TYPE_AUTO": 0,
+   "ATTRIBUTE_TYPE_CSS": 1,
+   "ATTRIBUTE_TYPE_XML": 2
   }
  },
- "TimeList": {
+ "ElementTest": {
   "type": "interface",
   "inherits": [],
-  "methods": {
-   "item": {
-    "returns": "Time",
-    "args": {
-     "index": "Uint32"
-    }
-   }
+  "properties": {
+   "systemBitrate": "Int32",
+   "systemCaptions": "Boolean",
+   "systemLanguage": "String",
+   "systemOverdubOrSubtitle": "String",
+   "systemAudioDesc": "Boolean"
   },
   "readonly": {
-   "length": "Uint32"
+   "systemRequired": "Boolean",
+   "systemScreenSize": "Boolean",
+   "systemScreenDepth": "Boolean"
   }
  },
  "ElementTime": {
@@ -90,16 +118,6 @@
    }
   }
  },
- "ElementTimeManipulation": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "speed": "Float32",
-   "accelerate": "Float32",
-   "decelerate": "Float32",
-   "autoReverse": "Boolean"
-  }
- },
  "ElementTimeContainer": {
   "type": "interface",
   "inherits": [
@@ -114,51 +132,6 @@
     "args": {
      "instant": "Float32"
     }
-   }
-  }
- },
- "ElementSyncBehavior": {
-  "type": "interface",
-  "inherits": [],
-  "readonly": {
-   "syncBehavior": "String",
-   "syncTolerance": "Float32",
-   "defaultSyncBehavior": "String",
-   "defaultSyncTolerance": "Float32",
-   "syncMaster": "Boolean"
-  }
- },
- "ElementParallelTimeContainer": {
-  "type": "interface",
-  "inherits": [
-   "ElementTimeContainer"
-  ],
-  "properties": {
-   "endSync": "String"
-  },
-  "methods": {
-   "getImplicitDuration": {
-    "returns": "Float32"
-   }
-  }
- },
- "ElementSequentialTimeContainer": {
-  "type": "interface",
-  "inherits": [
-   "ElementTimeContainer"
-  ]
- },
- "ElementExclusiveTimeContainer": {
-  "type": "interface",
-  "inherits": [
-   "ElementTimeContainer"
-  ],
-  "properties": {
-   "endSync": "String"
-  },
-  "methods": {
-   "getPausedElements": {
-    "returns": "NodeList"
    }
   }
  },
@@ -186,33 +159,66 @@
    }
   }
  },
- "ElementTargetAttributes": {
+ "ElementTimeManipulation": {
   "type": "interface",
   "inherits": [],
   "properties": {
-   "attributeName": "String",
-   "attributeType": "Uint16"
-  },
-  "constants": {
-   "ATTRIBUTE_TYPE_AUTO": 0,
-   "ATTRIBUTE_TYPE_CSS": 1,
-   "ATTRIBUTE_TYPE_XML": 2
+   "speed": "Float32",
+   "accelerate": "Float32",
+   "decelerate": "Float32",
+   "autoReverse": "Boolean"
   }
  },
- "ElementTest": {
+ "SMILAnimateColorElement": {
   "type": "interface",
-  "inherits": [],
+  "inherits": [
+   "SMILAnimation"
+  ]
+ },
+ "SMILAnimateElement": {
+  "type": "interface",
+  "inherits": [
+   "SMILAnimation"
+  ]
+ },
+ "SMILAnimateMotionElement": {
+  "type": "interface",
+  "inherits": [
+   "SMILAnimateElement"
+  ],
   "properties": {
-   "systemBitrate": "Int32",
-   "systemCaptions": "Boolean",
-   "systemLanguage": "String",
-   "systemOverdubOrSubtitle": "String",
-   "systemAudioDesc": "Boolean"
+   "path": "String",
+   "origin": "String"
+  }
+ },
+ "SMILAnimation": {
+  "type": "interface",
+  "inherits": [
+   "SMILElement",
+   "ElementTargetAttributes",
+   "ElementTime",
+   "ElementTimeControl"
+  ],
+  "constants": {
+   "ADDITIVE_REPLACE": 0,
+   "ADDITIVE_SUM": 1,
+   "ACCUMULATE_NONE": 0,
+   "ACCUMULATE_SUM": 1,
+   "CALCMODE_DISCRETE": 0,
+   "CALCMODE_LINEAR": 1,
+   "CALCMODE_PACED": 2,
+   "CALCMODE_SPLINE": 3
   },
-  "readonly": {
-   "systemRequired": "Boolean",
-   "systemScreenSize": "Boolean",
-   "systemScreenDepth": "Boolean"
+  "properties": {
+   "additive": "Uint16",
+   "accumulate": "Uint16",
+   "calcMode": "Uint16",
+   "keySplines": "String",
+   "keyTimes": "TimeList",
+   "values": "String",
+   "from": "String",
+   "to": "String",
+   "by": "String"
   }
  },
  "SMILDocument": {
@@ -239,51 +245,6 @@
   "readonly": {
    "type": "String",
    "resolved": "Boolean"
-  }
- },
- "SMILTopLayoutElement": {
-  "type": "interface",
-  "inherits": [
-   "SMILElement",
-   "ElementLayout"
-  ]
- },
- "SMILRootLayoutElement": {
-  "type": "interface",
-  "inherits": [
-   "SMILElement",
-   "ElementLayout"
-  ]
- },
- "SMILRegionElement": {
-  "type": "interface",
-  "inherits": [
-   "SMILElement",
-   "ElementLayout"
-  ],
-  "properties": {
-   "fit": "String",
-   "top": "String",
-   "zIndex": "Int32"
-  }
- },
- "TimeEvent": {
-  "type": "interface",
-  "inherits": [
-   "Event"
-  ],
-  "readonly": {
-   "view": "views::AbstractView",
-   "detail": "Int32"
-  },
-  "methods": {
-   "initTimeEvent": {
-    "args": {
-     "typeArg": "String",
-     "viewArg": "views::AbstractView",
-     "detailArg": "Int32"
-    }
-   }
   }
  },
  "SMILMediaElement": {
@@ -316,40 +277,30 @@
    "SMILMediaElement"
   ]
  },
- "SMILAnimation": {
+ "SMILRegionElement": {
   "type": "interface",
   "inherits": [
    "SMILElement",
-   "ElementTargetAttributes",
-   "ElementTime",
-   "ElementTimeControl"
+   "ElementLayout"
   ],
-  "constants": {
-   "ADDITIVE_REPLACE": 0,
-   "ADDITIVE_SUM": 1,
-   "ACCUMULATE_NONE": 0,
-   "ACCUMULATE_SUM": 1,
-   "CALCMODE_DISCRETE": 0,
-   "CALCMODE_LINEAR": 1,
-   "CALCMODE_PACED": 2,
-   "CALCMODE_SPLINE": 3
-  },
   "properties": {
-   "additive": "Uint16",
-   "accumulate": "Uint16",
-   "calcMode": "Uint16",
-   "keySplines": "String",
-   "keyTimes": "TimeList",
-   "values": "String",
-   "from": "String",
-   "to": "String",
-   "by": "String"
+   "fit": "String",
+   "top": "String",
+   "zIndex": "Int32"
   }
  },
- "SMILAnimateElement": {
+ "SMILRegionInterface": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "region": "SMILRegionElement"
+  }
+ },
+ "SMILRootLayoutElement": {
   "type": "interface",
   "inherits": [
-   "SMILAnimation"
+   "SMILElement",
+   "ElementLayout"
   ]
  },
  "SMILSetElement": {
@@ -364,22 +315,6 @@
    "to": "String"
   }
  },
- "SMILAnimateMotionElement": {
-  "type": "interface",
-  "inherits": [
-   "SMILAnimateElement"
-  ],
-  "properties": {
-   "path": "String",
-   "origin": "String"
-  }
- },
- "SMILAnimateColorElement": {
-  "type": "interface",
-  "inherits": [
-   "SMILAnimation"
-  ]
- },
  "SMILSwitchElement": {
   "type": "interface",
   "inherits": [
@@ -389,6 +324,71 @@
    "getSelectedElement": {
     "returns": "Element"
    }
+  }
+ },
+ "SMILTopLayoutElement": {
+  "type": "interface",
+  "inherits": [
+   "SMILElement",
+   "ElementLayout"
+  ]
+ },
+ "Time": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "resolved": "Boolean",
+   "resolvedOffset": "Float64",
+   "timeType": "Uint16"
+  },
+  "constants": {
+   "SMIL_TIME_INDEFINITE": 0,
+   "SMIL_TIME_OFFSET": 1,
+   "SMIL_TIME_SYNC_BASED": 2,
+   "SMIL_TIME_EVENT_BASED": 3,
+   "SMIL_TIME_WALLCLOCK": 4,
+   "SMIL_TIME_MEDIA_MARKER": 5
+  },
+  "properties": {
+   "offset": "Float64",
+   "baseElement": "Element",
+   "baseBegin": "Boolean",
+   "event": "String",
+   "marker": "String"
+  }
+ },
+ "TimeEvent": {
+  "type": "interface",
+  "inherits": [
+   "Event"
+  ],
+  "readonly": {
+   "view": "views::AbstractView",
+   "detail": "Int32"
+  },
+  "methods": {
+   "initTimeEvent": {
+    "args": {
+     "typeArg": "String",
+     "viewArg": "views::AbstractView",
+     "detailArg": "Int32"
+    }
+   }
+  }
+ },
+ "TimeList": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "item": {
+    "returns": "Time",
+    "args": {
+     "index": "Uint32"
+    }
+   }
+  },
+  "readonly": {
+   "length": "Uint32"
   }
  }
 }

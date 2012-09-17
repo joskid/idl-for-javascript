@@ -1,26 +1,96 @@
 {
- "Metadata": {
+ "DirectoryEntry": {
   "type": "interface",
-  "inherits": [],
-  "readonly": {
-   "modificationTime": "Date",
-   "size": "Uint64"
+  "inherits": [
+   "Entry"
+  ],
+  "methods": {
+   "createReader": {
+    "returns": "DirectoryReader"
+   },
+   "getFile": {
+    "args": {
+     "path": "String",
+     "options": "Flags",
+     "successCallback": "EntryCallback",
+     "errorCallback": "ErrorCallback"
+    }
+   },
+   "getDirectory": {
+    "args": {
+     "path": "String",
+     "options": "Flags",
+     "successCallback": "EntryCallback",
+     "errorCallback": "ErrorCallback"
+    }
+   },
+   "removeRecursively": {
+    "args": {
+     "successCallback": "VoidCallback",
+     "errorCallback": "ErrorCallback"
+    }
+   }
   }
  },
- "Flags": {
-  "type": "dictionary",
-  "inherits": [],
-  "defaults": {
-   "create": false,
-   "exclusive": false
+ "DirectoryEntrySync": {
+  "type": "interface",
+  "inherits": [
+   "EntrySync"
+  ],
+  "methods": {
+   "createReader": {
+    "returns": "DirectoryReaderSync"
+   },
+   "getFile": {
+    "returns": "FileEntrySync",
+    "args": {
+     "path": "String",
+     "options": "Flags"
+    }
+   },
+   "getDirectory": {
+    "returns": "DirectoryEntrySync",
+    "args": {
+     "path": "String",
+     "options": "Flags"
+    }
+   },
+   "removeRecursively": {}
   }
  },
- "FileSystem": {
+ "DirectoryReader": {
   "type": "interface",
   "inherits": [],
-  "readonly": {
-   "name": "String",
-   "root": "DirectoryEntry"
+  "methods": {
+   "readEntries": {
+    "args": {
+     "successCallback": "EntriesCallback",
+     "errorCallback": "ErrorCallback"
+    }
+   }
+  }
+ },
+ "DirectoryReaderSync": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "readEntries": {
+    "returns": "EntrySync..."
+   }
+  }
+ },
+ "EntriesCallback": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "handleEvent": {
+    "args": {
+     "entries": "Entry..."
+    }
+   }
+  },
+  "Callback": {
+   "value": "FunctionOnly"
   }
  },
  "Entry": {
@@ -73,85 +143,6 @@
    }
   }
  },
- "DirectoryEntry": {
-  "type": "interface",
-  "inherits": [
-   "Entry"
-  ],
-  "methods": {
-   "createReader": {
-    "returns": "DirectoryReader"
-   },
-   "getFile": {
-    "args": {
-     "path": "String",
-     "options": "Flags",
-     "successCallback": "EntryCallback",
-     "errorCallback": "ErrorCallback"
-    }
-   },
-   "getDirectory": {
-    "args": {
-     "path": "String",
-     "options": "Flags",
-     "successCallback": "EntryCallback",
-     "errorCallback": "ErrorCallback"
-    }
-   },
-   "removeRecursively": {
-    "args": {
-     "successCallback": "VoidCallback",
-     "errorCallback": "ErrorCallback"
-    }
-   }
-  }
- },
- "DirectoryReader": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "readEntries": {
-    "args": {
-     "successCallback": "EntriesCallback",
-     "errorCallback": "ErrorCallback"
-    }
-   }
-  }
- },
- "FileEntry": {
-  "type": "interface",
-  "inherits": [
-   "Entry"
-  ],
-  "methods": {
-   "createWriter": {
-    "args": {
-     "successCallback": "FileWriterCallback",
-     "errorCallback": "ErrorCallback"
-    }
-   },
-   "file": {
-    "args": {
-     "successCallback": "FileCallback",
-     "errorCallback": "ErrorCallback"
-    }
-   }
-  }
- },
- "FileSystemCallback": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "handleEvent": {
-    "args": {
-     "filesystem": "FileSystem"
-    }
-   }
-  },
-  "Callback": {
-   "value": "FunctionOnly"
-  }
- },
  "EntryCallback": {
   "type": "interface",
   "inherits": [],
@@ -164,94 +155,6 @@
   },
   "Callback": {
    "value": "FunctionOnly"
-  }
- },
- "EntriesCallback": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "handleEvent": {
-    "args": {
-     "entries": "Entry..."
-    }
-   }
-  },
-  "Callback": {
-   "value": "FunctionOnly"
-  }
- },
- "MetadataCallback": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "handleEvent": {
-    "args": {
-     "metadata": "Metadata"
-    }
-   }
-  },
-  "Callback": {
-   "value": "FunctionOnly"
-  }
- },
- "FileWriterCallback": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "handleEvent": {
-    "args": {
-     "fileWriter": "FileWriter"
-    }
-   }
-  },
-  "Callback": {
-   "value": "FunctionOnly"
-  }
- },
- "FileCallback": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "handleEvent": {
-    "args": {
-     "file": "File"
-    }
-   }
-  },
-  "Callback": {
-   "value": "FunctionOnly"
-  }
- },
- "VoidCallback": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "handleEvent": {}
-  },
-  "Callback": {
-   "value": "FunctionOnly"
-  }
- },
- "ErrorCallback": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "handleEvent": {
-    "args": {
-     "err": "DOMError"
-    }
-   }
-  },
-  "Callback": {
-   "value": "FunctionOnly"
-  }
- },
- "FileSystemSync": {
-  "type": "interface",
-  "inherits": [],
-  "readonly": {
-   "name": "String",
-   "root": "DirectoryEntrySync"
   }
  },
  "EntrySync": {
@@ -291,38 +194,51 @@
    }
   }
  },
- "DirectoryEntrySync": {
-  "type": "interface",
-  "inherits": [
-   "EntrySync"
-  ],
-  "methods": {
-   "createReader": {
-    "returns": "DirectoryReaderSync"
-   },
-   "getFile": {
-    "returns": "FileEntrySync",
-    "args": {
-     "path": "String",
-     "options": "Flags"
-    }
-   },
-   "getDirectory": {
-    "returns": "DirectoryEntrySync",
-    "args": {
-     "path": "String",
-     "options": "Flags"
-    }
-   },
-   "removeRecursively": {}
-  }
- },
- "DirectoryReaderSync": {
+ "ErrorCallback": {
   "type": "interface",
   "inherits": [],
   "methods": {
-   "readEntries": {
-    "returns": "EntrySync..."
+   "handleEvent": {
+    "args": {
+     "err": "DOMError"
+    }
+   }
+  },
+  "Callback": {
+   "value": "FunctionOnly"
+  }
+ },
+ "FileCallback": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "handleEvent": {
+    "args": {
+     "file": "File"
+    }
+   }
+  },
+  "Callback": {
+   "value": "FunctionOnly"
+  }
+ },
+ "FileEntry": {
+  "type": "interface",
+  "inherits": [
+   "Entry"
+  ],
+  "methods": {
+   "createWriter": {
+    "args": {
+     "successCallback": "FileWriterCallback",
+     "errorCallback": "ErrorCallback"
+    }
+   },
+   "file": {
+    "args": {
+     "successCallback": "FileCallback",
+     "errorCallback": "ErrorCallback"
+    }
    }
   }
  },
@@ -338,6 +254,90 @@
    "file": {
     "returns": "File"
    }
+  }
+ },
+ "FileSystem": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "name": "String",
+   "root": "DirectoryEntry"
+  }
+ },
+ "FileSystemCallback": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "handleEvent": {
+    "args": {
+     "filesystem": "FileSystem"
+    }
+   }
+  },
+  "Callback": {
+   "value": "FunctionOnly"
+  }
+ },
+ "FileSystemSync": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "name": "String",
+   "root": "DirectoryEntrySync"
+  }
+ },
+ "FileWriterCallback": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "handleEvent": {
+    "args": {
+     "fileWriter": "FileWriter"
+    }
+   }
+  },
+  "Callback": {
+   "value": "FunctionOnly"
+  }
+ },
+ "Flags": {
+  "type": "dictionary",
+  "inherits": [],
+  "defaults": {
+   "create": false,
+   "exclusive": false
+  }
+ },
+ "Metadata": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "modificationTime": "Date",
+   "size": "Uint64"
+  }
+ },
+ "MetadataCallback": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "handleEvent": {
+    "args": {
+     "metadata": "Metadata"
+    }
+   }
+  },
+  "Callback": {
+   "value": "FunctionOnly"
+  }
+ },
+ "VoidCallback": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "handleEvent": {}
+  },
+  "Callback": {
+   "value": "FunctionOnly"
   }
  }
 }

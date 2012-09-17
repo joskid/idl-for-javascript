@@ -2284,3 +2284,27 @@ dictionary ProgressEventInit : EventInit {
   unsigned long long loaded;
   unsigned long long total;
 };
+
+
+[Constructor(in HTMLElement host)]
+interface ShadowRoot : DocumentFragment {
+    HTMLElement getElementById(in DOMString elementId);
+    NodeList getElementsByClassName(in DOMString tagName);
+    NodeList getElementsByTagName(in DOMString className);
+    NodeList getElementsByTagNameNS(DOMString namespace, DOMString localName);
+    Selection getSelection();
+    CSSStyleSheet addStyleSheet(HTMLElement element) raises (DOMException);
+    CSSStyleSheet removeStyleSheet(CSSStyleSheet styleSheet) raises (DOMException);
+    attribute bool applyAuthorStyles;
+    attribute bool resetStyleInheritance;
+    readonly attribute Element activeElement;
+    attribute DOMString innerHTML;
+    readonly attribute StyleSheetList styleSheets;
+};
+ShadowRoot implements NodeSelector;
+
+
+interface HTMLContentElement : HTMLElement {
+    attribute DOMString select;
+    attribute boolean resetStyleInheritance;
+};

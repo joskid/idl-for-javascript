@@ -29,399 +29,6 @@
    "byteLength": "Uint32"
   }
  },
- "Int8Array": {
-  "type": "interface",
-  "inherits": [
-   "ArrayBufferView"
-  ],
-  "constants": {
-   "BYTES_PER_ELEMENT": 1
-  },
-  "readonly": {
-   "length": "Uint32"
-  },
-  "methods": {
-   "get": {
-    "returns": "Uint8",
-    "args": {
-     "index": "Uint32"
-    }
-   },
-   "set": {
-    "args": {
-     "index": "Uint32",
-     "value": "Uint8",
-     "array": [
-      "Int8Array",
-      "Uint8..."
-     ],
-     "offset": "Uint32"
-    }
-   },
-   "subarray": {
-    "returns": "Int8Array",
-    "args": {
-     "start": "Int32",
-     "end": "Int32"
-    }
-   }
-  },
-  "construct": {
-   "args": {
-    "buffer": "ArrayBuffer",
-    "byteOffset": "Uint32",
-    "length": "Uint32"
-   }
-  }
- },
- "Uint8Array": {
-  "type": "interface",
-  "inherits": [
-   "ArrayBufferView"
-  ],
-  "constants": {
-   "BYTES_PER_ELEMENT": 1
-  },
-  "readonly": {
-   "length": "Uint32"
-  },
-  "methods": {
-   "get": {
-    "returns": "Int8",
-    "args": {
-     "index": "Uint32"
-    }
-   },
-   "set": {
-    "args": {
-     "index": "Uint32",
-     "value": "Int8",
-     "array": [
-      "Uint8Array",
-      "Int8..."
-     ],
-     "offset": "Uint32"
-    }
-   },
-   "subarray": {
-    "returns": "Uint8Array",
-    "args": {
-     "start": "Int32",
-     "end": "Int32"
-    }
-   }
-  },
-  "construct": {
-   "args": {
-    "buffer": "ArrayBuffer",
-    "byteOffset": "Uint32",
-    "length": "Uint32"
-   }
-  }
- },
- "Uint8ClampedArray": {
-  "type": "interface",
-  "inherits": [
-   "Uint8Array"
-  ],
-  "methods": {
-   "set": {
-    "args": {
-     "index": "Uint32",
-     "value": "Int8",
-     "array": [
-      "Uint8ClampedArray",
-      "Int8..."
-     ],
-     "offset": "Uint32"
-    }
-   },
-   "subarray": {
-    "returns": "Uint8ClampedArray",
-    "args": {
-     "start": "Int32",
-     "end": "Int32"
-    }
-   }
-  },
-  "construct": {
-   "args": {
-    "buffer": "ArrayBuffer",
-    "byteOffset": "Uint32",
-    "length": "Uint32"
-   }
-  }
- },
- "Int16Array": {
-  "type": "interface",
-  "inherits": [
-   "ArrayBufferView"
-  ],
-  "constants": {
-   "BYTES_PER_ELEMENT": 2
-  },
-  "readonly": {
-   "length": "Uint32"
-  },
-  "methods": {
-   "get": {
-    "returns": "Int16",
-    "args": {
-     "index": "Uint32"
-    }
-   },
-   "set": {
-    "args": {
-     "index": "Uint32",
-     "value": "Int16",
-     "array": [
-      "Int16Array",
-      "Int16..."
-     ],
-     "offset": "Uint32"
-    }
-   },
-   "subarray": {
-    "returns": "Int16Array",
-    "args": {
-     "start": "Int32",
-     "end": "Int32"
-    }
-   }
-  },
-  "construct": {
-   "args": {
-    "buffer": "ArrayBuffer",
-    "byteOffset": "Uint32",
-    "length": "Uint32"
-   }
-  }
- },
- "Uint16Array": {
-  "type": "interface",
-  "inherits": [
-   "ArrayBufferView"
-  ],
-  "constants": {
-   "BYTES_PER_ELEMENT": 2
-  },
-  "readonly": {
-   "length": "Uint32"
-  },
-  "methods": {
-   "get": {
-    "returns": "Uint16",
-    "args": {
-     "index": "Uint32"
-    }
-   },
-   "set": {
-    "args": {
-     "index": "Uint32",
-     "value": "Uint16",
-     "array": [
-      "Uint16Array",
-      "Uint16..."
-     ],
-     "offset": "Uint32"
-    }
-   },
-   "subarray": {
-    "returns": "Uint16Array",
-    "args": {
-     "start": "Int32",
-     "end": "Int32"
-    }
-   }
-  },
-  "construct": {
-   "args": {
-    "buffer": "ArrayBuffer",
-    "byteOffset": "Uint32",
-    "length": "Uint32"
-   }
-  }
- },
- "Int32Array": {
-  "type": "interface",
-  "inherits": [
-   "ArrayBufferView"
-  ],
-  "constants": {
-   "BYTES_PER_ELEMENT": 4
-  },
-  "readonly": {
-   "length": "Uint32"
-  },
-  "methods": {
-   "get": {
-    "returns": "Int32",
-    "args": {
-     "index": "Uint32"
-    }
-   },
-   "set": {
-    "args": {
-     "index": "Uint32",
-     "value": "Int32",
-     "array": [
-      "Int32Array",
-      "Int32..."
-     ],
-     "offset": "Uint32"
-    }
-   },
-   "subarray": {
-    "returns": "Int32Array",
-    "args": {
-     "start": "Int32",
-     "end": "Int32"
-    }
-   }
-  },
-  "construct": {
-   "args": {
-    "buffer": "ArrayBuffer",
-    "byteOffset": "Uint32",
-    "length": "Uint32"
-   }
-  }
- },
- "Uint32Array": {
-  "type": "interface",
-  "inherits": [
-   "ArrayBufferView"
-  ],
-  "constants": {
-   "BYTES_PER_ELEMENT": 4
-  },
-  "readonly": {
-   "length": "Uint32"
-  },
-  "methods": {
-   "get": {
-    "returns": "Uint32",
-    "args": {
-     "index": "Uint32"
-    }
-   },
-   "set": {
-    "args": {
-     "index": "Uint32",
-     "value": "Uint32",
-     "array": [
-      "Uint32Array",
-      "Uint32..."
-     ],
-     "offset": "Uint32"
-    }
-   },
-   "subarray": {
-    "returns": "Uint32Array",
-    "args": {
-     "start": "Int32",
-     "end": "Int32"
-    }
-   }
-  },
-  "construct": {
-   "args": {
-    "buffer": "ArrayBuffer",
-    "byteOffset": "Uint32",
-    "length": "Uint32"
-   }
-  }
- },
- "Float32Array": {
-  "type": "interface",
-  "inherits": [
-   "ArrayBufferView"
-  ],
-  "constants": {
-   "BYTES_PER_ELEMENT": 4
-  },
-  "readonly": {
-   "length": "Uint32"
-  },
-  "methods": {
-   "get": {
-    "returns": "Float32",
-    "args": {
-     "index": "Uint32"
-    }
-   },
-   "set": {
-    "args": {
-     "index": "Uint32",
-     "value": "Float32",
-     "array": [
-      "Float32Array",
-      "Float32..."
-     ],
-     "offset": "Uint32"
-    }
-   },
-   "subarray": {
-    "returns": "Float32Array",
-    "args": {
-     "start": "Int32",
-     "end": "Int32"
-    }
-   }
-  },
-  "construct": {
-   "args": {
-    "buffer": "ArrayBuffer",
-    "byteOffset": "Uint32",
-    "length": "Uint32"
-   }
-  }
- },
- "Float64Array": {
-  "type": "interface",
-  "inherits": [
-   "ArrayBufferView"
-  ],
-  "constants": {
-   "BYTES_PER_ELEMENT": 8
-  },
-  "readonly": {
-   "length": "Uint32"
-  },
-  "methods": {
-   "get": {
-    "returns": "Float64",
-    "args": {
-     "index": "Uint32"
-    }
-   },
-   "set": {
-    "args": {
-     "index": "Uint32",
-     "value": "Float64",
-     "array": [
-      "Float64Array",
-      "Float64..."
-     ],
-     "offset": "Uint32"
-    }
-   },
-   "subarray": {
-    "returns": "Float64Array",
-    "args": {
-     "start": "Int32",
-     "end": "Int32"
-    }
-   }
-  },
-  "construct": {
-   "args": {
-    "buffer": "ArrayBuffer",
-    "byteOffset": "Uint32",
-    "length": "Uint32"
-   }
-  }
- },
  "DataView": {
   "type": "interface",
   "inherits": [
@@ -542,6 +149,399 @@
     "buffer": "ArrayBuffer",
     "byteOffset": "Uint32",
     "byteLength": "Uint32"
+   }
+  }
+ },
+ "Float32Array": {
+  "type": "interface",
+  "inherits": [
+   "ArrayBufferView"
+  ],
+  "constants": {
+   "BYTES_PER_ELEMENT": 4
+  },
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "get": {
+    "returns": "Float32",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "set": {
+    "args": {
+     "index": "Uint32",
+     "value": "Float32",
+     "array": [
+      "Float32Array",
+      "Float32..."
+     ],
+     "offset": "Uint32"
+    }
+   },
+   "subarray": {
+    "returns": "Float32Array",
+    "args": {
+     "start": "Int32",
+     "end": "Int32"
+    }
+   }
+  },
+  "construct": {
+   "args": {
+    "buffer": "ArrayBuffer",
+    "byteOffset": "Uint32",
+    "length": "Uint32"
+   }
+  }
+ },
+ "Float64Array": {
+  "type": "interface",
+  "inherits": [
+   "ArrayBufferView"
+  ],
+  "constants": {
+   "BYTES_PER_ELEMENT": 8
+  },
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "get": {
+    "returns": "Float64",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "set": {
+    "args": {
+     "index": "Uint32",
+     "value": "Float64",
+     "array": [
+      "Float64Array",
+      "Float64..."
+     ],
+     "offset": "Uint32"
+    }
+   },
+   "subarray": {
+    "returns": "Float64Array",
+    "args": {
+     "start": "Int32",
+     "end": "Int32"
+    }
+   }
+  },
+  "construct": {
+   "args": {
+    "buffer": "ArrayBuffer",
+    "byteOffset": "Uint32",
+    "length": "Uint32"
+   }
+  }
+ },
+ "Int16Array": {
+  "type": "interface",
+  "inherits": [
+   "ArrayBufferView"
+  ],
+  "constants": {
+   "BYTES_PER_ELEMENT": 2
+  },
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "get": {
+    "returns": "Int16",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "set": {
+    "args": {
+     "index": "Uint32",
+     "value": "Int16",
+     "array": [
+      "Int16Array",
+      "Int16..."
+     ],
+     "offset": "Uint32"
+    }
+   },
+   "subarray": {
+    "returns": "Int16Array",
+    "args": {
+     "start": "Int32",
+     "end": "Int32"
+    }
+   }
+  },
+  "construct": {
+   "args": {
+    "buffer": "ArrayBuffer",
+    "byteOffset": "Uint32",
+    "length": "Uint32"
+   }
+  }
+ },
+ "Int32Array": {
+  "type": "interface",
+  "inherits": [
+   "ArrayBufferView"
+  ],
+  "constants": {
+   "BYTES_PER_ELEMENT": 4
+  },
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "get": {
+    "returns": "Int32",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "set": {
+    "args": {
+     "index": "Uint32",
+     "value": "Int32",
+     "array": [
+      "Int32Array",
+      "Int32..."
+     ],
+     "offset": "Uint32"
+    }
+   },
+   "subarray": {
+    "returns": "Int32Array",
+    "args": {
+     "start": "Int32",
+     "end": "Int32"
+    }
+   }
+  },
+  "construct": {
+   "args": {
+    "buffer": "ArrayBuffer",
+    "byteOffset": "Uint32",
+    "length": "Uint32"
+   }
+  }
+ },
+ "Int8Array": {
+  "type": "interface",
+  "inherits": [
+   "ArrayBufferView"
+  ],
+  "constants": {
+   "BYTES_PER_ELEMENT": 1
+  },
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "get": {
+    "returns": "Uint8",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "set": {
+    "args": {
+     "index": "Uint32",
+     "value": "Uint8",
+     "array": [
+      "Int8Array",
+      "Uint8..."
+     ],
+     "offset": "Uint32"
+    }
+   },
+   "subarray": {
+    "returns": "Int8Array",
+    "args": {
+     "start": "Int32",
+     "end": "Int32"
+    }
+   }
+  },
+  "construct": {
+   "args": {
+    "buffer": "ArrayBuffer",
+    "byteOffset": "Uint32",
+    "length": "Uint32"
+   }
+  }
+ },
+ "Uint16Array": {
+  "type": "interface",
+  "inherits": [
+   "ArrayBufferView"
+  ],
+  "constants": {
+   "BYTES_PER_ELEMENT": 2
+  },
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "get": {
+    "returns": "Uint16",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "set": {
+    "args": {
+     "index": "Uint32",
+     "value": "Uint16",
+     "array": [
+      "Uint16Array",
+      "Uint16..."
+     ],
+     "offset": "Uint32"
+    }
+   },
+   "subarray": {
+    "returns": "Uint16Array",
+    "args": {
+     "start": "Int32",
+     "end": "Int32"
+    }
+   }
+  },
+  "construct": {
+   "args": {
+    "buffer": "ArrayBuffer",
+    "byteOffset": "Uint32",
+    "length": "Uint32"
+   }
+  }
+ },
+ "Uint32Array": {
+  "type": "interface",
+  "inherits": [
+   "ArrayBufferView"
+  ],
+  "constants": {
+   "BYTES_PER_ELEMENT": 4
+  },
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "get": {
+    "returns": "Uint32",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "set": {
+    "args": {
+     "index": "Uint32",
+     "value": "Uint32",
+     "array": [
+      "Uint32Array",
+      "Uint32..."
+     ],
+     "offset": "Uint32"
+    }
+   },
+   "subarray": {
+    "returns": "Uint32Array",
+    "args": {
+     "start": "Int32",
+     "end": "Int32"
+    }
+   }
+  },
+  "construct": {
+   "args": {
+    "buffer": "ArrayBuffer",
+    "byteOffset": "Uint32",
+    "length": "Uint32"
+   }
+  }
+ },
+ "Uint8Array": {
+  "type": "interface",
+  "inherits": [
+   "ArrayBufferView"
+  ],
+  "constants": {
+   "BYTES_PER_ELEMENT": 1
+  },
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "get": {
+    "returns": "Int8",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "set": {
+    "args": {
+     "index": "Uint32",
+     "value": "Int8",
+     "array": [
+      "Uint8Array",
+      "Int8..."
+     ],
+     "offset": "Uint32"
+    }
+   },
+   "subarray": {
+    "returns": "Uint8Array",
+    "args": {
+     "start": "Int32",
+     "end": "Int32"
+    }
+   }
+  },
+  "construct": {
+   "args": {
+    "buffer": "ArrayBuffer",
+    "byteOffset": "Uint32",
+    "length": "Uint32"
+   }
+  }
+ },
+ "Uint8ClampedArray": {
+  "type": "interface",
+  "inherits": [
+   "Uint8Array"
+  ],
+  "methods": {
+   "set": {
+    "args": {
+     "index": "Uint32",
+     "value": "Int8",
+     "array": [
+      "Uint8ClampedArray",
+      "Int8..."
+     ],
+     "offset": "Uint32"
+    }
+   },
+   "subarray": {
+    "returns": "Uint8ClampedArray",
+    "args": {
+     "start": "Int32",
+     "end": "Int32"
+    }
+   }
+  },
+  "construct": {
+   "args": {
+    "buffer": "ArrayBuffer",
+    "byteOffset": "Uint32",
+    "length": "Uint32"
    }
   }
  }

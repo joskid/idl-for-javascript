@@ -1,88 +1,130 @@
 {
- "DOMStringList": {
+ "Attr": {
   "type": "interface",
-  "inherits": [],
-  "methods": {
-   "item": {
-    "returns": "String",
-    "args": {
-     "index": "Uint32"
-    }
-   },
-   "contains": {
-    "returns": "Boolean",
-    "args": {
-     "str": "String"
-    }
-   }
+  "inherits": [
+   "Node"
+  ],
+  "readonly": {
+   "name": "String",
+   "specified": "Boolean",
+   "ownerElement": "Element",
+   "schemaTypeInfo": "TypeInfo",
+   "isId": "Boolean"
+  },
+  "properties": {
+   "value": "String"
+  }
+ },
+ "CDATASection": {
+  "type": "interface",
+  "inherits": [
+   "Text"
+  ]
+ },
+ "CharacterData": {
+  "type": "interface",
+  "inherits": [
+   "Node"
+  ],
+  "properties": {
+   "data": "String"
   },
   "readonly": {
    "length": "Uint32"
+  },
+  "methods": {
+   "substringData": {
+    "returns": "String",
+    "args": {
+     "offset": "Uint32",
+     "count": "Uint32"
+    }
+   },
+   "appendData": {
+    "args": {
+     "arg": "String"
+    }
+   },
+   "insertData": {
+    "args": {
+     "offset": "Uint32",
+     "arg": "String"
+    }
+   },
+   "deleteData": {
+    "args": {
+     "offset": "Uint32",
+     "count": "Uint32"
+    }
+   },
+   "replaceData": {
+    "args": {
+     "offset": "Uint32",
+     "count": "Uint32",
+     "arg": "String"
+    }
+   }
   }
  },
- "NameList": {
+ "Comment": {
+  "type": "interface",
+  "inherits": [
+   "CharacterData"
+  ]
+ },
+ "DOMConfiguration": {
   "type": "interface",
   "inherits": [],
   "methods": {
-   "getName": {
-    "returns": "String",
+   "setParameter": {
     "args": {
-     "index": "Uint32"
+     "name": "String",
+     "value": "Any"
     }
    },
-   "getNamespaceURI": {
-    "returns": "String",
+   "getParameter": {
+    "returns": "Any",
     "args": {
-     "index": "Uint32"
-    }
-   },
-   "contains": {
-    "returns": "Boolean",
-    "args": {
-     "str": "String"
-    }
-   },
-   "containsNS": {
-    "returns": "Boolean",
-    "args": {
-     "namespaceURI": "String",
      "name": "String"
     }
-   }
-  },
-  "readonly": {
-   "length": "Uint32"
-  }
- },
- "DOMImplementationList": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "item": {
-    "returns": "DOMImplementation",
-    "args": {
-     "index": "Uint32"
-    }
-   }
-  },
-  "readonly": {
-   "length": "Uint32"
-  }
- },
- "DOMImplementationSource": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "getDOMImplementation": {
-    "returns": "DOMImplementation",
-    "args": {
-     "features": "String"
-    }
    },
-   "getDOMImplementationList": {
-    "returns": "DOMImplementationList",
+   "canSetParameter": {
+    "returns": "Boolean",
     "args": {
-     "features": "String"
+     "name": "String",
+     "value": "Any"
+    }
+   }
+  },
+  "readonly": {
+   "parameterNames": "DOMStringList"
+  }
+ },
+ "DOMError": {
+  "type": "interface",
+  "inherits": [],
+  "constants": {
+   "SEVERITY_WARNING": 1,
+   "SEVERITY_ERROR": 2,
+   "SEVERITY_FATAL_ERROR": 3
+  },
+  "readonly": {
+   "severity": "Uint16",
+   "message": "String",
+   "type": "String",
+   "relatedException": "Object",
+   "relatedData": "Object",
+   "location": "DOMLocator"
+  }
+ },
+ "DOMErrorHandler": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "handleError": {
+    "returns": "Boolean",
+    "args": {
+     "error": "DOMError"
     }
    }
   }
@@ -121,6 +163,447 @@
      "version": "String"
     }
    }
+  }
+ },
+ "DOMImplementationList": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "item": {
+    "returns": "DOMImplementation",
+    "args": {
+     "index": "Uint32"
+    }
+   }
+  },
+  "readonly": {
+   "length": "Uint32"
+  }
+ },
+ "DOMImplementationSource": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "getDOMImplementation": {
+    "returns": "DOMImplementation",
+    "args": {
+     "features": "String"
+    }
+   },
+   "getDOMImplementationList": {
+    "returns": "DOMImplementationList",
+    "args": {
+     "features": "String"
+    }
+   }
+  }
+ },
+ "DOMLocator": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "lineNumber": "Int32",
+   "columnNumber": "Int32",
+   "byteOffset": "Int32",
+   "utf16Offset": "Int32",
+   "relatedNode": "Node",
+   "uri": "String"
+  }
+ },
+ "DOMStringList": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "item": {
+    "returns": "String",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "contains": {
+    "returns": "Boolean",
+    "args": {
+     "str": "String"
+    }
+   }
+  },
+  "readonly": {
+   "length": "Uint32"
+  }
+ },
+ "Document": {
+  "type": "interface",
+  "inherits": [
+   "Node"
+  ],
+  "readonly": {
+   "doctype": "DocumentType",
+   "implementation": "DOMImplementation",
+   "documentElement": "Element",
+   "inputEncoding": "String",
+   "xmlEncoding": "String",
+   "domConfig": "DOMConfiguration"
+  },
+  "methods": {
+   "createElement": {
+    "returns": "Element",
+    "args": {
+     "tagName": "String"
+    }
+   },
+   "createDocumentFragment": {
+    "returns": "DocumentFragment"
+   },
+   "createTextNode": {
+    "returns": "Text",
+    "args": {
+     "data": "String"
+    }
+   },
+   "createComment": {
+    "returns": "Comment",
+    "args": {
+     "data": "String"
+    }
+   },
+   "createCDATASection": {
+    "returns": "CDATASection",
+    "args": {
+     "data": "String"
+    }
+   },
+   "createProcessingInstruction": {
+    "returns": "ProcessingInstruction",
+    "args": {
+     "target": "String",
+     "data": "String"
+    }
+   },
+   "createAttribute": {
+    "returns": "Attr",
+    "args": {
+     "name": "String"
+    }
+   },
+   "createEntityReference": {
+    "returns": "EntityReference",
+    "args": {
+     "name": "String"
+    }
+   },
+   "getElementsByTagName": {
+    "returns": "NodeList",
+    "args": {
+     "tagname": "String"
+    }
+   },
+   "importNode": {
+    "returns": "Node",
+    "args": {
+     "importedNode": "Node",
+     "deep": "Boolean"
+    }
+   },
+   "createElementNS": {
+    "returns": "Element",
+    "args": {
+     "namespaceURI": "String",
+     "qualifiedName": "String"
+    }
+   },
+   "createAttributeNS": {
+    "returns": "Attr",
+    "args": {
+     "namespaceURI": "String",
+     "qualifiedName": "String"
+    }
+   },
+   "getElementsByTagNameNS": {
+    "returns": "NodeList",
+    "args": {
+     "namespaceURI": "String",
+     "localName": "String"
+    }
+   },
+   "getElementById": {
+    "returns": "Element",
+    "args": {
+     "elementId": "String"
+    }
+   },
+   "adoptNode": {
+    "returns": "Node",
+    "args": {
+     "source": "Node"
+    }
+   },
+   "normalizeDocument": {},
+   "renameNode": {
+    "returns": "Node",
+    "args": {
+     "n": "Node",
+     "namespaceURI": "String",
+     "qualifiedName": "String"
+    }
+   }
+  },
+  "properties": {
+   "xmlStandalone": "Boolean",
+   "xmlVersion": "String",
+   "strictErrorChecking": "Boolean",
+   "documentURI": "String"
+  }
+ },
+ "DocumentFragment": {
+  "type": "interface",
+  "inherits": [
+   "Node"
+  ]
+ },
+ "DocumentType": {
+  "type": "interface",
+  "inherits": [
+   "Node"
+  ],
+  "readonly": {
+   "name": "String",
+   "entities": "NamedNodeMap",
+   "notations": "NamedNodeMap",
+   "publicId": "String",
+   "systemId": "String",
+   "internalSubset": "String"
+  }
+ },
+ "Element": {
+  "type": "interface",
+  "inherits": [
+   "Node"
+  ],
+  "readonly": {
+   "tagName": "String",
+   "schemaTypeInfo": "TypeInfo"
+  },
+  "methods": {
+   "getAttribute": {
+    "returns": "String",
+    "args": {
+     "name": "String"
+    }
+   },
+   "setAttribute": {
+    "args": {
+     "name": "String",
+     "value": "String"
+    }
+   },
+   "removeAttribute": {
+    "args": {
+     "name": "String"
+    }
+   },
+   "getAttributeNode": {
+    "returns": "Attr",
+    "args": {
+     "name": "String"
+    }
+   },
+   "setAttributeNode": {
+    "returns": "Attr",
+    "args": {
+     "newAttr": "Attr"
+    }
+   },
+   "removeAttributeNode": {
+    "returns": "Attr",
+    "args": {
+     "oldAttr": "Attr"
+    }
+   },
+   "getElementsByTagName": {
+    "returns": "NodeList",
+    "args": {
+     "name": "String"
+    }
+   },
+   "getAttributeNS": {
+    "returns": "String",
+    "args": {
+     "namespaceURI": "String",
+     "localName": "String"
+    }
+   },
+   "setAttributeNS": {
+    "args": {
+     "namespaceURI": "String",
+     "qualifiedName": "String",
+     "value": "String"
+    }
+   },
+   "removeAttributeNS": {
+    "args": {
+     "namespaceURI": "String",
+     "localName": "String"
+    }
+   },
+   "getAttributeNodeNS": {
+    "returns": "Attr",
+    "args": {
+     "namespaceURI": "String",
+     "localName": "String"
+    }
+   },
+   "setAttributeNodeNS": {
+    "returns": "Attr",
+    "args": {
+     "newAttr": "Attr"
+    }
+   },
+   "getElementsByTagNameNS": {
+    "returns": "NodeList",
+    "args": {
+     "namespaceURI": "String",
+     "localName": "String"
+    }
+   },
+   "hasAttribute": {
+    "returns": "Boolean",
+    "args": {
+     "name": "String"
+    }
+   },
+   "hasAttributeNS": {
+    "returns": "Boolean",
+    "args": {
+     "namespaceURI": "String",
+     "localName": "String"
+    }
+   },
+   "setIdAttribute": {
+    "args": {
+     "name": "String",
+     "isId": "Boolean"
+    }
+   },
+   "setIdAttributeNS": {
+    "args": {
+     "namespaceURI": "String",
+     "localName": "String",
+     "isId": "Boolean"
+    }
+   },
+   "setIdAttributeNode": {
+    "args": {
+     "idAttr": "Attr",
+     "isId": "Boolean"
+    }
+   }
+  }
+ },
+ "Entity": {
+  "type": "interface",
+  "inherits": [
+   "Node"
+  ],
+  "readonly": {
+   "publicId": "String",
+   "systemId": "String",
+   "notationName": "String",
+   "inputEncoding": "String",
+   "xmlEncoding": "String",
+   "xmlVersion": "String"
+  }
+ },
+ "EntityReference": {
+  "type": "interface",
+  "inherits": [
+   "Node"
+  ]
+ },
+ "NameList": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "getName": {
+    "returns": "String",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "getNamespaceURI": {
+    "returns": "String",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "contains": {
+    "returns": "Boolean",
+    "args": {
+     "str": "String"
+    }
+   },
+   "containsNS": {
+    "returns": "Boolean",
+    "args": {
+     "namespaceURI": "String",
+     "name": "String"
+    }
+   }
+  },
+  "readonly": {
+   "length": "Uint32"
+  }
+ },
+ "NamedNodeMap": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "getNamedItem": {
+    "returns": "Node",
+    "args": {
+     "name": "String"
+    }
+   },
+   "setNamedItem": {
+    "returns": "Node",
+    "args": {
+     "arg": "Node"
+    }
+   },
+   "removeNamedItem": {
+    "returns": "Node",
+    "args": {
+     "name": "String"
+    }
+   },
+   "item": {
+    "returns": "Node",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "getNamedItemNS": {
+    "returns": "Node",
+    "args": {
+     "namespaceURI": "String",
+     "localName": "String"
+    }
+   },
+   "setNamedItemNS": {
+    "returns": "Node",
+    "args": {
+     "arg": "Node"
+    }
+   },
+   "removeNamedItemNS": {
+    "returns": "Node",
+    "args": {
+     "namespaceURI": "String",
+     "localName": "String"
+    }
+   }
+  },
+  "readonly": {
+   "length": "Uint32"
   }
  },
  "Node": {
@@ -287,243 +770,27 @@
    "length": "Uint32"
   }
  },
- "NamedNodeMap": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "getNamedItem": {
-    "returns": "Node",
-    "args": {
-     "name": "String"
-    }
-   },
-   "setNamedItem": {
-    "returns": "Node",
-    "args": {
-     "arg": "Node"
-    }
-   },
-   "removeNamedItem": {
-    "returns": "Node",
-    "args": {
-     "name": "String"
-    }
-   },
-   "item": {
-    "returns": "Node",
-    "args": {
-     "index": "Uint32"
-    }
-   },
-   "getNamedItemNS": {
-    "returns": "Node",
-    "args": {
-     "namespaceURI": "String",
-     "localName": "String"
-    }
-   },
-   "setNamedItemNS": {
-    "returns": "Node",
-    "args": {
-     "arg": "Node"
-    }
-   },
-   "removeNamedItemNS": {
-    "returns": "Node",
-    "args": {
-     "namespaceURI": "String",
-     "localName": "String"
-    }
-   }
-  },
-  "readonly": {
-   "length": "Uint32"
-  }
- },
- "CharacterData": {
+ "Notation": {
   "type": "interface",
   "inherits": [
    "Node"
   ],
+  "readonly": {
+   "publicId": "String",
+   "systemId": "String"
+  }
+ },
+ "ProcessingInstruction": {
+  "type": "interface",
+  "inherits": [
+   "Node"
+  ],
+  "readonly": {
+   "target": "String",
+   "sheet": "StyleSheet"
+  },
   "properties": {
    "data": "String"
-  },
-  "readonly": {
-   "length": "Uint32"
-  },
-  "methods": {
-   "substringData": {
-    "returns": "String",
-    "args": {
-     "offset": "Uint32",
-     "count": "Uint32"
-    }
-   },
-   "appendData": {
-    "args": {
-     "arg": "String"
-    }
-   },
-   "insertData": {
-    "args": {
-     "offset": "Uint32",
-     "arg": "String"
-    }
-   },
-   "deleteData": {
-    "args": {
-     "offset": "Uint32",
-     "count": "Uint32"
-    }
-   },
-   "replaceData": {
-    "args": {
-     "offset": "Uint32",
-     "count": "Uint32",
-     "arg": "String"
-    }
-   }
-  }
- },
- "Attr": {
-  "type": "interface",
-  "inherits": [
-   "Node"
-  ],
-  "readonly": {
-   "name": "String",
-   "specified": "Boolean",
-   "ownerElement": "Element",
-   "schemaTypeInfo": "TypeInfo",
-   "isId": "Boolean"
-  },
-  "properties": {
-   "value": "String"
-  }
- },
- "Element": {
-  "type": "interface",
-  "inherits": [
-   "Node"
-  ],
-  "readonly": {
-   "tagName": "String",
-   "schemaTypeInfo": "TypeInfo"
-  },
-  "methods": {
-   "getAttribute": {
-    "returns": "String",
-    "args": {
-     "name": "String"
-    }
-   },
-   "setAttribute": {
-    "args": {
-     "name": "String",
-     "value": "String"
-    }
-   },
-   "removeAttribute": {
-    "args": {
-     "name": "String"
-    }
-   },
-   "getAttributeNode": {
-    "returns": "Attr",
-    "args": {
-     "name": "String"
-    }
-   },
-   "setAttributeNode": {
-    "returns": "Attr",
-    "args": {
-     "newAttr": "Attr"
-    }
-   },
-   "removeAttributeNode": {
-    "returns": "Attr",
-    "args": {
-     "oldAttr": "Attr"
-    }
-   },
-   "getElementsByTagName": {
-    "returns": "NodeList",
-    "args": {
-     "name": "String"
-    }
-   },
-   "getAttributeNS": {
-    "returns": "String",
-    "args": {
-     "namespaceURI": "String",
-     "localName": "String"
-    }
-   },
-   "setAttributeNS": {
-    "args": {
-     "namespaceURI": "String",
-     "qualifiedName": "String",
-     "value": "String"
-    }
-   },
-   "removeAttributeNS": {
-    "args": {
-     "namespaceURI": "String",
-     "localName": "String"
-    }
-   },
-   "getAttributeNodeNS": {
-    "returns": "Attr",
-    "args": {
-     "namespaceURI": "String",
-     "localName": "String"
-    }
-   },
-   "setAttributeNodeNS": {
-    "returns": "Attr",
-    "args": {
-     "newAttr": "Attr"
-    }
-   },
-   "getElementsByTagNameNS": {
-    "returns": "NodeList",
-    "args": {
-     "namespaceURI": "String",
-     "localName": "String"
-    }
-   },
-   "hasAttribute": {
-    "returns": "Boolean",
-    "args": {
-     "name": "String"
-    }
-   },
-   "hasAttributeNS": {
-    "returns": "Boolean",
-    "args": {
-     "namespaceURI": "String",
-     "localName": "String"
-    }
-   },
-   "setIdAttribute": {
-    "args": {
-     "name": "String",
-     "isId": "Boolean"
-    }
-   },
-   "setIdAttributeNS": {
-    "args": {
-     "namespaceURI": "String",
-     "localName": "String",
-     "isId": "Boolean"
-    }
-   },
-   "setIdAttributeNode": {
-    "args": {
-     "idAttr": "Attr",
-     "isId": "Boolean"
-    }
-   }
   }
  },
  "Text": {
@@ -549,12 +816,6 @@
    "isElementContentWhitespace": "Boolean",
    "wholeText": "String"
   }
- },
- "Comment": {
-  "type": "interface",
-  "inherits": [
-   "CharacterData"
-  ]
  },
  "TypeInfo": {
   "type": "interface",
@@ -600,267 +861,6 @@
      "dst": "Node"
     }
    }
-  }
- },
- "DOMError": {
-  "type": "interface",
-  "inherits": [],
-  "constants": {
-   "SEVERITY_WARNING": 1,
-   "SEVERITY_ERROR": 2,
-   "SEVERITY_FATAL_ERROR": 3
-  },
-  "readonly": {
-   "severity": "Uint16",
-   "message": "String",
-   "type": "String",
-   "relatedException": "Object",
-   "relatedData": "Object",
-   "location": "DOMLocator"
-  }
- },
- "DOMErrorHandler": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "handleError": {
-    "returns": "Boolean",
-    "args": {
-     "error": "DOMError"
-    }
-   }
-  }
- },
- "DOMLocator": {
-  "type": "interface",
-  "inherits": [],
-  "readonly": {
-   "lineNumber": "Int32",
-   "columnNumber": "Int32",
-   "byteOffset": "Int32",
-   "utf16Offset": "Int32",
-   "relatedNode": "Node",
-   "uri": "String"
-  }
- },
- "DOMConfiguration": {
-  "type": "interface",
-  "inherits": [],
-  "methods": {
-   "setParameter": {
-    "args": {
-     "name": "String",
-     "value": "Any"
-    }
-   },
-   "getParameter": {
-    "returns": "Any",
-    "args": {
-     "name": "String"
-    }
-   },
-   "canSetParameter": {
-    "returns": "Boolean",
-    "args": {
-     "name": "String",
-     "value": "Any"
-    }
-   }
-  },
-  "readonly": {
-   "parameterNames": "DOMStringList"
-  }
- },
- "CDATASection": {
-  "type": "interface",
-  "inherits": [
-   "Text"
-  ]
- },
- "DocumentType": {
-  "type": "interface",
-  "inherits": [
-   "Node"
-  ],
-  "readonly": {
-   "name": "String",
-   "entities": "NamedNodeMap",
-   "notations": "NamedNodeMap",
-   "publicId": "String",
-   "systemId": "String",
-   "internalSubset": "String"
-  }
- },
- "Notation": {
-  "type": "interface",
-  "inherits": [
-   "Node"
-  ],
-  "readonly": {
-   "publicId": "String",
-   "systemId": "String"
-  }
- },
- "Entity": {
-  "type": "interface",
-  "inherits": [
-   "Node"
-  ],
-  "readonly": {
-   "publicId": "String",
-   "systemId": "String",
-   "notationName": "String",
-   "inputEncoding": "String",
-   "xmlEncoding": "String",
-   "xmlVersion": "String"
-  }
- },
- "EntityReference": {
-  "type": "interface",
-  "inherits": [
-   "Node"
-  ]
- },
- "ProcessingInstruction": {
-  "type": "interface",
-  "inherits": [
-   "Node"
-  ],
-  "readonly": {
-   "target": "String",
-   "sheet": "StyleSheet"
-  },
-  "properties": {
-   "data": "String"
-  }
- },
- "DocumentFragment": {
-  "type": "interface",
-  "inherits": [
-   "Node"
-  ]
- },
- "Document": {
-  "type": "interface",
-  "inherits": [
-   "Node"
-  ],
-  "readonly": {
-   "doctype": "DocumentType",
-   "implementation": "DOMImplementation",
-   "documentElement": "Element",
-   "inputEncoding": "String",
-   "xmlEncoding": "String",
-   "domConfig": "DOMConfiguration"
-  },
-  "methods": {
-   "createElement": {
-    "returns": "Element",
-    "args": {
-     "tagName": "String"
-    }
-   },
-   "createDocumentFragment": {
-    "returns": "DocumentFragment"
-   },
-   "createTextNode": {
-    "returns": "Text",
-    "args": {
-     "data": "String"
-    }
-   },
-   "createComment": {
-    "returns": "Comment",
-    "args": {
-     "data": "String"
-    }
-   },
-   "createCDATASection": {
-    "returns": "CDATASection",
-    "args": {
-     "data": "String"
-    }
-   },
-   "createProcessingInstruction": {
-    "returns": "ProcessingInstruction",
-    "args": {
-     "target": "String",
-     "data": "String"
-    }
-   },
-   "createAttribute": {
-    "returns": "Attr",
-    "args": {
-     "name": "String"
-    }
-   },
-   "createEntityReference": {
-    "returns": "EntityReference",
-    "args": {
-     "name": "String"
-    }
-   },
-   "getElementsByTagName": {
-    "returns": "NodeList",
-    "args": {
-     "tagname": "String"
-    }
-   },
-   "importNode": {
-    "returns": "Node",
-    "args": {
-     "importedNode": "Node",
-     "deep": "Boolean"
-    }
-   },
-   "createElementNS": {
-    "returns": "Element",
-    "args": {
-     "namespaceURI": "String",
-     "qualifiedName": "String"
-    }
-   },
-   "createAttributeNS": {
-    "returns": "Attr",
-    "args": {
-     "namespaceURI": "String",
-     "qualifiedName": "String"
-    }
-   },
-   "getElementsByTagNameNS": {
-    "returns": "NodeList",
-    "args": {
-     "namespaceURI": "String",
-     "localName": "String"
-    }
-   },
-   "getElementById": {
-    "returns": "Element",
-    "args": {
-     "elementId": "String"
-    }
-   },
-   "adoptNode": {
-    "returns": "Node",
-    "args": {
-     "source": "Node"
-    }
-   },
-   "normalizeDocument": {},
-   "renameNode": {
-    "returns": "Node",
-    "args": {
-     "n": "Node",
-     "namespaceURI": "String",
-     "qualifiedName": "String"
-    }
-   }
-  },
-  "properties": {
-   "xmlStandalone": "Boolean",
-   "xmlVersion": "String",
-   "strictErrorChecking": "Boolean",
-   "documentURI": "String"
   }
  }
 }

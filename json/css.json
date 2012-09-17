@@ -1,124 +1,42 @@
 {
- "DocumentStyle": {
-  "type": "interface",
-  "inherits": [],
-  "readonly": {
-   "styleSheets": "StyleSheetList"
-  }
- },
- "MediaList": {
+ "CSSColorComponentValue": {
   "type": "interface",
   "inherits": [],
   "properties": {
-   "mediaText": "String"
+   "red": "Int16",
+   "green": "Int16",
+   "blue": "Int16",
+   "alpha": "Float32"
   },
-  "readonly": {
-   "length": "Uint32"
-  },
-  "methods": {
-   "item": {
-    "returns": "String",
-    "args": {
-     "index": "Uint32"
-    }
-   },
-   "appendMedium": {
-    "args": {
-     "medium": "String"
-    }
-   },
-   "deleteMedium": {
-    "args": {
-     "medium": "String"
-    }
-   }
-  }
+  "NoInterfaceObject": true
  },
- "StyleSheet": {
+ "CSSComponentValue": {
   "type": "interface",
   "inherits": [],
   "readonly": {
-   "type": "String",
-   "href": "String",
-   "ownerNode": "Node",
-   "parentStyleSheet": "StyleSheet",
-   "title": "String",
-   "media": "MediaList"
+   "type": "String"
   },
   "properties": {
-   "disabled": "Boolean"
-  }
- },
- "StyleSheetList": {
-  "type": "interface",
-  "inherits": [],
-  "readonly": {
-   "length": "Uint32"
+   "value": "Any"
   },
-  "methods": {
-   "item": {
-    "returns": "StyleSheet",
-    "args": {
-     "index": "Uint32"
-    }
-   }
-  }
+  "NoInterfaceObject": true
  },
- "CSSStyleSheet": {
-  "type": "interface",
-  "inherits": [
-   "StyleSheet"
-  ],
-  "readonly": {
-   "ownerRule": "CSSRule",
-   "cssRules": "CSSRuleList"
-  },
-  "methods": {
-   "insertRule": {
-    "returns": "Uint32",
-    "args": {
-     "rule": "String",
-     "index": "Uint32"
-    }
-   },
-   "deleteRule": {
-    "args": {
-     "index": "Uint32"
-    }
-   }
-  }
- },
- "CSSRule": {
-  "type": "interface",
-  "inherits": [],
-  "constants": {
-   "STYLE_RULE": 1,
-   "IMPORT_RULE": 3,
-   "MEDIA_RULE": 4,
-   "FONT_FACE_RULE": 5,
-   "PAGE_RULE": 6,
-   "NAMESPACE_RULE": 10
-  },
-  "readonly": {
-   "type": "Uint16",
-   "parentRule": "CSSRule",
-   "parentStyleSheet": "CSSStyleSheet"
-  },
-  "properties": {
-   "cssText": "String"
-  }
- },
- "CSSStyleRule": {
+ "CSSFontFaceRule": {
   "type": "interface",
   "inherits": [
    "CSSRule"
   ],
-  "properties": {
-   "selectorText": "String"
-  },
   "readonly": {
    "style": "CSSStyleDeclaration"
   }
+ },
+ "CSSIdentifierComponentValue": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "identifier": "String"
+  },
+  "NoInterfaceObject": true
  },
  "CSSImportRule": {
   "type": "interface",
@@ -130,6 +48,33 @@
    "media": "MediaList",
    "styleSheet": "CSSStyleSheet"
   }
+ },
+ "CSSKeywordComponentValue": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "keyword": "String"
+  },
+  "NoInterfaceObject": true
+ },
+ "CSSLengthComponentValue": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "em": "Float32",
+   "ex": "Float32",
+   "px": "Float32"
+  },
+  "NoInterfaceObject": true
+ },
+ "CSSMapValue": {
+  "type": "interface",
+  "inherits": [],
+  "keyed": {
+   "itemType": "CSSValue",
+   "readonly": true
+  },
+  "NoInterfaceObject": true
  },
  "CSSMediaRule": {
   "type": "interface",
@@ -155,13 +100,14 @@
    }
   }
  },
- "CSSFontFaceRule": {
+ "CSSNamespaceRule": {
   "type": "interface",
   "inherits": [
    "CSSRule"
   ],
   "readonly": {
-   "style": "CSSStyleDeclaration"
+   "namespaceURI": "String",
+   "prefix": "String"
   }
  },
  "CSSPageRule": {
@@ -176,15 +122,56 @@
    "style": "CSSStyleDeclaration"
   }
  },
- "CSSNamespaceRule": {
+ "CSSPercentageComponentValue": {
   "type": "interface",
-  "inherits": [
-   "CSSRule"
-  ],
-  "readonly": {
-   "namespaceURI": "String",
-   "prefix": "String"
+  "inherits": [],
+  "properties": {
+   "percent": "Float32"
+  },
+  "NoInterfaceObject": true
+ },
+ "CSSPropertyValue": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "cssText": "String"
   }
+ },
+ "CSSPropertyValueList": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "list": "CSSValue..."
+  },
+  "NoInterfaceObject": true
+ },
+ "CSSRule": {
+  "type": "interface",
+  "inherits": [],
+  "constants": {
+   "STYLE_RULE": 1,
+   "IMPORT_RULE": 3,
+   "MEDIA_RULE": 4,
+   "FONT_FACE_RULE": 5,
+   "PAGE_RULE": 6,
+   "NAMESPACE_RULE": 10
+  },
+  "readonly": {
+   "type": "Uint16",
+   "parentRule": "CSSRule",
+   "parentStyleSheet": "CSSStyleSheet"
+  },
+  "properties": {
+   "cssText": "String"
+  }
+ },
+ "CSSStringComponentValue": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "_string": "String"
+  },
+  "NoInterfaceObject": true
  },
  "CSSStyleDeclaration": {
   "type": "interface",
@@ -357,93 +344,41 @@
   "type": "interface",
   "inherits": []
  },
- "CSSPropertyValue": {
+ "CSSStyleRule": {
   "type": "interface",
-  "inherits": [],
+  "inherits": [
+   "CSSRule"
+  ],
   "properties": {
-   "cssText": "String"
+   "selectorText": "String"
+  },
+  "readonly": {
+   "style": "CSSStyleDeclaration"
   }
  },
- "CSSMapValue": {
+ "CSSStyleSheet": {
   "type": "interface",
-  "inherits": [],
-  "keyed": {
-   "itemType": "CSSValue",
-   "readonly": true
-  },
-  "NoInterfaceObject": true
- },
- "CSSPropertyValueList": {
-  "type": "interface",
-  "inherits": [],
+  "inherits": [
+   "StyleSheet"
+  ],
   "readonly": {
-   "list": "CSSValue..."
+   "ownerRule": "CSSRule",
+   "cssRules": "CSSRuleList"
   },
-  "NoInterfaceObject": true
- },
- "CSSComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "readonly": {
-   "type": "String"
-  },
-  "properties": {
-   "value": "Any"
-  },
-  "NoInterfaceObject": true
- },
- "CSSStringComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "_string": "String"
-  },
-  "NoInterfaceObject": true
- },
- "CSSKeywordComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "keyword": "String"
-  },
-  "NoInterfaceObject": true
- },
- "CSSIdentifierComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "identifier": "String"
-  },
-  "NoInterfaceObject": true
- },
- "CSSColorComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "red": "Int16",
-   "green": "Int16",
-   "blue": "Int16",
-   "alpha": "Float32"
-  },
-  "NoInterfaceObject": true
- },
- "CSSLengthComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "em": "Float32",
-   "ex": "Float32",
-   "px": "Float32"
-  },
-  "NoInterfaceObject": true
- },
- "CSSPercentageComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "percent": "Float32"
-  },
-  "NoInterfaceObject": true
+  "methods": {
+   "insertRule": {
+    "returns": "Uint32",
+    "args": {
+     "rule": "String",
+     "index": "Uint32"
+    }
+   },
+   "deleteRule": {
+    "args": {
+     "index": "Uint32"
+    }
+   }
+  }
  },
  "CSSURLComponentValue": {
   "type": "interface",
@@ -453,6 +388,13 @@
   },
   "NoInterfaceObject": true
  },
+ "DocumentStyle": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "styleSheets": "StyleSheetList"
+  }
+ },
  "ElementCSSInlineStyle": {
   "type": "interface",
   "inherits": [],
@@ -460,5 +402,63 @@
    "style": "CSSStyleDeclaration"
   },
   "NoInterfaceObject": true
+ },
+ "MediaList": {
+  "type": "interface",
+  "inherits": [],
+  "properties": {
+   "mediaText": "String"
+  },
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "item": {
+    "returns": "String",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "appendMedium": {
+    "args": {
+     "medium": "String"
+    }
+   },
+   "deleteMedium": {
+    "args": {
+     "medium": "String"
+    }
+   }
+  }
+ },
+ "StyleSheet": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "type": "String",
+   "href": "String",
+   "ownerNode": "Node",
+   "parentStyleSheet": "StyleSheet",
+   "title": "String",
+   "media": "MediaList"
+  },
+  "properties": {
+   "disabled": "Boolean"
+  }
+ },
+ "StyleSheetList": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "item": {
+    "returns": "StyleSheet",
+    "args": {
+     "index": "Uint32"
+    }
+   }
+  }
  }
 }
