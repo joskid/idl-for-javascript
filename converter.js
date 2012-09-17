@@ -146,6 +146,12 @@ var definitionTypes = {
   dictionary: function(json){
     return new Dictionary(json);
   },
+  partialdictionary: function(json){
+    var dict = new Dictionary(json);
+    if (json.name in allDefinitions)
+      dict = merge(dict, allDefinitions[json.name]);
+    return dict;
+  },
   enum: function(json){
     return new Enum(json);
   },
