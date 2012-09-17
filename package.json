@@ -1,6 +1,6 @@
 {
   "name": "idl4js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Useful IDLs (DOM4, HTML5) converted into JSON and mapped to JavaScript types",
   "main": "index.js",
   "dependencies": {
