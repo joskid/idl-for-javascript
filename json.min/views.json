@@ -1,1 +1,1 @@
-{"AbstractView":{"type":"interface","inherits":[],"readonlys":{"document":"DocumentView"}},"DocumentView":{"type":"interface","inherits":[],"readonlys":{"defaultView":"AbstractView"}}}
+{"AbstractView":{"type":"interface","inherits":[],"readonly":{"document":"DocumentView"}},"DocumentView":{"type":"interface","inherits":[],"readonly":{"defaultView":"AbstractView"}}}

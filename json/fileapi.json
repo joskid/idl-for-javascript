@@ -1,162 +1,164 @@
 {
-	"FileList": {
-		"type": "interface",
-		"inherits": [],
-		"operations": {
-			"item": {
-				"returns": "File",
-				"args": {
-					"index": "Uint32"
-				}
-			}
-		},
-		"readonlys": {
-			"length": "Uint32"
-		}
-	},
-	"Blob": {
-		"type": "interface",
-		"inherits": [],
-		"readonlys": {
-			"size": "Uint64",
-			"type": "String"
-		},
-		"operations": {
-			"slice": {
-				"returns": "Blob",
-				"args": {
-					"start": "Uint64",
-					"end": "Uint64",
-					"contentType": "String"
-				}
-			}
-		},
-		"construct": {
-			"args": {
-				"blobParts": "StringArray",
-				"options": "BlobPropertyBag"
-			}
-		}
-	},
-	"EndingTypes": {
-		"type": "enum",
-		"values": [
-			"transparent",
-			"native"
-		]
-	},
-	"BlobPropertyBag": {
-		"type": "dictionary",
-		"members": {
-			"type": "",
-			"endings": ""
-		}
-	},
-	"File": {
-		"type": "interface",
-		"inherits": [
-			"Blob"
-		],
-		"readonlys": {
-			"name": "String",
-			"lastModifiedDate": "Date"
-		}
-	},
-	"FileReader": {
-		"type": "interface",
-		"inherits": [
-			"EventTarget"
-		],
-		"operations": {
-			"readAsArrayBuffer": {
-				"args": {
-					"blob": "Blob"
-				}
-			},
-			"readAsText": {
-				"args": {
-					"blob": "Blob",
-					"encoding": "String"
-				}
-			},
-			"readAsDataURL": {
-				"args": {
-					"blob": "Blob"
-				}
-			},
-			"abort": {}
-		},
-		"consts": {
-			"EMPTY": 0,
-			"LOADING": 1,
-			"DONE": 2
-		},
-		"readonlys": {
-			"readyState": "Uint16",
-			"result": [
-				"String",
-				"ArrayBuffer"
-			],
-			"error": "DOMError"
-		},
-		"attributes": {
-			"onloadstart": "Function",
-			"onprogress": "Function",
-			"onload": "Function",
-			"onabort": "Function",
-			"onerror": "Function",
-			"onloadend": "Function"
-		},
-		"construct": {}
-	},
-	"FileReaderSync": {
-		"type": "interface",
-		"inherits": [],
-		"operations": {
-			"readAsArrayBuffer": {
-				"returns": "ArrayBuffer",
-				"args": {
-					"blob": "Blob"
-				}
-			},
-			"readAsText": {
-				"returns": "String",
-				"args": {
-					"blob": "Blob",
-					"encoding": "String"
-				}
-			},
-			"readAsDataURL": {
-				"returns": "String",
-				"args": {
-					"blob": "Blob"
-				}
-			}
-		},
-		"construct": {}
-	},
-	"URL": {
-		"type": "interface",
-		"inherits": [],
-		"operations": {
-			"createObjectURL": {
-				"returns": "String",
-				"args": {
-					"blob": "Blob",
-					"options": "objectURLOptions"
-				}
-			},
-			"revokeObjectURL": {
-				"args": {
-					"url": "String"
-				}
-			}
-		}
-	},
-	"objectURLOptions": {
-		"type": "dictionary",
-		"members": {
-			"oneTimeOnly": false
-		}
-	}
+ "FileList": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "item": {
+    "returns": "File",
+    "args": {
+     "index": "Uint32"
+    }
+   }
+  },
+  "readonly": {
+   "length": "Uint32"
+  }
+ },
+ "Blob": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "size": "Uint64",
+   "type": "String"
+  },
+  "methods": {
+   "slice": {
+    "returns": "Blob",
+    "args": {
+     "start": "Uint64",
+     "end": "Uint64",
+     "contentType": "String"
+    }
+   }
+  },
+  "construct": {
+   "args": {
+    "blobParts": "String...",
+    "options": "BlobPropertyBag"
+   }
+  }
+ },
+ "EndingTypes": {
+  "type": "enum",
+  "values": [
+   "transparent",
+   "native"
+  ]
+ },
+ "BlobPropertyBag": {
+  "type": "dictionary",
+  "inherits": [],
+  "defaults": {
+   "type": "",
+   "endings": ""
+  }
+ },
+ "File": {
+  "type": "interface",
+  "inherits": [
+   "Blob"
+  ],
+  "readonly": {
+   "name": "String",
+   "lastModifiedDate": "Date"
+  }
+ },
+ "FileReader": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "methods": {
+   "readAsArrayBuffer": {
+    "args": {
+     "blob": "Blob"
+    }
+   },
+   "readAsText": {
+    "args": {
+     "blob": "Blob",
+     "encoding": "String"
+    }
+   },
+   "readAsDataURL": {
+    "args": {
+     "blob": "Blob"
+    }
+   },
+   "abort": {}
+  },
+  "constants": {
+   "EMPTY": 0,
+   "LOADING": 1,
+   "DONE": 2
+  },
+  "readonly": {
+   "readyState": "Uint16",
+   "result": [
+    "String",
+    "ArrayBuffer"
+   ],
+   "error": "DOMError"
+  },
+  "properties": {
+   "onloadstart": "Function",
+   "onprogress": "Function",
+   "onload": "Function",
+   "onabort": "Function",
+   "onerror": "Function",
+   "onloadend": "Function"
+  },
+  "construct": {}
+ },
+ "FileReaderSync": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "readAsArrayBuffer": {
+    "returns": "ArrayBuffer",
+    "args": {
+     "blob": "Blob"
+    }
+   },
+   "readAsText": {
+    "returns": "String",
+    "args": {
+     "blob": "Blob",
+     "encoding": "String"
+    }
+   },
+   "readAsDataURL": {
+    "returns": "String",
+    "args": {
+     "blob": "Blob"
+    }
+   }
+  },
+  "construct": {}
+ },
+ "URL": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "createObjectURL": {
+    "returns": "String",
+    "args": {
+     "blob": "Blob",
+     "options": "objectURLOptions"
+    }
+   },
+   "revokeObjectURL": {
+    "args": {
+     "url": "String"
+    }
+   }
+  }
+ },
+ "objectURLOptions": {
+  "type": "dictionary",
+  "inherits": [],
+  "defaults": {
+   "oneTimeOnly": false
+  }
+ }
 }

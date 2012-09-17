@@ -1,0 +1,1089 @@
+{
+ "DOMException": {
+  "type": "exception",
+  "inherits": [],
+  "constants": {
+   "INDEX_SIZE_ERR": 1,
+   "DOMSTRING_SIZE_ERR": 2,
+   "HIERARCHY_REQUEST_ERR": 3,
+   "WRONG_DOCUMENT_ERR": 4,
+   "INVALID_CHARACTER_ERR": 5,
+   "NO_DATA_ALLOWED_ERR": 6,
+   "NO_MODIFICATION_ALLOWED_ERR": 7,
+   "NOT_FOUND_ERR": 8,
+   "NOT_SUPPORTED_ERR": 9,
+   "INUSE_ATTRIBUTE_ERR": 10,
+   "INVALID_STATE_ERR": 11,
+   "SYNTAX_ERR": 12,
+   "INVALID_MODIFICATION_ERR": 13,
+   "NAMESPACE_ERR": 14,
+   "INVALID_ACCESS_ERR": 15,
+   "VALIDATION_ERR": 16,
+   "TYPE_MISMATCH_ERR": 17,
+   "SECURITY_ERR": 18,
+   "NETWORK_ERR": 19,
+   "ABORT_ERR": 20,
+   "URL_MISMATCH_ERR": 21,
+   "QUOTA_EXCEEDED_ERR": 22,
+   "TIMEOUT_ERR": 23,
+   "INVALID_NODE_TYPE_ERR": 24,
+   "DATA_CLONE_ERR": 25
+  },
+  "readonly": {
+   "code": "Uint16"
+  }
+ },
+ "DOMError": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "name": "String"
+  }
+ },
+ "Event": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "type": "String",
+   "target": "EventTarget",
+   "currentTarget": "EventTarget",
+   "eventPhase": "Uint16",
+   "bubbles": "Boolean",
+   "cancelable": "Boolean",
+   "defaultPrevented": "Boolean",
+   "isTrusted": "Boolean",
+   "timeStamp": "Uint64"
+  },
+  "constants": {
+   "NONE": 0,
+   "CAPTURING_PHASE": 1,
+   "AT_TARGET": 2,
+   "BUBBLING_PHASE": 3
+  },
+  "methods": {
+   "stopPropagation": {},
+   "stopImmediatePropagation": {},
+   "preventDefault": {},
+   "initEvent": {
+    "args": {
+     "type": "String",
+     "bubbles": "Boolean",
+     "cancelable": "Boolean"
+    }
+   }
+  },
+  "construct": {
+   "args": {
+    "type": "String",
+    "eventInitDict": "EventInit"
+   }
+  }
+ },
+ "EventInit": {
+  "type": "dictionary",
+  "inherits": [],
+  "defaults": {
+   "bubbles": false,
+   "cancelable": false
+  }
+ },
+ "CustomEvent": {
+  "type": "interface",
+  "inherits": [
+   "Event"
+  ],
+  "readonly": {
+   "detail": "Any"
+  },
+  "construct": {
+   "args": {
+    "type": "String",
+    "eventInitDict": "CustomEventInit"
+   }
+  }
+ },
+ "CustomEventInit": {
+  "type": "dictionary",
+  "inherits": [
+   "EventInit"
+  ],
+  "defaults": {
+   "detail": ""
+  }
+ },
+ "EventListener": {
+  "type": "callbackinterface",
+  "inherits": [],
+  "methods": {
+   "handleEvent": {
+    "args": {
+     "event": "Event"
+    }
+   }
+  }
+ },
+ "MutationObserver": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "observe": {
+    "args": {
+     "target": "Node",
+     "options": "MutationObserverInit"
+    }
+   },
+   "disconnect": {},
+   "takeRecords": {
+    "returns": "MutationRecord..."
+   }
+  },
+  "construct": {
+   "args": {
+    "callback": "MutationCallback"
+   }
+  }
+ },
+ "MutationCallback": {
+  "type": "callback"
+ },
+ "MutationObserverInit": {
+  "type": "dictionary",
+  "inherits": [],
+  "defaults": {
+   "childList": false,
+   "attributes": false,
+   "characterData": false,
+   "subtree": false,
+   "attributeOldValue": false,
+   "characterDataOldValue": false,
+   "attributeFilter": ""
+  }
+ },
+ "MutationRecord": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "type": "String",
+   "target": "Node",
+   "addedNodes": "NodeList",
+   "removedNodes": "NodeList",
+   "previousSibling": "Node",
+   "nextSibling": "Node",
+   "attributeName": "String",
+   "attributeNamespace": "String",
+   "oldValue": "String"
+  }
+ },
+ "Node": {
+  "type": "interface",
+  "inherits": [
+   "EventTarget"
+  ],
+  "constants": {
+   "ELEMENT_NODE": 1,
+   "ATTRIBUTE_NODE": 2,
+   "TEXT_NODE": 3,
+   "CDATA_SECTION_NODE": 4,
+   "ENTITY_REFERENCE_NODE": 5,
+   "ENTITY_NODE": 6,
+   "PROCESSING_INSTRUCTION_NODE": 7,
+   "COMMENT_NODE": 8,
+   "DOCUMENT_NODE": 9,
+   "DOCUMENT_TYPE_NODE": 10,
+   "DOCUMENT_FRAGMENT_NODE": 11,
+   "NOTATION_NODE": 12,
+   "DOCUMENT_POSITION_DISCONNECTED": 1,
+   "DOCUMENT_POSITION_PRECEDING": 2,
+   "DOCUMENT_POSITION_FOLLOWING": 4,
+   "DOCUMENT_POSITION_CONTAINS": 8,
+   "DOCUMENT_POSITION_CONTAINED_BY": 16,
+   "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC": 32
+  },
+  "readonly": {
+   "nodeType": "Uint16",
+   "nodeName": "String",
+   "baseURI": "String",
+   "ownerDocument": "Document",
+   "parentNode": "Node",
+   "parentElement": "Element",
+   "childNodes": "NodeList",
+   "firstChild": "Node",
+   "lastChild": "Node",
+   "previousSibling": "Node",
+   "nextSibling": "Node"
+  },
+  "methods": {
+   "hasChildNodes": {
+    "returns": "Boolean"
+   },
+   "insertBefore": {
+    "returns": "Node",
+    "args": {
+     "node": "Node",
+     "child": "Node"
+    }
+   },
+   "appendChild": {
+    "returns": "Node",
+    "args": {
+     "node": "Node"
+    }
+   },
+   "replaceChild": {
+    "returns": "Node",
+    "args": {
+     "node": "Node",
+     "child": "Node"
+    }
+   },
+   "removeChild": {
+    "returns": "Node",
+    "args": {
+     "child": "Node"
+    }
+   },
+   "normalize": {},
+   "cloneNode": {
+    "returns": "Node",
+    "args": {
+     "deep": "Boolean"
+    }
+   },
+   "isEqualNode": {
+    "returns": "Boolean",
+    "args": {
+     "node": "Node"
+    }
+   },
+   "compareDocumentPosition": {
+    "returns": "Uint16",
+    "args": {
+     "other": "Node"
+    }
+   },
+   "contains": {
+    "returns": "Boolean",
+    "args": {
+     "other": "Node"
+    }
+   },
+   "lookupPrefix": {
+    "returns": "String",
+    "args": {
+     "namespace": "String"
+    }
+   },
+   "lookupNamespaceURI": {
+    "returns": "String",
+    "args": {
+     "prefix": "String"
+    }
+   },
+   "isDefaultNamespace": {
+    "returns": "Boolean",
+    "args": {
+     "namespace": "String"
+    }
+   }
+  },
+  "properties": {
+   "nodeValue": "String",
+   "textContent": "String"
+  }
+ },
+ "Document": {
+  "type": "interface",
+  "inherits": [
+   "Node"
+  ],
+  "readonly": {
+   "implementation": "DOMImplementation",
+   "URL": "String",
+   "documentURI": "String",
+   "compatMode": "String",
+   "characterSet": "String",
+   "contentType": "String",
+   "doctype": "DocumentType",
+   "documentElement": "Element"
+  },
+  "methods": {
+   "getElementsByTagName": {
+    "returns": "HTMLCollection",
+    "args": {
+     "localName": "String"
+    }
+   },
+   "getElementsByTagNameNS": {
+    "returns": "HTMLCollection",
+    "args": {
+     "namespace": "String",
+     "localName": "String"
+    }
+   },
+   "getElementsByClassName": {
+    "returns": "HTMLCollection",
+    "args": {
+     "classNames": "String"
+    }
+   },
+   "getElementById": {
+    "returns": "Element",
+    "args": {
+     "elementId": "String"
+    }
+   },
+   "createElement": {
+    "returns": "Element",
+    "args": {
+     "localName": "String"
+    }
+   },
+   "createElementNS": {
+    "returns": "Element",
+    "args": {
+     "namespace": "String",
+     "qualifiedName": "String"
+    }
+   },
+   "createDocumentFragment": {
+    "returns": "DocumentFragment"
+   },
+   "createTextNode": {
+    "returns": "Text",
+    "args": {
+     "data": "String"
+    }
+   },
+   "createComment": {
+    "returns": "Comment",
+    "args": {
+     "data": "String"
+    }
+   },
+   "createProcessingInstruction": {
+    "returns": "ProcessingInstruction",
+    "args": {
+     "target": "String",
+     "data": "String"
+    }
+   },
+   "importNode": {
+    "returns": "Node",
+    "args": {
+     "node": "Node",
+     "deep": "Boolean"
+    }
+   },
+   "adoptNode": {
+    "returns": "Node",
+    "args": {
+     "node": "Node"
+    }
+   },
+   "createEvent": {
+    "returns": "Event",
+    "args": {
+     "interface": "String"
+    }
+   },
+   "createRange": {
+    "returns": "Range"
+   },
+   "createNodeIterator": {
+    "returns": "NodeIterator",
+    "args": {
+     "root": "Node",
+     "whatToShow": "Uint32",
+     "filter": "NodeFilter"
+    }
+   },
+   "createTreeWalker": {
+    "returns": "TreeWalker",
+    "args": {
+     "root": "Node",
+     "whatToShow": "Uint32",
+     "filter": "NodeFilter"
+    }
+   },
+   "prepend": {
+    "args": {
+     "nodes": [
+      "Node",
+      "String"
+     ]
+    }
+   },
+   "append": {
+    "args": {
+     "nodes": [
+      "Node",
+      "String"
+     ]
+    }
+   }
+  }
+ },
+ "XMLDocument": {
+  "type": "interface",
+  "inherits": [
+   "Document"
+  ]
+ },
+ "DOMImplementation": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "createDocumentType": {
+    "returns": "DocumentType",
+    "args": {
+     "qualifiedName": "String",
+     "publicId": "String",
+     "systemId": "String"
+    }
+   },
+   "createDocument": {
+    "returns": "XMLDocument",
+    "args": {
+     "namespace": "String",
+     "qualifiedName": "String",
+     "doctype": "DocumentType"
+    }
+   },
+   "createHTMLDocument": {
+    "returns": "Document",
+    "args": {
+     "title": "String"
+    }
+   },
+   "hasFeature": {
+    "returns": "Boolean",
+    "args": {
+     "feature": "String",
+     "version": "String"
+    }
+   }
+  }
+ },
+ "DocumentFragment": {
+  "type": "interface",
+  "inherits": [
+   "Node"
+  ],
+  "methods": {
+   "prepend": {
+    "args": {
+     "nodes": [
+      "Node",
+      "String"
+     ]
+    }
+   },
+   "append": {
+    "args": {
+     "nodes": [
+      "Node",
+      "String"
+     ]
+    }
+   }
+  }
+ },
+ "DocumentType": {
+  "type": "interface",
+  "inherits": [
+   "Node"
+  ],
+  "readonly": {
+   "name": "String",
+   "publicId": "String",
+   "systemId": "String"
+  },
+  "methods": {
+   "before": {
+    "args": {
+     "nodes": [
+      "Node",
+      "String"
+     ]
+    }
+   },
+   "after": {
+    "args": {
+     "nodes": [
+      "Node",
+      "String"
+     ]
+    }
+   },
+   "replace": {
+    "args": {
+     "nodes": [
+      "Node",
+      "String"
+     ]
+    }
+   },
+   "remove": {}
+  }
+ },
+ "Element": {
+  "type": "interface",
+  "inherits": [
+   "Node"
+  ],
+  "readonly": {
+   "namespaceURI": "String",
+   "prefix": "String",
+   "localName": "String",
+   "tagName": "String",
+   "classList": "DOMTokenList",
+   "attributes": "Attr...",
+   "children": "HTMLCollection",
+   "firstElementChild": "Element",
+   "lastElementChild": "Element",
+   "previousElementSibling": "Element",
+   "nextElementSibling": "Element",
+   "childElementCount": "Uint32"
+  },
+  "properties": {
+   "id": "String",
+   "className": "String"
+  },
+  "methods": {
+   "getAttribute": {
+    "returns": "String",
+    "args": {
+     "name": "String"
+    }
+   },
+   "getAttributeNS": {
+    "returns": "String",
+    "args": {
+     "namespace": "String",
+     "localName": "String"
+    }
+   },
+   "setAttribute": {
+    "args": {
+     "name": "String",
+     "value": "String"
+    }
+   },
+   "setAttributeNS": {
+    "args": {
+     "namespace": "String",
+     "name": "String",
+     "value": "String"
+    }
+   },
+   "removeAttribute": {
+    "args": {
+     "name": "String"
+    }
+   },
+   "removeAttributeNS": {
+    "args": {
+     "namespace": "String",
+     "localName": "String"
+    }
+   },
+   "hasAttribute": {
+    "returns": "Boolean",
+    "args": {
+     "name": "String"
+    }
+   },
+   "hasAttributeNS": {
+    "returns": "Boolean",
+    "args": {
+     "namespace": "String",
+     "localName": "String"
+    }
+   },
+   "getElementsByTagName": {
+    "returns": "HTMLCollection",
+    "args": {
+     "localName": "String"
+    }
+   },
+   "getElementsByTagNameNS": {
+    "returns": "HTMLCollection",
+    "args": {
+     "namespace": "String",
+     "localName": "String"
+    }
+   },
+   "getElementsByClassName": {
+    "returns": "HTMLCollection",
+    "args": {
+     "classNames": "String"
+    }
+   },
+   "prepend": {
+    "args": {
+     "nodes": [
+      "Node",
+      "String"
+     ]
+    }
+   },
+   "append": {
+    "args": {
+     "nodes": [
+      "Node",
+      "String"
+     ]
+    }
+   },
+   "before": {
+    "args": {
+     "nodes": [
+      "Node",
+      "String"
+     ]
+    }
+   },
+   "after": {
+    "args": {
+     "nodes": [
+      "Node",
+      "String"
+     ]
+    }
+   },
+   "replace": {
+    "args": {
+     "nodes": [
+      "Node",
+      "String"
+     ]
+    }
+   },
+   "remove": {}
+  }
+ },
+ "Attr": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "name": "String",
+   "namespaceURI": "String",
+   "prefix": "String",
+   "localName": "String"
+  },
+  "properties": {
+   "value": "String"
+  }
+ },
+ "CharacterData": {
+  "type": "interface",
+  "inherits": [
+   "Node"
+  ],
+  "properties": {
+   "data": "String"
+  },
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "substringData": {
+    "returns": "String",
+    "args": {
+     "offset": "Uint32",
+     "count": "Uint32"
+    }
+   },
+   "appendData": {
+    "args": {
+     "data": "String"
+    }
+   },
+   "insertData": {
+    "args": {
+     "offset": "Uint32",
+     "data": "String"
+    }
+   },
+   "deleteData": {
+    "args": {
+     "offset": "Uint32",
+     "count": "Uint32"
+    }
+   },
+   "replaceData": {
+    "args": {
+     "offset": "Uint32",
+     "count": "Uint32",
+     "data": "String"
+    }
+   },
+   "before": {
+    "args": {
+     "nodes": [
+      "Node",
+      "String"
+     ]
+    }
+   },
+   "after": {
+    "args": {
+     "nodes": [
+      "Node",
+      "String"
+     ]
+    }
+   },
+   "replace": {
+    "args": {
+     "nodes": [
+      "Node",
+      "String"
+     ]
+    }
+   },
+   "remove": {}
+  }
+ },
+ "Text": {
+  "type": "interface",
+  "inherits": [
+   "CharacterData"
+  ],
+  "methods": {
+   "splitText": {
+    "returns": "Text",
+    "args": {
+     "offset": "Uint32"
+    }
+   }
+  },
+  "readonly": {
+   "wholeText": "String"
+  }
+ },
+ "ProcessingInstruction": {
+  "type": "interface",
+  "inherits": [
+   "CharacterData"
+  ],
+  "readonly": {
+   "target": "String",
+   "sheet": "StyleSheet"
+  }
+ },
+ "Comment": {
+  "type": "interface",
+  "inherits": [
+   "CharacterData"
+  ]
+ },
+ "Range": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "startContainer": "Node",
+   "startOffset": "Uint32",
+   "endContainer": "Node",
+   "endOffset": "Uint32",
+   "collapsed": "Boolean",
+   "commonAncestorContainer": "Node"
+  },
+  "methods": {
+   "setStart": {
+    "args": {
+     "refNode": "Node",
+     "offset": "Uint32"
+    }
+   },
+   "setEnd": {
+    "args": {
+     "refNode": "Node",
+     "offset": "Uint32"
+    }
+   },
+   "setStartBefore": {
+    "args": {
+     "refNode": "Node"
+    }
+   },
+   "setStartAfter": {
+    "args": {
+     "refNode": "Node"
+    }
+   },
+   "setEndBefore": {
+    "args": {
+     "refNode": "Node"
+    }
+   },
+   "setEndAfter": {
+    "args": {
+     "refNode": "Node"
+    }
+   },
+   "collapse": {
+    "args": {
+     "toStart": "Boolean"
+    }
+   },
+   "selectNode": {
+    "args": {
+     "refNode": "Node"
+    }
+   },
+   "selectNodeContents": {
+    "args": {
+     "refNode": "Node"
+    }
+   },
+   "compareBoundaryPoints": {
+    "returns": "Int16",
+    "args": {
+     "how": "Uint16",
+     "sourceRange": "Range"
+    }
+   },
+   "deleteContents": {},
+   "extractContents": {
+    "returns": "DocumentFragment"
+   },
+   "cloneContents": {
+    "returns": "DocumentFragment"
+   },
+   "insertNode": {
+    "args": {
+     "node": "Node"
+    }
+   },
+   "surroundContents": {
+    "args": {
+     "newParent": "Node"
+    }
+   },
+   "cloneRange": {
+    "returns": "Range"
+   },
+   "detach": {},
+   "isPointInRange": {
+    "returns": "Boolean",
+    "args": {
+     "node": "Node",
+     "offset": "Uint32"
+    }
+   },
+   "comparePoint": {
+    "returns": "Int16",
+    "args": {
+     "node": "Node",
+     "offset": "Uint32"
+    }
+   },
+   "intersectsNode": {
+    "returns": "Boolean",
+    "args": {
+     "node": "Node"
+    }
+   }
+  },
+  "constants": {
+   "START_TO_START": 0,
+   "START_TO_END": 1,
+   "END_TO_END": 2,
+   "END_TO_START": 3
+  }
+ },
+ "NodeIterator": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "root": "Node",
+   "referenceNode": "Node",
+   "pointerBeforeReferenceNode": "Boolean",
+   "whatToShow": "Uint32",
+   "filter": "NodeFilter"
+  },
+  "methods": {
+   "nextNode": {
+    "returns": "Node"
+   },
+   "previousNode": {
+    "returns": "Node"
+   },
+   "detach": {}
+  }
+ },
+ "TreeWalker": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "root": "Node",
+   "whatToShow": "Uint32",
+   "filter": "NodeFilter"
+  },
+  "properties": {
+   "currentNode": "Node"
+  },
+  "methods": {
+   "parentNode": {
+    "returns": "Node"
+   },
+   "firstChild": {
+    "returns": "Node"
+   },
+   "lastChild": {
+    "returns": "Node"
+   },
+   "previousSibling": {
+    "returns": "Node"
+   },
+   "nextSibling": {
+    "returns": "Node"
+   },
+   "previousNode": {
+    "returns": "Node"
+   },
+   "nextNode": {
+    "returns": "Node"
+   }
+  }
+ },
+ "NodeFilter": {
+  "type": "callbackinterface",
+  "inherits": [],
+  "constants": {
+   "FILTER_ACCEPT": 1,
+   "FILTER_REJECT": 2,
+   "FILTER_SKIP": 3,
+   "SHOW_ALL": 4294967295,
+   "SHOW_ELEMENT": 1,
+   "SHOW_ATTRIBUTE": 2,
+   "SHOW_TEXT": 4,
+   "SHOW_CDATA_SECTION": 8,
+   "SHOW_ENTITY_REFERENCE": 16,
+   "SHOW_ENTITY": 32,
+   "SHOW_PROCESSING_INSTRUCTION": 64,
+   "SHOW_COMMENT": 128,
+   "SHOW_DOCUMENT": 256,
+   "SHOW_DOCUMENT_TYPE": 512,
+   "SHOW_DOCUMENT_FRAGMENT": 1024,
+   "SHOW_NOTATION": 2048
+  },
+  "methods": {
+   "acceptNode": {
+    "returns": "Uint16",
+    "args": {
+     "node": "Node"
+    }
+   }
+  }
+ },
+ "NodeList": {
+  "type": "interface",
+  "inherits": [],
+  "methods": {
+   "item": {
+    "returns": "Node",
+    "args": {
+     "index": "Uint32"
+    }
+   }
+  },
+  "readonly": {
+   "length": "Uint32"
+  },
+  "ArrayClass": true
+ },
+ "HTMLCollection": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "item": {
+    "returns": "Element",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "namedItem": {
+    "returns": "Object",
+    "args": {
+     "name": "String"
+    }
+   }
+  }
+ },
+ "DOMStringList": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "item": {
+    "returns": "String",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "contains": {
+    "returns": "Boolean",
+    "args": {
+     "string": "String"
+    }
+   }
+  },
+  "NoInterfaceObject": true
+ },
+ "DOMTokenList": {
+  "type": "interface",
+  "inherits": [],
+  "readonly": {
+   "length": "Uint32"
+  },
+  "methods": {
+   "item": {
+    "returns": "String",
+    "args": {
+     "index": "Uint32"
+    }
+   },
+   "contains": {
+    "returns": "Boolean",
+    "args": {
+     "token": "String"
+    }
+   },
+   "add": {
+    "args": {
+     "token": "String"
+    }
+   },
+   "remove": {
+    "args": {
+     "token": "String"
+    }
+   },
+   "toggle": {
+    "returns": "Boolean",
+    "args": {
+     "token": "String"
+    }
+   },
+   "toString": {
+    "returns": "String"
+   }
+  }
+ },
+ "DOMSettableTokenList": {
+  "type": "interface",
+  "inherits": [
+   "DOMTokenList"
+  ],
+  "properties": {
+   "value": "String"
+  }
+ }
+}

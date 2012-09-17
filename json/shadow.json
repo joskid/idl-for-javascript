@@ -1,93 +1,66 @@
 {
-	"ShadowRoot": {
-		"type": "interface",
-		"inherits": [
-			"DocumentFragment"
-		],
-		"operations": {
-			"getElementById": {
-				"returns": "HTMLElement",
-				"args": {
-					"elementId": "String"
-				}
-			},
-			"getElementsByClassName": {
-				"returns": "NodeList",
-				"args": {
-					"tagName": "String"
-				}
-			},
-			"getElementsByTagName": {
-				"returns": "NodeList",
-				"args": {
-					"className": "String"
-				}
-			},
-			"getElementsByTagNameNS": {
-				"returns": "NodeList",
-				"args": {
-					"namespace": "String",
-					"localName": "String"
-				}
-			},
-			"getSelection": {
-				"returns": "Selection"
-			},
-			"querySelector": {
-				"returns": "Element",
-				"args": {
-					"selectors": "String",
-					"refNodes": "Any"
-				}
-			},
-			"querySelectorAll": {
-				"returns": "NodeList",
-				"args": {
-					"selectors": "String",
-					"refNodes": "Any"
-				}
-			},
-			"queryScopedSelector": {
-				"returns": "Element",
-				"args": {
-					"selectors": "String"
-				}
-			},
-			"queryScopedSelectorAll": {
-				"returns": "NodeList",
-				"args": {
-					"selectors": "String"
-				}
-			}
-		},
-		"attributes": {
-			"applyAuthorStyles": "bool",
-			"resetStyleInheritance": "bool",
-			"innerHTML": "String"
-		},
-		"readonlys": {
-			"activeElement": "Element"
-		},
-		"construct": {
-			"args": {
-				"host": "HTMLElement"
-			}
-		},
-		"Supplemental": true
-	},
-	"HTMLContentElement": {
-		"type": "interface",
-		"inherits": [
-			"HTMLElement"
-		],
-		"attributes": {
-			"select": "String"
-		}
-	},
-	"HTMLShadowElement": {
-		"type": "interface",
-		"inherits": [
-			"HTMLElement"
-		]
-	}
+ "ShadowRoot": {
+  "type": "interface",
+  "inherits": [
+   "DocumentFragment"
+  ],
+  "methods": {
+   "getElementById": {
+    "returns": "HTMLElement",
+    "args": {
+     "elementId": "String"
+    }
+   },
+   "getElementsByClassName": {
+    "returns": "NodeList",
+    "args": {
+     "tagName": "String"
+    }
+   },
+   "getElementsByTagName": {
+    "returns": "NodeList",
+    "args": {
+     "className": "String"
+    }
+   },
+   "getElementsByTagNameNS": {
+    "returns": "NodeList",
+    "args": {
+     "namespace": "String",
+     "localName": "String"
+    }
+   },
+   "getSelection": {
+    "returns": "Selection"
+   }
+  },
+  "properties": {
+   "applyAuthorStyles": "bool",
+   "resetStyleInheritance": "bool",
+   "innerHTML": "String"
+  },
+  "readonly": {
+   "activeElement": "Element"
+  },
+  "construct": {
+   "args": {
+    "host": "HTMLElement"
+   }
+  }
+ },
+ "HTMLContentElement": {
+  "type": "interface",
+  "inherits": [
+   "HTMLElement"
+  ],
+  "properties": {
+   "select": "String"
+  }
+ },
+ "HTMLShadowElement": {
+  "type": "interface",
+  "inherits": [
+   "HTMLElement"
+  ]
+ }
 }
