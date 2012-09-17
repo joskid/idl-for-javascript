@@ -4,69 +4,12 @@ var parseIDL = require('webidl.js').webidl;
 var tags = require('./json/_tags');
 var zlib = require('zlib');
 
-tags = Object.keys(tags).reduce(function(ret, type){
-  Object.keys(tags[type]).forEach(function(tag){
-    if (tags[type][tag] === '')
-      var name = type + tag[0].toUpperCase() + tag.slice(1) + 'Element'
-    else
-      var name = type + tags[type][tag] + 'Element';
-    ret[name] = tag;
-  });
-  return ret;
-}, {});
 
 
-
-var allDefinitions = {},
-    allImplements = [];
-
-var types = {
-  'unsigned short'     : 'Uint16',
-  'unsigned long'      : 'Uint32',
-  'unsigned long long' : 'Uint64',
-  octet                : 'Int8',
-  short                : 'Int16',
-  long                 : 'Int32',
-  'long long'          : 'Int64',
-  float                : 'Float32',
-  single               : 'Float32',
-  'unrestricted float': 'Float32',
-  double               : 'Float64',
-  'unrestricted double': 'Float64',
-  DOMTimeStamp         : 'Number',
-  DOMString            : 'String',
-  boolean              : 'Boolean',
-  object               : 'Object',
-  DOMObject            : 'Object',
-  void                 : 'Void',
-  DOMUserData          : 'Any',
-  any                  : 'Any',
-  WindowProxy          : 'Window'
-};
-
-function isObject(o){
-  return Object(o) === o;
+function recase(s){
+  return s[0].toUpperCase() + s.slice(1);
 }
 
-function type(json){
-  if (json === 'void')
-    return 'Void';
-  if (isObject(json)) {
-    if (json.idlType === 'union')
-      return json.members.map(type);
-    if (isObject(json.idlType))
-      return type(json.idlType);
-    if (!types[json.idlType])
-      return json.idlType;
-    var name = types[json.idlType];
-    if (json.sequence)
-      name += 'Sequence';
-    if (json.array)
-      name += 'Array';
-
-    return name;
-  }
-}
 
 function hidden(o, n, v){
   Object.defineProperty(o, n, {
@@ -77,18 +20,23 @@ function hidden(o, n, v){
   });
 }
 
-function arrayize(a, b){
-  if (a === b)
-    return a;
-  a = Array.isArray(a) ? a : [a];
-  if (!~a.indexOf(b))
-    a.push(b);
+function isObject(o){
+  return o != null && typeof o === 'object' || typeof o === 'function';
+}
+
+
+function arrayify(a, b){
+  if (a !== b) {
+    a instanceof Array || (a = [a]);
+    ~a.indexOf(b) || a.push(b);
+  }
   return a;
 }
 
+
 function merge(from, to){
   isObject(from) && isObject(to) && Object.keys(from).forEach(function(key){
-    if (key === 'NoInterfaceObject') return;
+    if (key in filter) return;
     if (key in to)  {
       merge(from[key], to[key]);
     } else
@@ -96,11 +44,87 @@ function merge(from, to){
   });
 }
 
+
+Object.keys(tags).forEach(function(type){
+  var tagset = tags[type],
+      name = [type, , 'Element'];
+
+  name.toString = function(){ return this.join('') };
+  delete tags[type];
+
+  Object.keys(tagset).forEach(function(tag){
+    name[1] = tagset[tag] || recase(tag);
+    tags[name] = tag;
+  });
+});
+
+
+
+
+var allDefinitions = {},
+    allImplements = [];
+
+var typeMap = {
+  'byte'               : 'Uint8',
+  'unsigned short'     : 'Uint16',
+  'unsigned long'      : 'Uint32',
+  'unsigned long long' : 'Uint64',
+  'octet'              : 'Int8',
+  'short'              : 'Int16',
+  'long'               : 'Int32',
+  'long long'          : 'Int64',
+  'float'              : 'Float32',
+  'single'             : 'Float32',
+  'unrestricted float' : 'Float32',
+  'double'             : 'Float64',
+  'unrestricted double': 'Float64',
+  'DOMString'          : 'String',
+  'boolean'            : 'Boolean',
+  'object'             : 'Object',
+  'void'               : 'Void',
+  'any'                : 'Any',
+  'WindowProxy'        : 'Window'
+};
+
+var filter = {
+  NoInterfaceObject: true,
+  Supplemental: true,
+  NamedPropertiesObject: true
+};
+
+
+function interpretType(json){
+  if (!json)
+    return 'Void';
+
+  if (typeof json === 'string')
+    return typeMap[json];
+
+  if (json.idlType === 'union')
+    return json.members.map(interpretType);
+
+  var name = isObject(json.idlType) ? interpretType(json.idlType) : json.idlType;
+
+  if (name in typeMap)
+    name = typeMap[name];
+
+  if (json.sequence)
+    name = name+'...';
+
+  if (json.array)
+    name = name+'...';
+
+  return name;
+}
+
+
 var definitionTypes = {
   implements: function(json){
     allImplements.push(json);
   },
-  typedef: function(json){},
+  typedef: function(json){
+    typeMap[json.name] = interpretType(json);
+  },
   interface: function(json){
     return new Interface(json);
   },
@@ -115,10 +139,8 @@ var definitionTypes = {
   },
   partialinterface: function(json){
     var iface = new Interface(json);
-    if (json.name in allDefinitions) {
-      merge(iface, allDefinitions[json.name]);
-      iface = allDefinitions[json.name];
-    }
+    if (json.name in allDefinitions)
+      iface = merge(iface, allDefinitions[json.name]);
     return iface;
   },
   dictionary: function(json){
@@ -130,20 +152,20 @@ var definitionTypes = {
 };
 
 var memberTypes = {
-  const: function(o){
+  const: function constants(o){
     return isFinite(o.value) ? +o.value : o.value;
   },
-  operation: function(o){
+  operation: function methods(o){
     return new Operation(o);
   },
-  readonly: function(o){
-    return type(o.idlType);
+  readonly: function readonly(o){
+    return interpretType(o.idlType);
   },
-  attribute: function(o){
-    return type(o.idlType);
+  attribute: function properties(o){
+    return interpretType(o.idlType);
   },
-  accessor: function(o){
-    return new Operation(o);
+  accessor: function accessors(o){
+    return new Accessor(o);
   }
 };
 
@@ -155,6 +177,7 @@ Definition.prototype = {};
 
 
 
+
 function Interface(json){
   if (!json) return;
   this.type = 'interface';
@@ -163,11 +186,14 @@ function Interface(json){
   if (json.name in tags)
     this.tag = tags[json.name];
   this.inherits = json.inheritance ? typeof json.inheritance === 'string' ? [json.inheritance] : json.inheritance : [];
-  json.members && json.members.forEach(function(member){
+
+  Object(json.members).forEach(function(member){
     if (member.type === 'field')
       member.type = 'readonly';
+
     if (member.readonly)
       member.type = 'readonly';
+
     if (!member.name) {
       if (member.stringifier)
         member.name = 'toString';
@@ -176,22 +202,81 @@ function Interface(json){
         member.name = member[0];
       }
     }
-    var t = member.type + 's';
-    var n = member.name;
-    var set = this[t] = this[t] || Object.create(null);
-    if (!(member.type in memberTypes))
-      return console.log(member);
-    var item = memberTypes[member.type](member);
-    if (n in set && t === 'operations') {
-      var existing = set[n];
-      existing.returns = arrayize(existing.returns, item.returns);
-      existing.args = existing.args || {};
-      Object.keys(item.args).forEach(function(name){
-        existing.args[name] = name in existing.args ? arrayize(existing.args[name], item.args[name]) : item.args[name];
+
+    var type = memberTypes[member.type].name,
+        set = this[type] = this[type] || Object.create(null),
+        item = memberTypes[member.type](member),
+        itemArgs = item.args;
+
+    if (member.name in set && type === 'methods') {
+      var existing = set[member.name],
+          existingArgs = existing.args = existing.args || {};
+
+      existing.returns = arrayify(existing.returns, item.returns);
+
+      Object.keys(itemArgs).forEach(function(name){
+        if (name in existingArgs)
+          existingArgs[name] = arrayify(existingArgs[name], itemArgs[name]);
+        else
+          existingArgs[name] = itemArgs[name];
       });
-    } else
-      set[n] = item;
+    } else {
+      set[member.name] = item;
+    }
   }, this);
+
+  if (this.accessors) {
+    void function(){
+      var type = {
+        index: false,
+        key: false
+      };
+      var actions = {
+        deleter: false,
+        getter: false,
+        setter: false,
+        creator: false,
+        legacycaller: false
+      };
+      var itemTypes = {};
+      for (var k in this.accessors) {
+        if (k === 'legacycaller') {
+          this.legacyCaller = this.accessors[k];
+          if (Object.keys(this.accessors) === 1)
+            return;
+        }
+        actions[k] = true;
+        if ('accessedBy' in this.accessors[k])
+          type[this.accessors[k].accessedBy] = true;
+        if ('itemType' in this.accessors[k])
+          itemTypes[this.accessors[k].itemType] = true;
+      }
+      itemTypes = Object.keys(itemTypes);
+      if (itemTypes.length === 1)
+        itemTypes = itemTypes[0];
+
+      for (var k in type) {
+        if (type[k]) {
+          var accessor = this[k + 'ed'] = {
+            itemType: itemTypes,
+          };
+          if (actions.setter || actions.deleter || actions.creator) {
+            if (actions.setter)
+              accessor.writable = true;
+            if (actions.deleter)
+              accessor.deletable = true
+            if (actions.creator)
+              accessor.creatable = true;
+          } else {
+            accessor.readonly = true;
+          }
+
+        }
+      }
+      delete this.accessors;
+    }.call(this);
+  }
+
   if (json.extAttrs) {
     json.extAttrs.forEach(function(attr){
       if (Object.keys(attr).length === 1 && attr.name) {
@@ -238,9 +323,10 @@ function uncoerce(type, value){
     case 'Uint8':
     case 'Uint16':
     case 'Uint32':
+      return ~~value;
     case 'Float32':
     case 'Float64':
-      return Number(value) || 0;
+      return +value || 0;
     default:
       return value === 'null' ? null : value;
   }
@@ -250,9 +336,10 @@ function uncoerce(type, value){
 function Dictionary(json){
   this.type = 'dictionary';
   hidden(this, 'name', json.name);
-  var members = this.members = {};
+  this.inherits = json.inheritance ? typeof json.inheritance === 'string' ? [json.inheritance] : json.inheritance : [];
+  var defaults = this.defaults = {};
   json.members.forEach(function(member){
-    members[member.name] = uncoerce(type(member.type), member.defaultValue);
+    defaults[member.name] = uncoerce(interpretType(member.type), member.defaultValue);
   });
 }
 
@@ -288,28 +375,76 @@ CallbackInterface.prototype = Object.create(Interface.prototype);
 
 function Operation(json){
   hidden(this, 'name', json.name);
-  var t = type(json.idlType);
+  var t = interpretType(json.idlType);
   if (t !== 'Void')
     this.returns = t;
   var args = {};
   if (isObject(json.arguments)) {
     json.arguments.forEach(function(s){
-      args[s.name] = type(s.type);
+      args[s.name] = interpretType(s.type);
     });
   }
   if (Object.keys(args).length)
     this.args = args;
-  if (json.extAttrs)
-    console.log(json.extAttrs);
+  if (json.extAttrs) {
+    json.extAttrs.forEach(function(attr){
+      if (Object.keys(attr).length === 1 && attr.name) {
+        this[attr.name] = true;
+      } else {
+        this[attr.name] = attr;
+        delete attr.name
+      }
+    }, this);
+  }
 }
 
 
 function Callback(json){
-  Operation.call(this, json);
   this.type = 'callback';
+  Operation.call(this, json);
 }
 
 Callback.prototype = Object.create(Operation.prototype);
+
+
+
+function Accessor(json){
+  var type = interpretType(json.idlType);
+
+
+  if (isObject(json.arguments) && json.arguments.length) {
+    json.arguments.forEach(function(arg){
+      this[arg.name] = interpretType(arg.type);
+    }, this.args = {});
+    if (this.args.index) {
+      this.accessedBy = 'index';
+      delete this.args.index;
+    } else if (this.args.name) {
+      this.accessedBy = 'key';
+      delete this.args.name;
+    }
+  }
+
+
+  switch (json.name) {
+    case 'getter':
+      this.itemType = type;
+      break;
+    case 'setter':
+    case 'creator':
+      var keyname = Object.keys(this.args)[0];
+      this.itemType = this.args[keyname];
+      delete this.args[keyname];
+      break;
+  }
+  if (!Object.keys(Object(this.args)).length)
+    delete this.args;
+
+  if (json.extAttrs)
+    merge(json.extAttrs, this);
+}
+
+Accessor.prototype = Object.create(Operation.prototype);
 
 
 var conversionStanza = [
@@ -344,7 +479,7 @@ var conversionStanza = [
   },
 
   function stringify(state, json){
-    return [JSON.stringify(json, null, '\t'), JSON.stringify(json)];
+    return [JSON.stringify(json, null, ' '), JSON.stringify(json)];
   },
 
   function save(state, text){
