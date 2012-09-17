@@ -1,0 +1,180 @@
+partial interface CSSStyleDeclaration {
+  readonly attribute CSSStyleDeclarationValue values;
+};
+
+interface CSSStyleDeclarationValue {
+  // CSS Properties
+  readonly attribute CSSPropertyValue azimuth;
+  readonly attribute CSSPropertyValue background;
+  readonly attribute CSSPropertyValue backgroundAttachment;
+  readonly attribute CSSPropertyValue backgroundColor;
+  readonly attribute CSSPropertyValue backgroundImage;
+  readonly attribute CSSPropertyValue backgroundPosition;
+  readonly attribute CSSPropertyValue backgroundRepeat;
+  readonly attribute CSSPropertyValue border;
+  readonly attribute CSSPropertyValue borderCollapse;
+  readonly attribute CSSPropertyValue borderColor;
+  readonly attribute CSSPropertyValue borderSpacing;
+  readonly attribute CSSPropertyValue borderStyle;
+  readonly attribute CSSPropertyValue borderTop;
+  readonly attribute CSSPropertyValue borderRight;
+  readonly attribute CSSPropertyValue borderBottom;
+  readonly attribute CSSPropertyValue borderLeft;
+  readonly attribute CSSPropertyValue borderTopColor;
+  readonly attribute CSSPropertyValue borderRightColor;
+  readonly attribute CSSPropertyValue borderBottomColor;
+  readonly attribute CSSPropertyValue borderLeftColor;
+  readonly attribute CSSPropertyValue borderTopStyle;
+  readonly attribute CSSPropertyValue borderRightStyle;
+  readonly attribute CSSPropertyValue borderBottomStyle;
+  readonly attribute CSSPropertyValue borderLeftStyle;
+  readonly attribute CSSPropertyValue borderTopWidth;
+  readonly attribute CSSPropertyValue borderRightWidth;
+  readonly attribute CSSPropertyValue borderBottomWidth;
+  readonly attribute CSSPropertyValue borderLeftWidth;
+  readonly attribute CSSPropertyValue borderWidth;
+  readonly attribute CSSPropertyValue bottom;
+  readonly attribute CSSPropertyValue captionSide;
+  readonly attribute CSSPropertyValue clear;
+  readonly attribute CSSPropertyValue clip;
+  readonly attribute CSSPropertyValue color;
+  readonly attribute CSSPropertyValue content;
+  readonly attribute CSSPropertyValue counterIncrement;
+  readonly attribute CSSPropertyValue counterReset;
+  readonly attribute CSSPropertyValue cue;
+  readonly attribute CSSPropertyValue cueAfter;
+  readonly attribute CSSPropertyValue cueBefore;
+  readonly attribute CSSPropertyValue cursor;
+  readonly attribute CSSPropertyValue direction;
+  readonly attribute CSSPropertyValue display;
+  readonly attribute CSSPropertyValue elevation;
+  readonly attribute CSSPropertyValue emptyCells;
+  readonly attribute CSSPropertyValue cssFloat;
+  readonly attribute CSSPropertyValue font;
+  readonly attribute CSSPropertyValue fontFamily;
+  readonly attribute CSSPropertyValue fontSize;
+  readonly attribute CSSPropertyValue fontSizeAdjust;
+  readonly attribute CSSPropertyValue fontStretch;
+  readonly attribute CSSPropertyValue fontStyle;
+  readonly attribute CSSPropertyValue fontVariant;
+  readonly attribute CSSPropertyValue fontWeight;
+  readonly attribute CSSPropertyValue height;
+  readonly attribute CSSPropertyValue left;
+  readonly attribute CSSPropertyValue letterSpacing;
+  readonly attribute CSSPropertyValue lineHeight;
+  readonly attribute CSSPropertyValue listStyle;
+  readonly attribute CSSPropertyValue listStyleImage;
+  readonly attribute CSSPropertyValue listStylePosition;
+  readonly attribute CSSPropertyValue listStyleType;
+  readonly attribute CSSPropertyValue margin;
+  readonly attribute CSSPropertyValue marginTop;
+  readonly attribute CSSPropertyValue marginRight;
+  readonly attribute CSSPropertyValue marginBottom;
+  readonly attribute CSSPropertyValue marginLeft;
+  readonly attribute CSSPropertyValue markerOffset;
+  readonly attribute CSSPropertyValue marks;
+  readonly attribute CSSPropertyValue maxHeight;
+  readonly attribute CSSPropertyValue maxWidth;
+  readonly attribute CSSPropertyValue minHeight;
+  readonly attribute CSSPropertyValue minWidth;
+  readonly attribute CSSPropertyValue orphans;
+  readonly attribute CSSPropertyValue outline;
+  readonly attribute CSSPropertyValue outlineColor;
+  readonly attribute CSSPropertyValue outlineStyle;
+  readonly attribute CSSPropertyValue outlineWidth;
+  readonly attribute CSSPropertyValue overflow;
+  readonly attribute CSSPropertyValue padding;
+  readonly attribute CSSPropertyValue paddingTop;
+  readonly attribute CSSPropertyValue paddingRight;
+  readonly attribute CSSPropertyValue paddingBottom;
+  readonly attribute CSSPropertyValue paddingLeft;
+  readonly attribute CSSPropertyValue page;
+  readonly attribute CSSPropertyValue pageBreakAfter;
+  readonly attribute CSSPropertyValue pageBreakBefore;
+  readonly attribute CSSPropertyValue pageBreakInside;
+  readonly attribute CSSPropertyValue pause;
+  readonly attribute CSSPropertyValue pauseAfter;
+  readonly attribute CSSPropertyValue pauseBefore;
+  readonly attribute CSSPropertyValue pitch;
+  readonly attribute CSSPropertyValue pitchRange;
+  readonly attribute CSSPropertyValue playDuring;
+  readonly attribute CSSPropertyValue position;
+  readonly attribute CSSPropertyValue quotes;
+  readonly attribute CSSPropertyValue richness;
+  readonly attribute CSSPropertyValue right;
+  readonly attribute CSSPropertyValue size;
+  readonly attribute CSSPropertyValue speak;
+  readonly attribute CSSPropertyValue speakHeader;
+  readonly attribute CSSPropertyValue speakNumeral;
+  readonly attribute CSSPropertyValue speakPunctuation;
+  readonly attribute CSSPropertyValue speechRate;
+  readonly attribute CSSPropertyValue stress;
+  readonly attribute CSSPropertyValue tableLayout;
+  readonly attribute CSSPropertyValue textAlign;
+  readonly attribute CSSPropertyValue textDecoration;
+  readonly attribute CSSPropertyValue textIndent;
+  readonly attribute CSSPropertyValue textShadow;
+  readonly attribute CSSPropertyValue textTransform;
+  readonly attribute CSSPropertyValue top;
+  readonly attribute CSSPropertyValue unicodeBidi;
+  readonly attribute CSSPropertyValue verticalAlign;
+  readonly attribute CSSPropertyValue visibility;
+  readonly attribute CSSPropertyValue voiceFamily;
+  readonly attribute CSSPropertyValue volume;
+  readonly attribute CSSPropertyValue whiteSpace;
+  readonly attribute CSSPropertyValue widows;
+  readonly attribute CSSPropertyValue width;
+  readonly attribute CSSPropertyValue wordSpacing;
+  readonly attribute CSSPropertyValue zIndex;
+};
+
+interface CSSPropertyValue {
+           attribute DOMString cssText;
+};
+
+[NoInterfaceObject] interface CSSPropertyValueList {
+  readonly attribute CSSValue[] list;
+};
+
+[NoInterfaceObject] interface CSSMapValue {
+  getter CSSValue (DOMString name);
+};
+
+[NoInterfaceObject] interface CSSComponentValue {
+  readonly attribute DOMString type;
+           attribute any value;
+};
+
+[NoInterfaceObject] interface CSSColorComponentValue {
+           attribute short red;
+           attribute short green;
+           attribute short blue;
+           attribute float alpha;
+};
+
+[NoInterfaceObject] interface CSSIdentifierComponentValue {
+           attribute DOMString identifier;
+};
+
+[NoInterfaceObject] interface CSSKeywordComponentValue {
+           attribute DOMString keyword;
+};
+
+[NoInterfaceObject] interface CSSLengthComponentValue {
+           attribute float em;
+           attribute float ex;
+           attribute float px;
+           // figure out what to do with absolute lengths
+};
+
+[NoInterfaceObject] interface CSSPercentageComponentValue {
+           attribute float percent;
+};
+
+[NoInterfaceObject] interface CSSStringComponentValue {
+           attribute DOMString string;
+};
+
+[NoInterfaceObject] interface CSSURLComponentValue {
+           attribute DOMString? url;
+};

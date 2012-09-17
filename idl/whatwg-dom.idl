@@ -72,8 +72,8 @@ dictionary CustomEventInit : EventInit {
 };
 
 interface EventTarget {
-  void addEventListener(DOMString type, EventListener? callback, optional boolean capture);// = false);
-  void removeEventListener(DOMString type, EventListener? callback, optional boolean capture);// = false);
+  void addEventListener(DOMString type, EventListener? callback, optional boolean capture);
+  void removeEventListener(DOMString type, EventListener? callback, optional boolean capture);
   boolean dispatchEvent(Event event);
 };
 
@@ -97,7 +97,7 @@ dictionary MutationObserverInit {
   boolean subtree;
   boolean attributeOldValue;
   boolean characterDataOldValue;
-  DOMString[] attributeFilter;
+  sequence<DOMString> attributeFilter;
 };
 
 interface MutationRecord {
@@ -140,6 +140,17 @@ interface Node : EventTarget {
   readonly attribute Node? previousSibling;
   readonly attribute Node? nextSibling;
 
+           attribute DOMString? nodeValue;
+           attribute DOMString? textContent;
+  Node insertBefore(Node node, Node? child);
+  Node appendChild(Node node);
+  Node replaceChild(Node node, Node child);
+  Node removeChild(Node child);
+  void normalize();
+
+  Node cloneNode(optional boolean deep);
+  boolean isEqualNode(Node? node);
+
   const unsigned short DOCUMENT_POSITION_DISCONNECTED = 0x01;
   const unsigned short DOCUMENT_POSITION_PRECEDING = 0x02;
   const unsigned short DOCUMENT_POSITION_FOLLOWING = 0x04;
@@ -149,20 +160,8 @@ interface Node : EventTarget {
   unsigned short compareDocumentPosition(Node other);
   boolean contains(Node? other);
 
-           attribute DOMString? nodeValue;
-           attribute DOMString? textContent;
-  Node insertBefore(Node node, Node? child);
-  Node appendChild(Node node);
-  Node replaceChild(Node node, Node child);
-  Node removeChild(Node child);
-  void normalize();
-
-  
-  Node cloneNode(optional boolean deep);// = true);
-  boolean isEqualNode(Node? node);
-
-  DOMString lookupPrefix(DOMString? namespace);
-  DOMString lookupNamespaceURI(DOMString? prefix);
+  DOMString? lookupPrefix(DOMString? namespace);
+  DOMString? lookupNamespaceURI(DOMString? prefix);
   boolean isDefaultNamespace(DOMString? namespace);
 };
 
@@ -188,16 +187,14 @@ interface Document : Node {
   Comment createComment(DOMString data);
   ProcessingInstruction createProcessingInstruction(DOMString target, DOMString data);
 
-  Node importNode(Node node, optional boolean deep);// = true);
+  Node importNode(Node node, optional boolean deep);
   Node adoptNode(Node node);
 
-  Event createEvent(DOMString eventInterfaceName);
+  Event createEvent(DOMString interface);
 
   Range createRange();
 
-  // NodeFilter.SHOW_ALL = 0xFFFFFFFF
-  //NodeIterator createNodeIterator(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
-  //TreeWalker createTreeWalker(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
+  // NodeFilter.SHOW_ALL
   NodeIterator createNodeIterator(Node root, optional unsigned long whatToShow, optional NodeFilter? filter);
   TreeWalker createTreeWalker(Node root, optional unsigned long whatToShow, optional NodeFilter? filter);
 
@@ -211,7 +208,7 @@ interface XMLDocument : Document {};
 interface DOMImplementation {
   DocumentType createDocumentType(DOMString qualifiedName, DOMString publicId, DOMString systemId);
   XMLDocument createDocument(DOMString? namespace, DOMString qualifiedName, DocumentType? doctype);
-  Document createHTMLDocument(DOMString title);
+  Document createHTMLDocument(optional DOMString title);
 
   boolean hasFeature(DOMString feature, [TreatNullAs=EmptyString] DOMString version);
 };
@@ -385,8 +382,6 @@ callback interface NodeFilter {
   const unsigned short FILTER_ACCEPT = 1;
   const unsigned short FILTER_REJECT = 2;
   const unsigned short FILTER_SKIP = 3;
-
-  // Constants for whatToShow
   const unsigned long SHOW_ALL = 0xFFFFFFFF;
   const unsigned long SHOW_ELEMENT = 0x1;
   const unsigned long SHOW_ATTRIBUTE = 0x2; // historical
@@ -435,22 +430,4 @@ interface DOMTokenList {
 
 interface DOMSettableTokenList : DOMTokenList {
             attribute DOMString value;
-};
-
-
-[Supplemental, NoInterfaceObject]
-interface NodeSelector {
-  Element   querySelector(in DOMString selectors, in optional any refNodes);
-  NodeList  querySelectorAll(in DOMString selectors, in optional any refNodes);
-  Element   queryScopedSelector(in DOMString selectors);
-  NodeList  queryScopedSelectorAll(in DOMString selectors);
-};
-
-Document implements NodeSelector;
-DocumentFragment implements NodeSelector;
-Element implements NodeSelector;
-
-[Supplemental]
-interface Element {
-  boolean   matchesSelector(in DOMString selectors, in optional any refNodes);
 };
