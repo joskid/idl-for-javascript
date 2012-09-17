@@ -1,26 +1,4 @@
 {
- "CSSColorComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "red": "Int16",
-   "green": "Int16",
-   "blue": "Int16",
-   "alpha": "Float32"
-  },
-  "NoInterfaceObject": true
- },
- "CSSComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "readonly": {
-   "type": "String"
-  },
-  "properties": {
-   "value": "Any"
-  },
-  "NoInterfaceObject": true
- },
  "CSSFontFaceRule": {
   "type": "interface",
   "inherits": [
@@ -29,14 +7,6 @@
   "readonly": {
    "style": "CSSStyleDeclaration"
   }
- },
- "CSSIdentifierComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "identifier": "String"
-  },
-  "NoInterfaceObject": true
  },
  "CSSImportRule": {
   "type": "interface",
@@ -48,24 +18,6 @@
    "media": "MediaList",
    "styleSheet": "CSSStyleSheet"
   }
- },
- "CSSKeywordComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "keyword": "String"
-  },
-  "NoInterfaceObject": true
- },
- "CSSLengthComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "em": "Float32",
-   "ex": "Float32",
-   "px": "Float32"
-  },
-  "NoInterfaceObject": true
  },
  "CSSMapValue": {
   "type": "interface",
@@ -122,14 +74,6 @@
    "style": "CSSStyleDeclaration"
   }
  },
- "CSSPercentageComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "percent": "Float32"
-  },
-  "NoInterfaceObject": true
- },
  "CSSPropertyValue": {
   "type": "interface",
   "inherits": [],
@@ -164,14 +108,6 @@
   "properties": {
    "cssText": "String"
   }
- },
- "CSSStringComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "_string": "String"
-  },
-  "NoInterfaceObject": true
  },
  "CSSStyleDeclaration": {
   "type": "interface",
@@ -340,10 +276,6 @@
    }
   }
  },
- "CSSStyleDeclarationValue": {
-  "type": "interface",
-  "inherits": []
- },
  "CSSStyleRule": {
   "type": "interface",
   "inherits": [
@@ -379,14 +311,6 @@
     }
    }
   }
- },
- "CSSURLComponentValue": {
-  "type": "interface",
-  "inherits": [],
-  "properties": {
-   "url": "String"
-  },
-  "NoInterfaceObject": true
  },
  "DocumentStyle": {
   "type": "interface",
