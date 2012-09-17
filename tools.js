@@ -3,6 +3,7 @@ var converters = function(global){
     return r[name].typed = new global[name+'Array'](1), r;
   }, {
     Any: function Any(x){ return x },
+    Void: function Void(x){ },
     Int8: function Int8(x){ Int8.typed[0] = x; return Int8.typed[0] },
     Int16: function Int16(x){ Int16.typed[0] = x; return Int16.typed[0] },
     Int32: function Int32(x){ x >> 0 },

@@ -44,6 +44,13 @@ function merge(from, to){
   });
 }
 
+function sort(o){
+  var out = {};
+  Object.keys(o).sort().forEach(function(key){
+    out[key] = o[key];
+  });
+  return out;
+}
 
 Object.keys(tags).forEach(function(type){
   var tagset = tags[type],
@@ -484,16 +491,15 @@ var conversionStanza = [
     return out;
   },
 
-  function stringify(state, json){
-    return [JSON.stringify(json, null, ' '), JSON.stringify(json)];
-  },
-
-  function save(state, text){
+  function save(state, json){
     var name = path.basename(state.name).slice(0, -path.extname(state.name).length)+'.json';
-    fs.writeFileSync(path.resolve(state.out, name), text[0]);
-    fs.writeFileSync(path.resolve(state.out+'.min', name), text[1]);
+    saveJSON(state.out, name, json);
   }
 ];
+
+function saveJSON(folder, name, json){
+  fs.writeFileSync(path.resolve(folder, name), JSON.stringify(sort(json), null, ' '));
+}
 
 function stanzaRunner(ops, input, state){
   state = state || {};
@@ -515,3 +521,5 @@ function convert(file, outdir){
 fs.readdirSync('./idl').forEach(function(name){
   convert('./idl/'+name, './json');
 });
+
+

@@ -1,0 +1,22 @@
+{
+  "name": "idl4js",
+  "version": "0.0.1",
+  "description": "Useful IDLs (DOM4, HTML5) converted into JSON and mapped to JavaScript types",
+  "main": "index.js",
+  "dependencies": {
+    "webidl.js": "~0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Benvie/idl-for-javascript.git"
+  },
+  "keywords": [
+    "idl",
+    "webidl",
+    "html5",
+    "dom",
+    "json"
+  ],
+  "author": "Brandon Benvie",
+  "license": "MIT"
+}
