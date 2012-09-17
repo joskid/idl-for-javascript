@@ -1,1 +1,0 @@
-{"ClipboardEventInit":{"type":"dictionary","inherits":["EventInit"],"defaults":{"data":"","dataType":""}},"ClipboardEvent":{"type":"interface","inherits":["Event"],"readonly":{"clipboardData":"DataTransfer"},"construct":{"args":{"type":"String","eventInitDict":"ClipboardEventInit"}}}}
